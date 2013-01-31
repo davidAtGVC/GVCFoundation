@@ -40,8 +40,12 @@
 
 - (void) didStartElement:(NSString *)elementName attributes:(NSDictionary *)attributeDict
 {
-    id object = [[self digester] peekNodeObject];
-    [object setValue:elementName forKey:(gvc_IsEmpty(propertyName) ? elementName : propertyName)];
+    GVCXMLDigester *strongDigest = [self digester];
+    if ( strongDigest != nil )
+    {
+        id object = [strongDigest peekNodeObject];
+        [object setValue:elementName forKey:(gvc_IsEmpty(propertyName) ? elementName : propertyName)];
+    }
 }
 
 - (void)writeConfiguration:(GVCXMLGenerator *)outputGenerator

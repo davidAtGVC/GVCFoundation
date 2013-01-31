@@ -63,7 +63,11 @@
 
 	Class nodeClass = NSClassFromString(realClassName);
 	GVC_ASSERT(nodeClass != nil, @"Failed to map class name '%@' to object", realClassName);
-	[[self digester] pushNodeObject:[[nodeClass alloc] init]];
+    GVCXMLDigester *strongDigest = [self digester];
+    if ( strongDigest != nil )
+    {
+        [strongDigest pushNodeObject:[[nodeClass alloc] init]];
+    }
 }
 
 - (void) didEndElement: (NSString*) elementName

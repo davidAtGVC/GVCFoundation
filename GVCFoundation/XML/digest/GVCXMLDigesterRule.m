@@ -22,9 +22,6 @@
 
 @implementation GVCXMLDigesterRule
 
-@synthesize digester;
-@synthesize namespaceURI;
-
 - (id)init
 {
 	self = [super init];

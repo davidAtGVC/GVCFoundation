@@ -89,9 +89,14 @@
 
 - (void) didStartElement:(NSString *)element attributes:(NSDictionary *)attributeDict
 {
-	NSObject *object = [[self digester] peekNodeObject];
-	
-	for (NSString *attributeName in attributeDict) 
+	NSObject *object = nil;
+    GVCXMLDigester *strongDigest = [self digester];
+    if ( strongDigest != nil )
+    {
+        object = [strongDigest peekNodeObject];
+    }
+
+	for (NSString *attributeName in attributeDict)
 	{
 		NSString *propertyName = [attributeMap objectForKey:attributeName];
 		

@@ -73,7 +73,11 @@
 		
 		if ( record != nil )
 		{
-			[[self delegate] parser:self didParseRow:record];
+            id <GVCParserDelegate>strongDelegate = [self delegate];
+            if ( strongDelegate != nil )
+            {
+                [strongDelegate parser:self didParseRow:record];
+            }
 			[self parseLineSeparator];
 		}
 	}

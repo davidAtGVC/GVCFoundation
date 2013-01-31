@@ -46,18 +46,22 @@
 
 - (void) didEndElement:(NSString *)elementName
 {
-    id child = [[self digester] peekNodeObject];
-    id parent = [[self digester] peekNodeObjectAtIndex:1];
-	
-	NSString *key = [self propertyName];
-	if ( gvc_IsEmpty(key) == YES )
-	{
-		key = elementName;
-	}
-	
-    if ((parent != nil) && (child != nil))
+    GVCXMLDigester *strongDigest = [self digester];
+    if ( strongDigest != nil )
     {
-        [self setObject:parent value:child forKey:key];
+        id child = [strongDigest peekNodeObject];
+        id parent = [strongDigest peekNodeObjectAtIndex:1];
+        
+        NSString *key = [self propertyName];
+        if ( gvc_IsEmpty(key) == YES )
+        {
+            key = elementName;
+        }
+        
+        if ((parent != nil) && (child != nil))
+        {
+            [self setObject:parent value:child forKey:key];
+        }
     }
 }
 

@@ -60,10 +60,14 @@
 {
     if ( gvc_IsEmpty(nodeText) == NO )
     {
-        id object = [[self digester] peekNodeObject];
-        NSString *propertyKey = (gvc_IsEmpty([self propertyName]) ? elementName : [self propertyName]);
-        
-        [self setObject:object value:nodeText forKey:propertyKey];
+        GVCXMLDigester *strongDigest = [self digester];
+        if ( strongDigest != nil )
+        {
+            id object = [strongDigest peekNodeObject];
+            NSString *propertyKey = (gvc_IsEmpty([self propertyName]) ? elementName : [self propertyName]);
+            
+            [self setObject:object value:nodeText forKey:propertyKey];
+        }
     }
 }
 
@@ -110,9 +114,13 @@
 
 - (void) didEndElement:(NSString *)elementName
 {
-    id object = [[self digester] peekNodeObject];
-	NSString *propertyKey = (gvc_IsEmpty([self propertyName]) ? elementName : [self propertyName]);
-    [self setObject:object value:nodeCDATA forKey:propertyKey];
+    GVCXMLDigester *strongDigest = [self digester];
+    if ( strongDigest != nil )
+    {
+        id object = [strongDigest peekNodeObject];
+        NSString *propertyKey = (gvc_IsEmpty([self propertyName]) ? elementName : [self propertyName]);
+        [self setObject:object value:nodeCDATA forKey:propertyKey];
+    }
 }
 
 @end
