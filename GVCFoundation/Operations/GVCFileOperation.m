@@ -128,7 +128,8 @@ GVC_DEFINE_STR( GVCFileOperationErrorDomain )
 			if ([[NSFileManager defaultManager] removeItemAtPath:path error:&localError] == NO) 
 			{
 				NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithCapacity:3];
-				[userInfo setObject:GVC_LocalizedFormat(GVC_CLS_DOMAIN_KEY(@"DeleteFailed"), @"Unable to remove file at path '%@'", path) forKey:NSLocalizedDescriptionKey];
+				NSString *key = GVC_CLS_DOMAIN_KEY(@"DeleteFailed");
+				[userInfo setObject:GVC_LocalizedFormat(key, @"Unable to remove file at path '%@'", path) forKey:NSLocalizedDescriptionKey];
 				[userInfo setObject:localError forKey:NSUnderlyingErrorKey];
 				
 				if ( error != NULL )
@@ -166,7 +167,8 @@ GVC_DEFINE_STR( GVCFileOperationErrorDomain )
 				if ((localError != nil) && (error != nil))
 				{
 					NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithCapacity:3];
-					[userInfo setObject:GVC_LocalizedFormat(GVC_CLS_DOMAIN_KEY(@"MoveFailed"), @"Unable to move file from '%@' to '%@'", srcpath, destpath) forKey:NSLocalizedDescriptionKey];
+					NSString *key = GVC_CLS_DOMAIN_KEY(@"MoveFailed");
+					[userInfo setObject:GVC_LocalizedFormat(key, @"Unable to move file from '%@' to '%@'", srcpath, destpath) forKey:NSLocalizedDescriptionKey];
 					[userInfo setObject:localError forKey:NSUnderlyingErrorKey];
 					
 					*error = [NSError errorWithDomain:GVCFileOperationErrorDomain code:GVCFileOperation_Type_MOVE userInfo:userInfo];
@@ -183,7 +185,8 @@ GVC_DEFINE_STR( GVCFileOperationErrorDomain )
 		}
 		else if ( error != NULL )
 		{
-			*error = [NSError gvc_ErrorWithDomain:GVCFileOperationErrorDomain code:GVCFileOperation_Type_MOVE localizedDescription:GVC_LocalizedFormat(GVC_CLS_DOMAIN_KEY(@"SourceNotFound"), @"No source file at path '%@'", srcpath)];
+			NSString *key = GVC_CLS_DOMAIN_KEY(@"SourceNotFound");
+			*error = [NSError gvc_ErrorWithDomain:GVCFileOperationErrorDomain code:GVCFileOperation_Type_MOVE localizedDescription:GVC_LocalizedFormat(key, @"No source file at path '%@'", srcpath)];
 		}
 	}
 	else if ( error != NULL )
@@ -207,7 +210,8 @@ GVC_DEFINE_STR( GVCFileOperationErrorDomain )
 				if (localError != nil)
 				{
 					NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithCapacity:3];
-					[userInfo setObject:GVC_LocalizedFormat(GVC_CLS_DOMAIN_KEY(@"CopyFailed"), @"Unable to copy file from '%@' to '%@'", srcpath, destpath) forKey:NSLocalizedDescriptionKey];
+					NSString *key = GVC_CLS_DOMAIN_KEY(@"CopyFailed");
+					[userInfo setObject:GVC_LocalizedFormat(key, @"Unable to copy file from '%@' to '%@'", srcpath, destpath) forKey:NSLocalizedDescriptionKey];
 					[userInfo setObject:localError forKey:NSUnderlyingErrorKey];
 					
 					*error = [NSError errorWithDomain:GVCFileOperationErrorDomain code:GVCFileOperation_Type_COPY userInfo:userInfo];
@@ -224,7 +228,8 @@ GVC_DEFINE_STR( GVCFileOperationErrorDomain )
 		}
 		else if ( error != NULL )
 		{
-			*error = [NSError gvc_ErrorWithDomain:GVCFileOperationErrorDomain code:GVCFileOperation_Type_COPY localizedDescription:GVC_LocalizedFormat(GVC_CLS_DOMAIN_KEY(@"SourceNotFound"), @"No source file at path '%@'", srcpath)];
+			NSString *key = GVC_CLS_DOMAIN_KEY(@"SourceNotFound");
+			*error = [NSError gvc_ErrorWithDomain:GVCFileOperationErrorDomain code:GVCFileOperation_Type_COPY localizedDescription:GVC_LocalizedFormat(key, @"No source file at path '%@'", srcpath)];
 		}
 	}
 	else if ( error != NULL )
@@ -296,7 +301,8 @@ GVC_DEFINE_STR( GVCFileOperationErrorDomain )
 		}
 		else if ( error != NULL )
 		{
-			*error = [NSError gvc_ErrorWithDomain:GVCFileOperationErrorDomain code:GVCFileOperation_Type_OVERWRITE localizedDescription:GVC_LocalizedFormat(GVC_CLS_DOMAIN_KEY(@"OpenFileFailed"), @"Unable to open file '%@'", targetPath)];
+			NSString *key = GVC_CLS_DOMAIN_KEY(@"OpenFileFailed");
+			*error = [NSError gvc_ErrorWithDomain:GVCFileOperationErrorDomain code:GVCFileOperation_Type_OVERWRITE localizedDescription:GVC_LocalizedFormat(key, @"Unable to open file '%@'", targetPath)];
 		}
 	}
 	else if ( error != NULL )
