@@ -21,6 +21,7 @@
 	{
 		iso8601LongDateFormatter = [[GVCISO8601DateFormatter alloc] init];
 		[iso8601LongDateFormatter setFormat:GVCISO8601DateFormatter_Calendar];
+		[iso8601LongDateFormatter setIncludeTime:YES];
 	}
 	return iso8601LongDateFormatter;
 }
@@ -53,7 +54,14 @@
 
 - (NSString *)gvc_iso8601StringValue
 {
-	return [[NSDate gvc_ISO8601LongDateFormatter] stringFromDate:self];
+//	return [[NSDate gvc_ISO8601LongDateFormatter] stringFromDate:self];
+	NSDateFormatter *sISO8601 = [[NSDateFormatter alloc] init];
+	[sISO8601 setTimeStyle:NSDateFormatterFullStyle];
+	
+	[sISO8601 setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss"];
+	[sISO8601 setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+	
+	return [[sISO8601 stringFromDate:self] stringByAppendingString:@"Z"];
 }
 
 + (NSDate *)gvc_DateFromYear:(NSInteger)y month:(NSInteger)m day:(NSInteger)d hour:(NSInteger)h minute:(NSInteger)mn second:(NSInteger)s

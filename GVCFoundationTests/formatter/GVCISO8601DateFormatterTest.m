@@ -73,4 +73,16 @@
 	STAssertNotNil(date_1, @"Failed to parse date %@", date_1);
 }
 
+- (void)testDateAsLongISOFormat
+{
+	GVCISO8601DateFormatter *formatter = [[GVCISO8601DateFormatter alloc] init];
+	[formatter setFormat:GVCISO8601DateFormatter_Calendar];
+	[formatter setIncludeTime:YES];
+	
+	NSDate *testDate = [NSDate gvc_DateFromYear:2000 month:10 day:5 hour:12 minute:6 second:3];
+	NSString *iso_1 = [formatter stringFromDate:testDate];
+	STAssertNotNil(iso_1, @"Failed to generate date %@", testDate);
+	STAssertEqualObjects(@"2000-10-05T12:06:03+119304128", iso_1, @"Generated dates do not match");
+}
+
 @end
