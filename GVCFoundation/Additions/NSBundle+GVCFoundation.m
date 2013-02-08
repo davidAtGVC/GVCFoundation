@@ -42,6 +42,11 @@
 	return [[NSBundle mainBundle] gvc_bundleIdentifier];
 }
 
++ (NSString *)gvc_MainBundleBuildDate
+{
+	return [[NSBundle mainBundle] gvc_bundleBuildDate];
+}
+
 - (NSString *)gvc_bundleName
 {
 	return [self objectForInfoDictionaryKey:@"CFBundleName"];
@@ -67,15 +72,30 @@
 {
 	NSString *marketingVersionNumber = [self gvc_bundleMarketingVersion];
 	NSString *devVersionNumber = [self objectForInfoDictionaryKey:@"CFBundleVersion"];
+	NSString *buildDate = [self gvc_bundleBuildDate];
 	NSString *appVersion = nil;
     
-	if (devVersionNumber) 
+	if (gvc_IsEmpty(devVersionNumber) == NO)
 	{
-        appVersion = [NSString stringWithFormat:@"%@ rev:%@", marketingVersionNumber, devVersionNumber];
+		if (gvc_IsEmpty(devVersionNumber) == NO)
+		{
+			appVersion = [NSString stringWithFormat:@"%@ rev:%@ Build Date: %@", marketingVersionNumber, devVersionNumber, buildDate];
+		}
+		else
+		{
+			appVersion = [NSString stringWithFormat:@"%@ rev:%@", marketingVersionNumber, devVersionNumber];
+		}
 	}
 	else
 	{
-		appVersion = marketingVersionNumber;
+		if (gvc_IsEmpty(devVersionNumber) == NO)
+		{
+			appVersion = [NSString stringWithFormat:@"%@ Build Date: %@", marketingVersionNumber, buildDate];
+		}
+		else
+		{
+			appVersion = marketingVersionNumber;
+		}
 	}
 	
 	return appVersion;
@@ -89,6 +109,11 @@
 		ident = GVC_SPRINTF(@"net.global-village.%@", [[NSProcessInfo processInfo] processName]);
 	}
 	return ident;
+}
+
+- (NSString *)gvc_bundleBuildDate
+{
+	return [self objectForInfoDictionaryKey:@"GVCBuildDateString"];
 }
 
 @end
