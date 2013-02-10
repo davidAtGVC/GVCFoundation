@@ -15,6 +15,11 @@
 @interface GVCHTTPAction : NSObject
 
 /**
+ * Set the trace flag on this action.
+ */
+@property (assign, nonatomic) BOOL trace;
+
+/**
  * the action error while processing networking, parsing, core data
  * @returns the error that failed the action
  */
