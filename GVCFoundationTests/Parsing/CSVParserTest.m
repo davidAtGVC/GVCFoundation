@@ -52,7 +52,7 @@
 	NSArray *fieldNames = [[NSArray alloc] initWithObjects:@"Year",@"Make",@"Model",@"Description",@"Price", nil];
 	CarsParserDelegate *carsDelegate = [[CarsParserDelegate alloc] init];
 	GVCCSVParser *parser = [[GVCCSVParser alloc] initWithDelegate:carsDelegate separator:@"," fieldNames:fieldNames firstLineHeaders:NO];
-	[parser parseFilename:file error:&error];
+	STAssertTrue([parser parseFilename:file error:&error], @"Failed to parse cars file %@", error);
 }
 
 @end
