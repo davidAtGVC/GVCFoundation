@@ -32,4 +32,10 @@
 
 - (BOOL)remove;
 
+- (NSDictionary *)attributes;
+- (unsigned long long)fileSize;
+- (NSDate *)fileModificationDate;
+- (NSString *)fileType;
+- (NSDate *)fileCreationDate;
+
 @end

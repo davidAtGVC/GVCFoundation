@@ -71,4 +71,31 @@
 	return [NSString stringWithFormat:@"%@ '%@'", NSStringFromClass([self class]), [self fullpath]];
 }
 
+- (NSDictionary *)attributes
+{
+	return [[NSFileManager defaultManager] attributesOfItemAtPath:[self fullpath] error:nil];
+}
+
+- (unsigned long long)fileSize
+{
+	return [[self attributes] fileSize];
+}
+
+- (NSDate *)fileModificationDate
+{
+	return [[self attributes] fileModificationDate];
+}
+
+- (NSString *)fileType
+{
+	return [[self attributes] fileType];
+}
+
+- (NSDate *)fileCreationDate
+{
+	return [[self attributes] fileCreationDate];
+}
+
+
+
 @end
