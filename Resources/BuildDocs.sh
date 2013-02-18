@@ -15,6 +15,7 @@ fi
 	--docset-fallback-url "http://global-village.net/GVCFoundation/" \
 	--output "~/Sites/GVCFoundation" \
 	--publish-docset \
+	--exit-threshold 2 \
 	--logformat xcode \
 	--keep-undocumented-objects \
 	--keep-undocumented-members \
