@@ -58,7 +58,9 @@ if [ -f $HEADER ]; then
 		mv ${TEMP} ${HEADER}
 	else
 		echo "Framework header unchanged"
-		rm ${TEMP}
+		if [ -f $TEMP ]; then
+			rm -f $TEMP
+		fi
 	fi
 else
 	mv ${TEMP} ${HEADER}
