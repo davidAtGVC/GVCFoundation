@@ -17,7 +17,7 @@
 
 @interface GVCXMLRecursiveParserDelegate : GVCXMLRecursiveParserBase <GVCXMLParserProtocol>
 
-- (NSString *)xmlDocumentClassName;
+@property (strong, nonatomic) NSString *xmlDocumentClassName;
 @property (strong, nonatomic) GVCXMLRecursiveNode *document;
 
 @property (assign, nonatomic, readonly) GVCXMLParserDelegate_Status status;

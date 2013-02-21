@@ -167,6 +167,7 @@
 #import "GVCSOAPDocument.h"
 #import "GVCSOAPEnvelope.h"
 #import "GVCSOAPFault.h"
+#import "GVCSOAPFaultDetail.h"
 #import "GVCSOAPFaultcode.h"
 #import "GVCSOAPFaultstring.h"
 #import "GVCSOAPHeader.h"

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+  <s:Body>
+    <s:Fault>
+      <faultcode xmlns:a="http://schemas.microsoft.com/net/2005/12/windowscommunicationfoundation/dispatcher">a:InternalServiceFault</faultcode>
+      <faultstring xml:lang="en-US">Object reference not set to an instance of an object.</faultstring>
+      <detail>
+        <ExceptionDetail xmlns="http://schemas.datacontract.org/2004/07/System.ServiceModel" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+          <HelpLink i:nil="true"/>
+          <InnerException i:nil="true"/>
+          <Message>Object reference not set to an instance of an object.</Message>
+          <StackTrace>   at PariscribeCMS.RISWS.getCppAllergy(Patient _Patient) in I:\Projects\EMR\GVC\EMRWS_slate_jsoned\PariscribeRIS\RISWS.svc.cs:line 11524&#xD;
+   at SyncInvokegetCppAllergy(Object , Object[] , Object[] )&#xD;
+   at System.ServiceModel.Dispatcher.SyncMethodInvoker.Invoke(Object instance, Object[] inputs, Object[]&amp; outputs)&#xD;
+   at System.ServiceModel.Dispatcher.DispatchOperationRuntime.InvokeBegin(MessageRpc&amp; rpc)&#xD;
+   at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage5(MessageRpc&amp; rpc)&#xD;
+   at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage31(MessageRpc&amp; rpc)&#xD;
+   at System.ServiceModel.Dispatcher.MessageRpc.Process(Boolean isOperationContextSet)
+   </StackTrace>
+          <Type>System.NullReferenceException</Type>
+        </ExceptionDetail>
+      </detail>
+    </s:Fault>
+  </s:Body>
+</s:Envelope>

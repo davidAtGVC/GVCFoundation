@@ -36,6 +36,7 @@
 	{
 		[self setStatus:GVCXMLParserDelegate_Status_INITIAL];
 		[self setElementStack:[[GVCStack alloc] init]];
+		[self setXmlDocumentClassName:NSStringFromClass([GVCXMLRecursiveNode class])];
 	}
 	return self;
 }
@@ -120,10 +121,6 @@
 }
 
 #pragma mark - NSXMLParserDelegate
-- (NSString *)xmlDocumentClassName
-{
-	return NSStringFromClass([GVCXMLRecursiveNode class]);
-}
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser
 {

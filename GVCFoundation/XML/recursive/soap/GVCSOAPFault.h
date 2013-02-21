@@ -24,4 +24,7 @@ GVC_DEFINE_EXTERN_STR(GVCSOAPFault_elementname);
 @property (strong, nonatomic) GVCSOAPFaultcode *faultcode;
 @property (strong, nonatomic) GVCSOAPFaultstring *faultstring;
 
+@property (strong, nonatomic) NSMutableArray *contentArray;
+- (id <GVCXMLContent>)addContent:(id <GVCXMLContent>) child;
+
 @end

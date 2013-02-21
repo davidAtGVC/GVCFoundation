@@ -88,6 +88,10 @@
 		0521B837148E73C800FD75AF /* NSFileManager+GVCFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 0521B835148E73C800FD75AF /* NSFileManager+GVCFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0521B838148E73C800FD75AF /* NSFileManager+GVCFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0521B836148E73C800FD75AF /* NSFileManager+GVCFoundation.m */; };
 		0521B83A148E833C00FD75AF /* GVCDirectoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0521B839148E833C00FD75AF /* GVCDirectoryTest.m */; };
+		052FB8C016D5C50E00BB849C /* SOAP-Fault.xml in Resources */ = {isa = PBXBuildFile; fileRef = 052FB8BF16D5C50E00BB849C /* SOAP-Fault.xml */; };
+		052FB8C416D5C65C00BB849C /* GVCXMLRecursiveParserDelegateTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 052FB8C316D5C65C00BB849C /* GVCXMLRecursiveParserDelegateTest.m */; };
+		052FB8C716D5CFA800BB849C /* GVCSOAPFaultDetail.h in Headers */ = {isa = PBXBuildFile; fileRef = 052FB8C516D5CFA800BB849C /* GVCSOAPFaultDetail.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		052FB8C816D5CFA800BB849C /* GVCSOAPFaultDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 052FB8C616D5CFA800BB849C /* GVCSOAPFaultDetail.m */; };
 		05306B7316BDB35600CED7AE /* NSMethodSignature+GVCFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 05306B7116BDB35600CED7AE /* NSMethodSignature+GVCFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		05306B7416BDB35600CED7AE /* NSMethodSignature+GVCFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 05306B7216BDB35600CED7AE /* NSMethodSignature+GVCFoundation.m */; };
 		0530BDD6150BB62E005ED5B6 /* AgentDigest.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0530BDD4150BB563005ED5B6 /* AgentDigest.xml */; };
@@ -356,6 +360,10 @@
 		0521B835148E73C800FD75AF /* NSFileManager+GVCFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+GVCFoundation.h"; sourceTree = "<group>"; };
 		0521B836148E73C800FD75AF /* NSFileManager+GVCFoundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+GVCFoundation.m"; sourceTree = "<group>"; };
 		0521B839148E833C00FD75AF /* GVCDirectoryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCDirectoryTest.m; sourceTree = "<group>"; };
+		052FB8BF16D5C50E00BB849C /* SOAP-Fault.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "SOAP-Fault.xml"; sourceTree = "<group>"; };
+		052FB8C316D5C65C00BB849C /* GVCXMLRecursiveParserDelegateTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCXMLRecursiveParserDelegateTest.m; sourceTree = "<group>"; };
+		052FB8C516D5CFA800BB849C /* GVCSOAPFaultDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCSOAPFaultDetail.h; sourceTree = "<group>"; };
+		052FB8C616D5CFA800BB849C /* GVCSOAPFaultDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCSOAPFaultDetail.m; sourceTree = "<group>"; };
 		05306B7116BDB35600CED7AE /* NSMethodSignature+GVCFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMethodSignature+GVCFoundation.h"; sourceTree = "<group>"; };
 		05306B7216BDB35600CED7AE /* NSMethodSignature+GVCFoundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMethodSignature+GVCFoundation.m"; sourceTree = "<group>"; };
 		0530BDD4150BB563005ED5B6 /* AgentDigest.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = AgentDigest.xml; sourceTree = "<group>"; };
@@ -685,6 +693,22 @@
 				055F98C6150FFF4000D243AB /* GVCXMLContainerNode.m */,
 			);
 			path = node;
+			sourceTree = "<group>";
+		};
+		052FB8C116D5C5B500BB849C /* recursive */ = {
+			isa = PBXGroup;
+			children = (
+				052FB8C216D5C5B500BB849C /* soap */,
+				052FB8C316D5C65C00BB849C /* GVCXMLRecursiveParserDelegateTest.m */,
+			);
+			path = recursive;
+			sourceTree = "<group>";
+		};
+		052FB8C216D5C5B500BB849C /* soap */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = soap;
 			sourceTree = "<group>";
 		};
 		0551D34715166BC90089217F /* Operations */ = {
@@ -1040,6 +1064,7 @@
 		0594FA4C15099D7100614D48 /* Test */ = {
 			isa = PBXGroup;
 			children = (
+				052FB8BF16D5C50E00BB849C /* SOAP-Fault.xml */,
 				057543EA15254C0C00160469 /* itunesTop300.xml */,
 				05BB433A1515155D007DD3A2 /* sample-rss-2.xml */,
 				05412D8815116F3600919C57 /* DaringFireball.xml */,
@@ -1081,6 +1106,7 @@
 		0594FA5F15099D8700614D48 /* XML */ = {
 			isa = PBXGroup;
 			children = (
+				052FB8C116D5C5B500BB849C /* recursive */,
 				0594FA6015099D8700614D48 /* digest */,
 				0594FA6115099D8700614D48 /* generator */,
 				0594FA6215099D8700614D48 /* node */,
@@ -1161,6 +1187,8 @@
 				05CE0EBA163C7A6600DE1118 /* GVCSOAPFaultcode.m */,
 				05CE0EBD163C7C7600DE1118 /* GVCSOAPFaultstring.h */,
 				05CE0EBE163C7C7600DE1118 /* GVCSOAPFaultstring.m */,
+				052FB8C516D5CFA800BB849C /* GVCSOAPFaultDetail.h */,
+				052FB8C616D5CFA800BB849C /* GVCSOAPFaultDetail.m */,
 			);
 			path = soap;
 			sourceTree = "<group>";
@@ -1419,6 +1447,7 @@
 				059A3EA716B072DD0047EF66 /* GVCFileWriter.h in Headers */,
 				05C2E32D1669172A00FDEE0D /* GVCInvocation.h in Headers */,
 				05306B7316BDB35600CED7AE /* NSMethodSignature+GVCFoundation.h in Headers */,
+				052FB8C716D5CFA800BB849C /* GVCSOAPFaultDetail.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1515,6 +1544,7 @@
 				05EAE0A71565572F004F5126 /* CachedConfiguration.xml in Resources */,
 				05EAE0A81565572F004F5126 /* LocalConfiguration.xml in Resources */,
 				05EAE0A91565572F004F5126 /* RemoteConfiguration.xml in Resources */,
+				052FB8C016D5C50E00BB849C /* SOAP-Fault.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1685,6 +1715,7 @@
 				059A3EA516B072DD0047EF66 /* GVCFileHandleWriter.m in Sources */,
 				059A3EA816B072DD0047EF66 /* GVCFileWriter.m in Sources */,
 				05306B7416BDB35600CED7AE /* NSMethodSignature+GVCFoundation.m in Sources */,
+				052FB8C816D5CFA800BB849C /* GVCSOAPFaultDetail.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1714,6 +1745,7 @@
 				051C88E515613C2C00A4D7F6 /* GVCHeaderSetTest.m in Sources */,
 				054472C11599D70000DF90BA /* NSDateAdditionsTest.m in Sources */,
 				05749FB316066B35007CF96D /* CodeCoverageSupport.c in Sources */,
+				052FB8C416D5C65C00BB849C /* GVCXMLRecursiveParserDelegateTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

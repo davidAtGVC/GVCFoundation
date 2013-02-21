@@ -11,6 +11,7 @@
 #import "GVCXMLGenerator.h"
 #import "GVCSOAPFaultcode.h"
 #import "GVCSOAPFaultstring.h"
+#import "GVCSOAPFaultDetail.h"
 
 GVC_DEFINE_STRVALUE(GVCSOAPFault_elementname, Fault);
 
@@ -31,6 +32,50 @@ GVC_DEFINE_STRVALUE(GVCSOAPFault_elementname, Fault);
     return self;
 }
 
+- (NSString *)nodeClassNameForElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI
+{
+	NSString *nodeClassName = nil;
+	GVC_DBC_REQUIRE(
+					GVC_DBC_FACT_NOT_EMPTY(elementName);
+					)
+	
+	// implementation
+	if ( [GVCSOAPFaultDetail_elementname isEqualToString:elementName] == YES )
+	{
+		nodeClassName = @"GVCSOAPFaultDetail";
+	}
+	else
+	{
+		nodeClassName = [super nodeClassNameForElement:elementName namespaceURI:namespaceURI];
+	}
+	
+	GVC_DBC_ENSURE( )
+	
+	return nodeClassName;
+}
+
+- (id <GVCXMLContent>)addContent:(id <GVCXMLContent>) child
+{
+	GVC_DBC_REQUIRE(
+					GVC_DBC_FACT_NOT_NIL(child);
+					)
+	
+	// implementation
+	
+	if ( [self contentArray] == nil )
+	{
+		[self setContentArray:[[NSMutableArray alloc] initWithCapacity:1]];
+	}
+	[[self contentArray] addObject:child];
+	
+	GVC_DBC_ENSURE(
+				   GVC_DBC_FACT_NOT_EMPTY([self contentArray]);
+				   )
+	return child;
+}
+
+
+
 - (void)generateOutput:(GVCXMLGenerator *)generator
 {
 	[generator openElement:[self qualifiedName] inNamespace:[self defaultNamespace] withAttributes:nil];
@@ -50,6 +95,12 @@ GVC_DEFINE_STRVALUE(GVCSOAPFault_elementname, Fault);
 	{
 		[[self faultstring] generateOutput:generator];
 	}
+	
+	for (id <GVCXMLGeneratorProtocol>node in [self contentArray])
+	{
+		[node generateOutput:generator];
+	}
+
 	[generator closeElement];
 }
 
