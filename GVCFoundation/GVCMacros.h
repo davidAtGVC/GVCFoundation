@@ -98,7 +98,7 @@ static inline BOOL gvc_IsEmpty(id thing)
 #ifdef DEBUG
 #define GVC_ASSERT_LOG(...)		[[NSAssertionHandler currentHandler] handleFailureInFunction:GVC_FUNCTIONNAME file:GVC_FILENAME lineNumber:__LINE__ description:__VA_ARGS__]
 #else
-#define GVC_ASSERT_LOG(...)		GVCLogWarn(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
+#define GVC_ASSERT_LOG(...)		NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
 #endif
 
 #pragma mark - Assertions
