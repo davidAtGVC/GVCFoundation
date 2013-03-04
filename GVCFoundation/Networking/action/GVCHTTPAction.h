@@ -70,4 +70,9 @@
  */
 - (NSData *)requestMessageData;
 
+/**
+ * performs validation on the action and any content to be POST'd
+ */
+- (BOOL)validateAction:(out NSError **)outError;
+
 @end

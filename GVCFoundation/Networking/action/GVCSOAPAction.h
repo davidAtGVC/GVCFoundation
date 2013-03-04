@@ -9,6 +9,12 @@
 #import <Foundation/Foundation.h>
 
 #import "GVCHTTPAction.h"
+#import "GVCMacros.h"
+
+/** String constant for general SOAP Action errors
+ */
+GVC_DEFINE_EXTERN_STR( GVCSOAPActionErrorDomain )
+
 
 @class GVCSOAPDocument;
 
@@ -22,5 +28,10 @@
 @property (strong, nonatomic) NSString *soapActionName;
 
 @property (strong, nonatomic) GVCSOAPDocument *soapActionResponse;
+
+/**
+ * validation method for SOAP action name
+ */
+- (BOOL)validateSoapActionName:(id *)ioValue error:(NSError **)outError;
 
 @end

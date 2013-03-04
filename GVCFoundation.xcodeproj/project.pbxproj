@@ -291,6 +291,7 @@
 		05F8B882155E51ED00625B01 /* GVCConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 05F8B880155E51ED00625B01 /* GVCConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		05F8B883155E51ED00625B01 /* GVCConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F8B881155E51ED00625B01 /* GVCConfiguration.m */; };
 		05F8B88B155E7EE200625B01 /* GVCConfigurationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F8B88A155E7EE200625B01 /* GVCConfigurationTest.m */; };
+		05FC427B16E532E400F2AD0B /* GVCFoundationConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 05FC427A16E532E400F2AD0B /* GVCFoundationConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -598,6 +599,7 @@
 		05F8B880155E51ED00625B01 /* GVCConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCConfiguration.h; sourceTree = "<group>"; };
 		05F8B881155E51ED00625B01 /* GVCConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCConfiguration.m; sourceTree = "<group>"; };
 		05F8B88A155E7EE200625B01 /* GVCConfigurationTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCConfigurationTest.m; sourceTree = "<group>"; };
+		05FC427A16E532E400F2AD0B /* GVCFoundationConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCFoundationConstants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -801,6 +803,7 @@
 			isa = PBXGroup;
 			children = (
 				056F5938147EE84D0076010D /* GVCFoundation.h */,
+				05FC427A16E532E400F2AD0B /* GVCFoundationConstants.h */,
 				056F5989147EEDC40076010D /* Additions */,
 				059A3E9616B072DD0047EF66 /* filesystem */,
 				0551D34715166BC90089217F /* Operations */,
@@ -1448,6 +1451,7 @@
 				05C2E32D1669172A00FDEE0D /* GVCInvocation.h in Headers */,
 				05306B7316BDB35600CED7AE /* NSMethodSignature+GVCFoundation.h in Headers */,
 				052FB8C716D5CFA800BB849C /* GVCSOAPFaultDetail.h in Headers */,
+				05FC427B16E532E400F2AD0B /* GVCFoundationConstants.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

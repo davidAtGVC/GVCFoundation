@@ -76,4 +76,12 @@
 	return nil;
 }
 
+#pragma mark - validation
+- (BOOL)validateAction:(out NSError **)outError
+{
+	BOOL success = YES;
+	return success;
+}
+
+
 @end

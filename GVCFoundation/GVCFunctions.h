@@ -15,6 +15,7 @@
 #import <Foundation/NSDictionary.h>
 
 #import "GVCMacros.h"
+#import "GVCFoundationConstants.h"
 
 #pragma mark - Method Swizzle
 
