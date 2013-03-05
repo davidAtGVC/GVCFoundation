@@ -74,6 +74,7 @@ GVC_EXTERN NSString *gvc_LocalizedFormat(NSString *key, NSString *fmt, ...);
 #define GVC_OK_LABEL			GVC_LocalizedString(@"Label/OK",     	@"Ok")
 #define GVC_PROCESSING_LABEL	GVC_LocalizedString(@"Label/Processing",@"Processing")
 
+#define GVC_VALIDATION_ERR_LABEL	GVC_LocalizedString(@"Label/ValidationError",	@"Validation Error")
 #define GVC_NETWORK_ERR_LABEL	GVC_LocalizedString(@"Label/NetworkError",	@"Network Error")
 #define GVC_NETWORK_NO_RESPONSE_LABEL	GVC_LocalizedString(@"Label/NetworkNoResponse",	@"No response from server")
 
