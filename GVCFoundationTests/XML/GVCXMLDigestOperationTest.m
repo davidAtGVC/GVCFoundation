@@ -120,25 +120,16 @@ const NSString *ITUNES_URL = @"http://ax.phobos.apple.com.edgesuite.net/WebObjec
 
 	[[self queue] addOperation:url_Op];
 	
-	int count = 0;
-    while (hasCalledBack == NO && count < 20)
+    while (hasCalledBack == NO)
 	{
-        GVCLogError(@"letting runloop %d", count);
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:20]];
-        count++;
+        GVCLogError(@"letting runloop ...");
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:30]];
     }
     STAssertTrue(hasCalledBack, @"Operation not finished");
     
     if ( hasCalledBack == NO ) 
     {
         [queue cancelAllOperations];
-        
-        count = 0;
-        while (hasCalledBack == NO && count < 2)
-        {
-            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
-            count++;
-        }
     }
 }
 
