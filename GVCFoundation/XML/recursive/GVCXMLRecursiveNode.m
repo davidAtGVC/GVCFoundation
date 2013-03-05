@@ -148,7 +148,7 @@
 - (NSString *)currentTextContent
 {
 	NSString  *trimed = [[self stringBuffer] gvc_TrimWhitespaceAndNewline];
-    return (gvc_IsEmpty(trimed) ? nil : trimed);
+    return (gvc_IsEmpty(trimed) ? nil : [self stringBuffer]);
 }
 
 - (SEL)currentSetNodeSelectorKey:(GVCXMLRecursiveNode *)node;
@@ -380,7 +380,6 @@
 	GVC_DBC_REQUIRE()
 	
 	// implementation
-	string = [string gvc_TrimWhitespace];
 	if ( gvc_IsEmpty(string) == NO )
 	{
 		if ( [self stringBuffer] == nil )
