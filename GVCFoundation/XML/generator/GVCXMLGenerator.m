@@ -33,16 +33,6 @@
 
 @implementation GVCXMLGenerator
 
-@synthesize elementStack;
-@synthesize declaredNamespaces;
-@synthesize illegalCharacters;
-
-@synthesize format;
-@synthesize inlineNodeCount;
-@synthesize indentLevel;
-@synthesize lastWriteWasText;
-@synthesize tagIsOpen;
-
 - init
 {
 	return [self initWithWriter:nil andFormat:GVC_XML_GeneratorFormat_PRETTY];
@@ -59,14 +49,14 @@
 	self = [super initWithWriter:wrter];
 	if ( self != nil )
 	{
-		elementStack = [[GVCStack alloc] init];
-		declaredNamespaces = [[NSMutableArray alloc] init];
+		[self setElementStack:[[GVCStack alloc] init]];
+		[self setDeclaredNamespaces:[[NSMutableArray alloc] init]];
 		
-		inlineNodeCount = 0;
-		indentLevel = 0;
-		format = fmt;
-		lastWriteWasText = NO;
-		tagIsOpen = NO;
+		[self setInlineNodeCount:0];
+		[self setIndentLevel:0];
+		[self setFormat:fmt];
+		[self setLastWriteWasText:NO];
+		[self setTagIsOpen:NO];
 		[self setXmlEncoding:[[self writer] stringEncoding]];
 	}
 	return self;
@@ -95,7 +85,7 @@
 
 - (NSCharacterSet *)illegalCharacterSet
 {
-	if ( illegalCharacters == nil )
+	if ( [self illegalCharacters] == nil )
 	{
 		NSMutableCharacterSet *legalSet = [[NSMutableCharacterSet alloc] init];
 		
@@ -120,9 +110,9 @@
 		// Allow white space to pass through normally
 		[legalSet addCharactersInString:@"\r\n\t"];
 		
-		illegalCharacters = [[legalSet invertedSet] copy];
+		[self setIllegalCharacters:[[legalSet invertedSet] copy]];
 	}
-    return illegalCharacters;
+    return [self illegalCharacters];
 }
 
 
@@ -186,16 +176,16 @@
 
 - (void)writeIndent
 {
-	if ( format != GVC_XML_GeneratorFormat_COMPACT )
+	if ( [self format] != GVC_XML_GeneratorFormat_COMPACT )
 	{
-		for ( NSUInteger i = 0; i < indentLevel; i++ )
+		for ( NSUInteger i = 0; i < [self indentLevel]; i++ )
 			[super writeString:@"\t"];
 	}
 }
 
 - (void)writeNewline
 {
-	if ( format != GVC_XML_GeneratorFormat_COMPACT )
+	if ( [self format] != GVC_XML_GeneratorFormat_COMPACT )
 	{
 		[super writeString:@"\n"];
 		[self writeIndent];
@@ -216,14 +206,14 @@
 			[super writeFormat:@" encoding=\"%@\"", [NSString gvc_ShortMimeEncodingName:[self xmlEncoding]]];
 		}
 		[super writeString:@"?>"];
-//		[self writeNewline];
+		[self writeNewline];
 	}
 }
 
 - (void)closeDocument
 {
 	GVC_ASSERT( [self writer] != nil, @"No Writer defined" );
-	GVC_ASSERT( [elementStack count] == 0, @"Element tags are not all closed %@", elementStack );
+	GVC_ASSERT( [[self elementStack] count] == 0, @"Element tags are not all closed %@", [self elementStack] );
     
 	[self close];
 }
@@ -235,7 +225,7 @@
 
 - (void)writeDoctype:(NSString *)rootElement identifiers:(NSString *)publicIdentifier system:(NSString *)systemIdentifier internalSubset:(NSString *)subset
 {
-	GVC_ASSERT( [elementStack count] == 0, @"DocType must come before element tags are started %@", elementStack );
+	GVC_ASSERT( [[self elementStack] count] == 0, @"DocType must come before element tags are started %@", [self elementStack] );
 	
 	BOOL hasPublic = (gvc_IsEmpty(publicIdentifier) != NO);
 	
@@ -272,12 +262,11 @@
 {
 	GVC_ASSERT_NOT_EMPTY( target );
     
-	if ( tagIsOpen == YES )
+	if ( [self tagIsOpen] == YES )
 	{
 		[self closeTag];
 	}
 	
-	[self writeNewline];
 	[self writeFormat:@"<?%@", target];
     
 	if ( gvc_IsEmpty(instructions) == NO) 
@@ -286,23 +275,23 @@
 	}
 	
 	[self writeString:@"?>"];
-	lastWriteWasText = NO;
+	[self setLastWriteWasText:NO];
 }
 
 - (void)writeText:(NSString *)text
 {
-	if ( tagIsOpen == YES )
+	if ( [self tagIsOpen] == YES )
 	{
 		[self closeTag];
 	}
 	
 	[self writeString:[text gvc_XMLEntityEscapedString:NO]];
-	lastWriteWasText = YES;
+	[self setLastWriteWasText:YES];
 }
 
 - (void)writeComment:(NSString *)comment
 {
-	if ( tagIsOpen == YES )
+	if ( [self tagIsOpen] == YES )
 	{
 		[self closeTag];
 	}
@@ -394,7 +383,7 @@
 
 - (void)startCDATA
 {
-	if ( tagIsOpen == YES )
+	if ( [self tagIsOpen] == YES )
 	{
 		[self closeTag];
 	}
@@ -467,7 +456,7 @@
 {
 	GVC_ASSERT_NOT_EMPTY( name );
 	
-	if ( tagIsOpen == YES )
+	if ( [self tagIsOpen] == YES )
 	{
 		[self closeTag];
 	}
@@ -478,7 +467,7 @@
     //	}
     //	else
     //	{
-    [self writeNewline];
+    // [self writeNewline];
     //	}
 	
 	NSString *qualifiedName = name;
@@ -491,11 +480,11 @@
     [self writeString:qualifiedName];
     
 	GVCXMLOutputNode *node = [[GVCXMLOutputNode alloc] initWithName:qualifiedName andAttributes:nil forNamespaces:nil];
-	[elementStack pushObject:node];
+	[[self elementStack] pushObject:node];
     
-	indentLevel ++;
-	lastWriteWasText = NO;
-	tagIsOpen = YES;
+	[self setIndentLevel:([self indentLevel] + 1)];
+	[self setLastWriteWasText:NO];
+	[self setTagIsOpen:YES];
     
 	if ( nmspValue != nil )
 		[self declareNamespace:nmspValue];
@@ -503,7 +492,7 @@
 
 - (void)appendAttribute:(NSString *)key forValue:(NSString *)value
 {
-	GVC_ASSERT( tagIsOpen == YES, @"Cannot write attribute, tag is already closed!" );
+	GVC_ASSERT( [self tagIsOpen] == YES, @"Cannot write attribute, tag is already closed!" );
 	GVC_ASSERT_NOT_EMPTY( key );
 	
 	[self writeFormat:@" %@=\"%@\"", key, [value gvc_XMLAttributeEscapedString]];
@@ -511,7 +500,7 @@
 
 - (void)appendAttribute:(NSString *)key inNamespacePrefix:(NSString *)prefix forValue:(NSString *)value
 {
-	GVC_ASSERT( tagIsOpen == YES, @"Cannot write attribute, tag is already closed!" );
+	GVC_ASSERT( [self tagIsOpen] == YES, @"Cannot write attribute, tag is already closed!" );
 	// assert namespace prefix is declared
 	GVC_ASSERT_NOT_EMPTY( key );
 	GVC_ASSERT_NOT_EMPTY( prefix );
@@ -535,12 +524,12 @@
 
 - (void)declareNamespace:(id <GVCXMLNamespaceDeclaration>)nmspValue
 {
-	GVC_ASSERT( tagIsOpen == YES, @"Cannot declare namespace, tag is already closed!" );
+	GVC_ASSERT( [self tagIsOpen] == YES, @"Cannot declare namespace, tag is already closed!" );
 	
-	if ( [declaredNamespaces containsObject:nmspValue] == NO )
+	if ( [[self declaredNamespaces] containsObject:nmspValue] == NO )
 	{
-		[declaredNamespaces addObject:nmspValue];
-		[(GVCXMLOutputNode *)[elementStack peekObject] addNamespace:nmspValue];
+		[[self declaredNamespaces] addObject:nmspValue];
+		[(GVCXMLOutputNode *)[[self elementStack] peekObject] addNamespace:nmspValue];
         
 		[self writeFormat:@" %@=\"%@\"", [nmspValue qualifiedPrefix], [nmspValue uri]];
 	}
@@ -548,35 +537,35 @@
 
 - (void)closeElement
 {
-	GVCXMLOutputNode *node = (GVCXMLOutputNode *)[elementStack popObject];
+	GVCXMLOutputNode *node = (GVCXMLOutputNode *)[[self elementStack] popObject];
 	NSArray *declNamespace = [node namespaces];
 	for (id <GVCXMLNamespaceDeclaration> nsDecl in declNamespace )
 	{
-		[declaredNamespaces removeObject:nsDecl];
+		[[self declaredNamespaces] removeObject:nsDecl];
 	}
     
-	indentLevel--;
+	[self setIndentLevel:([self indentLevel] - 1)];
     
-	if ( tagIsOpen == YES )
+	if ( [self tagIsOpen] == YES )
 	{
 		[self writeString:@" />"];
-		tagIsOpen = NO;
+		[self setTagIsOpen:NO];
 	}
 	else
 	{
-		if (lastWriteWasText == NO)
+		if ([self lastWriteWasText] == NO)
 			[self writeNewline];
 		[self writeFormat:@"</%@>", [node nodeName]];
 	}
-	lastWriteWasText = NO;
+	[self setLastWriteWasText:NO];
 }
 
 
 - (void)closeTag
 {
-	GVC_ASSERT( tagIsOpen == YES, @"Cannot close tag, already closed!" );
+	GVC_ASSERT( [self tagIsOpen] == YES, @"Cannot close tag, already closed!" );
 	[self writeString:@">"];
-	tagIsOpen = NO;
+	[self setTagIsOpen:NO];
 }
 
 @end

@@ -19,10 +19,6 @@
 
 @implementation GVCStringWriter
 
-@synthesize writerStatus;
-@synthesize stringEncoding;
-@synthesize stringBuffer;
-
 + (GVCStringWriter *)stringWriter
 {
 	return [[GVCStringWriter alloc] init];
@@ -41,16 +37,16 @@
 
 - (NSString *)string
 {
-	return stringBuffer;
+	return [self stringBuffer];
 }
 
 - (void)openWriter
 {
-	GVC_ASSERT( writerStatus == GVC_IO_Status_INITIAL, @"Cannot open writer more than once" );
-	GVC_ASSERT( stringBuffer == nil, @"String buffer improperly initialized" );
+	GVC_ASSERT( [self writerStatus] == GVC_IO_Status_INITIAL, @"Cannot open writer more than once" );
+	GVC_ASSERT( [self stringBuffer] == nil, @"String buffer improperly initialized" );
 	
-	stringBuffer = [[NSMutableString alloc] init];
-	writerStatus = GVC_IO_Status_OPEN;
+	[self setStringBuffer:[[NSMutableString alloc] init]];
+	[self setWriterStatus:GVC_IO_Status_OPEN];
 }
 
 - (void)flush
@@ -58,11 +54,11 @@
 
 - (void)writeString:(NSString *)str
 {
-	GVC_ASSERT( writerStatus == GVC_IO_Status_OPEN, @"Cannot write unless writer is open" );
-	GVC_ASSERT( stringBuffer != nil, @"String buffer not initialized" );
+	GVC_ASSERT( [self writerStatus] == GVC_IO_Status_OPEN, @"Cannot write unless writer is open" );
+	GVC_ASSERT( [self stringBuffer] != nil, @"String buffer not initialized" );
     GVC_ASSERT( str != nil, @"No message" );
 	
-	[stringBuffer appendString:str];
+	[[self stringBuffer] appendString:str];
 }
 
 - (void)writeFormat:(NSString *)fmt, ...
@@ -79,8 +75,8 @@
 
 - (void)closeWriter
 {
-	GVC_ASSERT( writerStatus == GVC_IO_Status_OPEN, @"Cannot close writer unless writer is open" );
-	writerStatus = GVC_IO_Status_CLOSED;
+	GVC_ASSERT( [self writerStatus] == GVC_IO_Status_OPEN, @"Cannot close writer unless writer is open" );
+	[self setWriterStatus:GVC_IO_Status_CLOSED];
 }
 
 @end
