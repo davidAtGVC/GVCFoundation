@@ -98,6 +98,8 @@
 		0530BDD8150BB65E005ED5B6 /* GVCXMLDigestTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0530BDD7150BB65E005ED5B6 /* GVCXMLDigestTest.m */; };
 		053B12ED155BAF1900F18A28 /* NSSet+GVCFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 053B12EB155BAF1900F18A28 /* NSSet+GVCFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		053B12EE155BAF1900F18A28 /* NSSet+GVCFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 053B12EC155BAF1900F18A28 /* NSSet+GVCFoundation.m */; };
+		053F76CE16E93DD0007C7557 /* NSPredicate+GVCFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 053F76CC16E93DD0007C7557 /* NSPredicate+GVCFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		053F76CF16E93DD0007C7557 /* NSPredicate+GVCFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 053F76CD16E93DD0007C7557 /* NSPredicate+GVCFoundation.m */; };
 		05412D8C15116F4300919C57 /* DaringFireball.xml in Resources */ = {isa = PBXBuildFile; fileRef = 05412D8815116F3600919C57 /* DaringFireball.xml */; };
 		05412D8D15116F4900919C57 /* hl7Digest.xml in Resources */ = {isa = PBXBuildFile; fileRef = 05412D8915116F3600919C57 /* hl7Digest.xml */; };
 		05412D8E15116F4C00919C57 /* hl7SoapDigest.xml in Resources */ = {isa = PBXBuildFile; fileRef = 05412D8A15116F3600919C57 /* hl7SoapDigest.xml */; };
@@ -371,6 +373,8 @@
 		0530BDD7150BB65E005ED5B6 /* GVCXMLDigestTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCXMLDigestTest.m; sourceTree = "<group>"; };
 		053B12EB155BAF1900F18A28 /* NSSet+GVCFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+GVCFoundation.h"; sourceTree = "<group>"; };
 		053B12EC155BAF1900F18A28 /* NSSet+GVCFoundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+GVCFoundation.m"; sourceTree = "<group>"; };
+		053F76CC16E93DD0007C7557 /* NSPredicate+GVCFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSPredicate+GVCFoundation.h"; sourceTree = "<group>"; };
+		053F76CD16E93DD0007C7557 /* NSPredicate+GVCFoundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSPredicate+GVCFoundation.m"; sourceTree = "<group>"; };
 		05412D8815116F3600919C57 /* DaringFireball.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = DaringFireball.xml; sourceTree = "<group>"; };
 		05412D8915116F3600919C57 /* hl7Digest.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = hl7Digest.xml; sourceTree = "<group>"; };
 		05412D8A15116F3600919C57 /* hl7SoapDigest.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = hl7SoapDigest.xml; sourceTree = "<group>"; };
@@ -1051,6 +1055,8 @@
 				059D1DB41638893800339074 /* NSURLRequest+GVCFoundation.m */,
 				05306B7116BDB35600CED7AE /* NSMethodSignature+GVCFoundation.h */,
 				05306B7216BDB35600CED7AE /* NSMethodSignature+GVCFoundation.m */,
+				053F76CC16E93DD0007C7557 /* NSPredicate+GVCFoundation.h */,
+				053F76CD16E93DD0007C7557 /* NSPredicate+GVCFoundation.m */,
 			);
 			path = Additions;
 			sourceTree = "<group>";
@@ -1452,6 +1458,7 @@
 				05306B7316BDB35600CED7AE /* NSMethodSignature+GVCFoundation.h in Headers */,
 				052FB8C716D5CFA800BB849C /* GVCSOAPFaultDetail.h in Headers */,
 				05FC427B16E532E400F2AD0B /* GVCFoundationConstants.h in Headers */,
+				053F76CE16E93DD0007C7557 /* NSPredicate+GVCFoundation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1720,6 +1727,7 @@
 				059A3EA816B072DD0047EF66 /* GVCFileWriter.m in Sources */,
 				05306B7416BDB35600CED7AE /* NSMethodSignature+GVCFoundation.m in Sources */,
 				052FB8C816D5CFA800BB849C /* GVCSOAPFaultDetail.m in Sources */,
+				053F76CF16E93DD0007C7557 /* NSPredicate+GVCFoundation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
