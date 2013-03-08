@@ -469,6 +469,11 @@
     //	{
     // [self writeNewline];
     //	}
+
+	if ( [self indentLevel] > 0 )
+	{
+		[self writeNewline];
+	}
 	
 	NSString *qualifiedName = name;
 	if ( nmspValue != nil )
