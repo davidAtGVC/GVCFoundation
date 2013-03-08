@@ -56,4 +56,10 @@
  */
 - (BOOL)gvc_isEqualToDateIgnoringTime:(NSDate *)aDate;
 
+
+/**
+ * returns the number of years between 2 dates
+ */
+- (NSUInteger) gvc_yearsBetweenDate:(NSDate *)aDate;
+
 @end

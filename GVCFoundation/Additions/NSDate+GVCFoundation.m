@@ -148,4 +148,25 @@
 	return isEqual;
 }
 
+#pragma mark - date differences
+- (NSUInteger) gvc_yearsBetweenDate:(NSDate *)aDate
+{
+	NSUInteger diff = 0;
+	GVC_DBC_REQUIRE(
+					GVC_DBC_FACT_NOT_NIL(aDate);
+					)
+	
+	NSUInteger compUnits = (NSYearCalendarUnit);
+	
+	NSDateComponents *myComponents = [[NSCalendar currentCalendar] components:compUnits fromDate:self];
+	NSDateComponents *otherComponents = [[NSCalendar currentCalendar] components:compUnits fromDate:aDate];
+
+	diff = (NSUInteger)ABS((NSUInteger)[myComponents year] - (NSUInteger)[otherComponents year]);
+
+	GVC_DBC_ENSURE(
+				   )
+
+	return diff;
+}
+
 @end
