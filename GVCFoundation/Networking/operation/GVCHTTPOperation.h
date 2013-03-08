@@ -31,4 +31,7 @@
 
 - (NSHTTPURLResponse *)lastResponse;
 
+- (void)dumpRequestTo:(NSString *)filename;
+- (void)dumpResponseTo:(NSString *)filename;
+
 @end

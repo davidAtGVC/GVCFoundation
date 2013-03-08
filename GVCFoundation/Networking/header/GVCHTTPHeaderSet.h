@@ -30,5 +30,6 @@
 - (void)parseHeaderLine:(NSString *)line;
 - (void)parseHeaderValue:(NSString *)value forKey:(NSString *)key;
 
+- (NSArray *)headerKeys;
 - (GVCHTTPHeader *)headerForKey:(NSString *)key;
 @end

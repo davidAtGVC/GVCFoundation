@@ -85,6 +85,14 @@
 {
 }
 
+- (void)writeData:(NSData *)data
+{
+	GVC_ASSERT( writerStatus == GVC_IO_Status_OPEN, @"Cannot write unless writer is open" );
+    GVC_ASSERT( data != nil, @"No data" );
+
+	[fileStream write:[data bytes] maxLength:[data length]];
+}
+
 - (void)writeString:(NSString *)str
 {
 	GVC_ASSERT( writerStatus == GVC_IO_Status_OPEN, @"Cannot write unless writer is open" );

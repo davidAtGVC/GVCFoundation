@@ -142,6 +142,11 @@ static NSSet *http_headers_with_parameters = nil;
     }
 }
 
+- (NSArray *)headerKeys
+{
+    return [[self headerDictionary] allKeys];
+}
+
 - (GVCHTTPHeader *)headerForKey:(NSString *)key
 {
     GVC_ASSERT_NOT_NIL(key);

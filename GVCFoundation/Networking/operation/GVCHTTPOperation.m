@@ -11,6 +11,11 @@
 #import "GVCFunctions.h"
 #import "GVCLogger.h"
 #import "GVCNetworking.h"
+#import "GVCFileWriter.h"
+#import "GVCNetResponseData.h"
+#import "GVCMultipartResponseData.h"
+#import "GVCHTTPHeaderSet.h"
+#import "GVCHTTPHeader.h"
 
 @implementation GVCHTTPOperation
 
@@ -89,5 +94,71 @@
     return (NSHTTPURLResponse *)[super lastResponse];
 }
 
+- (void)dumpRequestTo:(NSString *)filename
+{
+	GVCFileWriter *writer = [GVCFileWriter writerForFilename:filename];
+	[writer openWriter];
+	
+	[writer writeFormat:@"%@ %@\n", [[self request] HTTPMethod], [[[self request] URL] absoluteString]];
+	NSDictionary *headers = [[self request] allHTTPHeaderFields];
+	for ( NSString *key in headers)
+	{
+		[writer writeFormat:@"\t%@ = '%@'\n", key, [headers objectForKey:key]];
+	}
+	
+	[writer writeString:@"\n"];
+	[writer writeData:[[self request] HTTPBody]];
+	[writer closeWriter];
+}
+
+- (void)dumpResponseTo:(NSString *)filename
+{
+	GVCFileWriter *writer = [GVCFileWriter writerForFilename:filename];
+	[writer openWriter];
+	
+	[writer writeFormat:@"%d %@\n", [[self lastResponse] statusCode], [[[self lastResponse] URL] absoluteString]];
+	NSDictionary *headers = [[self lastResponse] allHeaderFields];
+	for ( NSString *key in headers)
+	{
+		[writer writeFormat:@"\t%@ = '%@'\n", key, [headers objectForKey:key]];
+	}
+	
+	[writer writeString:@"\n"];
+	if ( [self hasResponseData] == YES )
+	{
+		if ( [[self responseData] isKindOfClass:[GVCMultipartResponseData class]] == YES )
+		{
+			GVCHTTPHeaderSet *headerset = [[self responseData] httpHeaders];
+			NSArray *keys = [headerset headerKeys];
+			for ( NSString *key in keys )
+			{
+				[writer writeFormat:@"\t%@ = '%@'\n", key, [[headerset headerForKey:key] headerValue]];
+			}
+			[writer writeString:@"\n"];
+
+			NSArray *parts = [(GVCMultipartResponseData *)[self responseData] responseParts];
+			for ( GVCNetResponseData *part in parts )
+			{
+				GVCHTTPHeaderSet *partheaderset = [part httpHeaders];
+				NSArray *partkeys = [partheaderset headerKeys];
+				for ( NSString *key in partkeys )
+				{
+					[writer writeFormat:@"\t%@ = '%@'\n", key, [[partheaderset headerForKey:key] headerValue]];
+				}
+				[writer writeString:@"\n"];
+				if ( [part isKindOfClass:[GVCMemoryResponseData class]] == YES )
+				{
+					[writer writeData:[(GVCMemoryResponseData *)part responseBody]];
+				}
+
+			}
+		}
+		else if ( [[self responseData] isKindOfClass:[GVCMemoryResponseData class]] == YES )
+		{
+			[writer writeData:[(GVCMemoryResponseData *)[self responseData] responseBody]];
+		}
+	}
+	[writer closeWriter];
+}
 
 @end
