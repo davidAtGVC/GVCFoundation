@@ -597,16 +597,20 @@ static BOOL is_leap_year(NSUInteger year);
 
 - (NSDate *) dateFromString:(NSString *)string timeZone:(out NSTimeZone **)outTimeZone range:(out NSRange *)outRange 
 {
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    calendar.firstWeekday = 2; //Monday
-    
+	NSDate *retValue = nil;
     NSTimeZone *timeZone = nil;
     NSDateComponents *components = [self dateComponentsFromString:string timeZone:&timeZone range:outRange];
     if (outTimeZone)
         *outTimeZone = timeZone;
-    calendar.timeZone = timeZone;
-    
-    return [calendar dateFromComponents:components];
+	
+	if (([components year] != NSUndefinedDateComponent) && ([components month] != NSUndefinedDateComponent) && ([components day] != NSUndefinedDateComponent))
+	{
+		NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+		[calendar setFirstWeekday:2];   //Monday
+		[calendar setTimeZone:timeZone];
+		retValue = [calendar dateFromComponents:components];
+	}
+	return retValue;
 }
 
 - (BOOL)getObjectValue:(id *)outValue forString:(NSString *)string errorDescription:(NSString **)error 
