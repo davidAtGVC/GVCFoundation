@@ -17,6 +17,9 @@
 #import "GVCHTTPHeaderSet.h"
 #import "GVCHTTPHeader.h"
 
+#import "NSString+GVCFoundation.h"
+
+
 @implementation GVCHTTPOperation
 
 @synthesize acceptableStatusCodes;
@@ -94,17 +97,27 @@
     return (NSHTTPURLResponse *)[super lastResponse];
 }
 
+#pragma mark - Dump request and response content
+
 - (void)dumpRequestTo:(NSString *)filename
 {
 	GVCFileWriter *writer = [GVCFileWriter writerForFilename:filename];
 	[writer openWriter];
-	
+
+	if ( [filename gvc_endsWith:@".xml"] == YES )
+    {
+        [writer writeString:@"<!-- "];
+    }
 	[writer writeFormat:@"%@ %@\n", [[self request] HTTPMethod], [[[self request] URL] absoluteString]];
 	NSDictionary *headers = [[self request] allHTTPHeaderFields];
 	for ( NSString *key in headers)
 	{
 		[writer writeFormat:@"\t%@ = '%@'\n", key, [headers objectForKey:key]];
 	}
+	if ( [filename gvc_endsWith:@".xml"] == YES )
+    {
+        [writer writeString:@" -->"];
+    }
 	
 	[writer writeString:@"\n"];
 	[writer writeData:[[self request] HTTPBody]];
@@ -116,12 +129,20 @@
 	GVCFileWriter *writer = [GVCFileWriter writerForFilename:filename];
 	[writer openWriter];
 	
+	if ( [filename gvc_endsWith:@".xml"] == YES )
+    {
+        [writer writeString:@"<!-- HTTP Headers\n"];
+    }
 	[writer writeFormat:@"%d %@\n", [[self lastResponse] statusCode], [[[self lastResponse] URL] absoluteString]];
 	NSDictionary *headers = [[self lastResponse] allHeaderFields];
 	for ( NSString *key in headers)
 	{
 		[writer writeFormat:@"\t%@ = '%@'\n", key, [headers objectForKey:key]];
 	}
+    if ( [filename gvc_endsWith:@".xml"] == YES )
+    {
+        [writer writeString:@"End Headers -->"];
+    }
 	
 	[writer writeString:@"\n"];
 	if ( [self hasResponseData] == YES )
