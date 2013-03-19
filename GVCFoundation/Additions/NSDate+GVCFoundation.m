@@ -100,11 +100,22 @@
 	return date;
 }
 
-- (NSString *)gvc_FormattedStyle:(NSDateFormatterStyle)style
+- (NSString *)gvc_FormattedDateStyle:(NSDateFormatterStyle)datestyle timeStyle:(NSDateFormatterStyle)timestyle
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateStyle:style];
+    [formatter setDateStyle:datestyle];
+    [formatter setTimeStyle:timestyle];
     return [formatter stringFromDate:self];
+}
+
+- (NSString *)gvc_FormattedDate:(NSDateFormatterStyle)style
+{
+	return [self gvc_FormattedDateStyle:style timeStyle:NSDateFormatterNoStyle];
+}
+
+- (NSString *)gvc_FormattedTime:(NSDateFormatterStyle)style
+{
+	return [self gvc_FormattedDateStyle:NSDateFormatterNoStyle timeStyle:style];
 }
 
 - (NSString *)gvc_FormattedStringValue:(NSString *)fmt

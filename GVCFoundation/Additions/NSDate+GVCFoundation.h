@@ -24,7 +24,33 @@
 - (NSString *)gvc_iso8601StringValue;
 
 
-- (NSString *)gvc_FormattedStyle:(NSDateFormatterStyle)style;
+/**
+ * Generates a formatted string from this date usng the specified date and time styles
+ * @param datestyle the style for the date
+ * @param timestyle the style for the time
+ * @returns formatted date
+ */
+- (NSString *)gvc_FormattedDateStyle:(NSDateFormatterStyle)datestyle timeStyle:(NSDateFormatterStyle)timestyle;
+
+/**
+ * Generates a formatted string from this date usng the specified date styles.  Defaults time style to NSDateFormatterNoStyle
+ * @param datestyle the style for the date
+ * @returns formatted date
+ */
+- (NSString *)gvc_FormattedDate:(NSDateFormatterStyle)style;
+
+/**
+ * Generates a formatted string from this date usng the specified time style..  Defaults date style to NSDateFormatterNoStyle
+ * @param timestyle the style for the time
+ * @returns formatted date
+ */
+- (NSString *)gvc_FormattedTime:(NSDateFormatterStyle)style;
+
+/**
+ * Generates a formatted string from this date usng the specified format
+ * @param fmt the date format
+ * @returns formatted date
+ */
 - (NSString *)gvc_FormattedStringValue:(NSString *)fmt;
 
 #pragma mark - Date comparison 
