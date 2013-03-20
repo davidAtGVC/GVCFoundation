@@ -34,8 +34,10 @@
 - (GVCRSSFeed *)feedFromFile:(NSString *)file forNode:(NSString *)root
 {
 	//[[GVCLogger sharedGVCLogger] setLoggerLevel:GVCLoggerLevel_INFO];
-	GVCDirectory *testRoot = [[GVCDirectory TempDirectory] createSubdirectory:GVC_CLASSNAME(self)];
-	
+	NSError *tstErr = nil;
+	GVCDirectory *testRoot = [[GVCDirectory TempDirectory] createSubdirectory:GVC_CLASSNAME(self) error:&tstErr];
+	STAssertNil(tstErr, @"Failed to create subdirectory");
+
 	GVCRSSDigester *parser = [[GVCRSSDigester alloc] init];
 	[parser setXmlFilename:[self pathForResource:file extension:@"xml"]];
 	GVCXMLParserDelegate_Status stat = [parser parse];

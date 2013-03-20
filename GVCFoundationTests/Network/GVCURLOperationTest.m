@@ -50,7 +50,10 @@
         GVCMemoryResponseData *respData = (GVCMemoryResponseData *)[(GVCNetOperation *)operation responseData];
 		NSData *data = [respData responseBody];
 		GVCLogError(@"Operation success with data %@", data);
-		GVCDirectory *testRoot = [[GVCDirectory TempDirectory] createSubdirectory:GVC_CLASSNAME(self)];
+
+		NSError *tstErr = nil;
+		GVCDirectory *testRoot = [[GVCDirectory TempDirectory] createSubdirectory:GVC_CLASSNAME(self) error:&tstErr];
+		STAssertNil(tstErr, @"Failed to create subdirectory");
 		[data writeToFile:[testRoot fullpathForFile:@"apple.com.html"] atomically:YES];
 		hasCalledBack = YES;
 	}];
@@ -139,7 +142,11 @@
 		GVCLogError(@"GVCOperation success");
         GVCMemoryResponseData *respData = (GVCMemoryResponseData *)[(GVCNetOperation *)operation responseData];
 		NSData *data = [respData responseBody];
-		GVCDirectory *testRoot = [[GVCDirectory TempDirectory] createSubdirectory:GVC_CLASSNAME(self)];
+
+		NSError *tstErr = nil;
+		GVCDirectory *testRoot = [[GVCDirectory TempDirectory] createSubdirectory:GVC_CLASSNAME(self) error:&tstErr];
+		STAssertNil(tstErr, @"Failed to create subdirectory");
+
 		[data writeToFile:[testRoot fullpathForFile:@"media-local.html"] atomically:YES];
 		STAssertTrue(data != nil, @"Self signed server should have returned a page");
 		STAssertTrue([data length] > 10, @"Self signed server should have content");

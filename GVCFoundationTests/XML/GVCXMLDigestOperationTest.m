@@ -171,7 +171,10 @@ const NSString *ITUNES_URL = @"http://ax.phobos.apple.com.edgesuite.net/WebObjec
         
         GVCRSSFeed *feed = (GVCRSSFeed *)[parseDelegate digestValueForPath:@"rss"];
         
-		GVCDirectory *testRoot = [[GVCDirectory TempDirectory] createSubdirectory:GVC_CLASSNAME(self)];
+		NSError *tstErr = nil;
+		GVCDirectory *testRoot = [[GVCDirectory TempDirectory] createSubdirectory:GVC_CLASSNAME(self) error:&tstErr];
+		STAssertNil(tstErr, @"Failed to create subdirectory");
+
         GVCFileWriter *writer = [GVCFileWriter writerForFilename:[testRoot fullpathForFile:@"apple300.rss"]];
         GVCXMLGenerator *outgen = [[GVCXMLGenerator alloc] initWithWriter:writer andFormat:GVC_XML_GeneratorFormat_PRETTY];
         [feed writeRss:outgen];

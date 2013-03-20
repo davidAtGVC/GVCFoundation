@@ -230,7 +230,10 @@ static NSDictionary *rawHeaders = nil;
     NSString *responseFile = [self pathForResource:@"multipart-response" extension:@"http"];
     GVC_ASSERT_NOT_NIL(responseFile);
     
-	GVCDirectory *testRoot = [[GVCDirectory TempDirectory] createSubdirectory:GVC_CLASSNAME(self)];
+	NSError *tstErr = nil;
+	GVCDirectory *testRoot = [[GVCDirectory TempDirectory] createSubdirectory:GVC_CLASSNAME(self) error:&tstErr];
+	STAssertNil(tstErr, @"Failed to create subdirectory");
+
     GVCMultipartResponseData *responseData = [[GVCMultipartResponseData alloc] initForFilename:[testRoot uniqueFilename]];
     [responseData parseResponseHeaders:rawHeaders];
     [self verify:[responseData httpHeaders]];
