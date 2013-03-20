@@ -178,16 +178,15 @@ static GVCDirectory *downloadsDirectory;
     return [[NSFileManager defaultManager] gvc_md5Hash:[self fullpathForFile:path]];
 }
 
-- (BOOL)removeFileIfExists:(NSString *)path
+- (BOOL)removeFileIfExists:(NSString *)path error:(NSError **)err
 {
     BOOL success = YES;
     if ( [self fileExists:path] == YES )
     {
-        NSError *err = nil;
-        success = [[NSFileManager defaultManager] removeItemAtPath:[self fullpathForFile:path] error:&err];
+        success = [[NSFileManager defaultManager] removeItemAtPath:[self fullpathForFile:path] error:err];
         if ( success == NO )
         {
-            GVCLogError(@"remove file error %@", err);
+            GVCLogError(@"remove file error %@", *err);
         }
     }
     return success;
@@ -207,20 +206,20 @@ static GVCDirectory *downloadsDirectory;
     return ([fileMgr fileExistsAtPath:[self fullpathForFile:path] isDirectory:&isDir]) && (isDir == YES);
 }
 
-- (GVCDirectory *)createSubdirectory:(NSString *)name
+- (GVCDirectory *)createSubdirectory:(NSString *)name error:(NSError **)err
 {
     NSString *full = [[self rootDirectory] stringByAppendingPathComponent:name];
     NSFileManager *fileMgr = [NSFileManager defaultManager];
     
     if ( [fileMgr gvc_directoryExists:full] == NO )
     {
-        [fileMgr createDirectoryAtPath:full withIntermediateDirectories:YES attributes:nil error:nil];
+        [fileMgr createDirectoryAtPath:full withIntermediateDirectories:YES attributes:nil error:err];
     }
 
     return [[GVCDirectory alloc] initWithRootPath:full];
 }
 
-- (BOOL)moveFileFrom:(NSString *)source to:(NSString *)dest
+- (BOOL)moveFileFrom:(NSString *)source to:(NSString *)dest error:(NSError **)err
 {
     GVC_ASSERT_NOT_EMPTY(source);
     GVC_ASSERT_NOT_EMPTY(dest);
@@ -232,16 +231,14 @@ static GVCDirectory *downloadsDirectory;
     NSFileManager *fmgr = [NSFileManager defaultManager];
     if ( [fmgr fileExistsAtPath:source] == YES )
     {
-        success = [self removeFileIfExists:dest];
-
+        success = [self removeFileIfExists:dest error:err];
         if ( success == YES )
         {
-            NSError *err = nil;
             NSString *fullPathDest = [self fullpathForFile:dest];
-            success = [fmgr moveItemAtPath:source toPath:fullPathDest error:&err];
+            success = [fmgr moveItemAtPath:source toPath:fullPathDest error:err];
             if ( success == NO )
             {
-                GVCLogError(@"Move file error %@", err);
+                GVCLogError(@"Move file error %@", *err);
             }
         }
     }
@@ -249,7 +246,7 @@ static GVCDirectory *downloadsDirectory;
     return success;
 }
 
-- (BOOL)copyFileFrom:(NSString *)source to:(NSString *)dest
+- (BOOL)copyFileFrom:(NSString *)source to:(NSString *)dest error:(NSError **)err
 {
     GVC_ASSERT_NOT_EMPTY(source);
     GVC_ASSERT_NOT_EMPTY(dest);
@@ -258,11 +255,10 @@ static GVCDirectory *downloadsDirectory;
     if ( [source isAbsolutePath] == NO )
         source = [self fullpathForFile:source];
 
-    NSError *err = nil;
-    BOOL success = [[NSFileManager defaultManager] copyItemAtPath:source toPath:fullPathDest error:&err];
+    BOOL success = [[NSFileManager defaultManager] copyItemAtPath:source toPath:fullPathDest error:err];
     if ( success == NO )
     {
-        GVCLogError(@"Copy file error %@", err);
+        GVCLogError(@"Copy file error %@", *err);
     }
     return success;
 }
@@ -310,7 +306,7 @@ static GVCDirectory *downloadsDirectory;
     return GVC_SPRINTF(@"%@ [%@]", [super description], [self rootDirectory]);
 }
 
-- (NSArray *)contents
+- (NSArray *)contents:(NSError **)err
 {
 	if ([self cachedContentArray] == nil)
 	{
@@ -318,7 +314,7 @@ static GVCDirectory *downloadsDirectory;
 		NSMutableArray *gvcContent = [NSMutableArray arrayWithCapacity:[content count]];
 		for ( NSString *fullpath in content)
 		{
-			NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:fullpath error:nil];
+			NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:fullpath error:err];
 			if ([[attributes fileType] isEqualToString:NSFileTypeDirectory] == YES)
 			{
 				[gvcContent addObject:[[GVCDirectory alloc] initWithRootPath:fullpath]];
@@ -337,7 +333,7 @@ static GVCDirectory *downloadsDirectory;
 
 - (NSUInteger)contentCount
 {
-	return [[self contents] count];
+	return [[self contents:nil] count];
 }
 
 @end

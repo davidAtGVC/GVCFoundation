@@ -16,6 +16,7 @@
 GVC_SINGLETON_HEADER(GVCConfiguration)
 
 @property (strong, nonatomic) NSOperationQueue *operationQueue;
+@property (strong, nonatomic, readonly) NSError *lastError;
 
 - (void)reloadConfiguration;
 

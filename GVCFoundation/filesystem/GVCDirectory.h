@@ -52,11 +52,11 @@
 - (BOOL)fileExists:(NSString *)path;
 - (BOOL)directoryExists:(NSString *)path;
 
-- (BOOL)removeFileIfExists:(NSString *)path;
-- (BOOL)moveFileFrom:(NSString *)source to:(NSString *)dest;
-- (BOOL)copyFileFrom:(NSString *)source to:(NSString *)dest;
-- (GVCDirectory *)createSubdirectory:(NSString *)name;
+- (BOOL)removeFileIfExists:(NSString *)path error:(NSError **)err;
+- (BOOL)moveFileFrom:(NSString *)source to:(NSString *)dest error:(NSError **)err;
+- (BOOL)copyFileFrom:(NSString *)source to:(NSString *)dest error:(NSError **)err;
+- (GVCDirectory *)createSubdirectory:(NSString *)name error:(NSError **)err;
 
-- (NSArray *)contents;
+- (NSArray *)contents:(NSError **)err;
 - (NSUInteger)contentCount;
 @end

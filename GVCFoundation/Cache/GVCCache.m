@@ -177,7 +177,10 @@ GVC_SINGLETON_CLASS(GVCCache)
 
 - (NSString *)fullpathForData:(id <GVCCacheDataNode>)node
 {
-    return [[[self cacheDataRootDirectory] createSubdirectory:@"data"] fullpathForFile:[[node cacheKey] gvc_md5Hash]];
+	NSError *err = nil;
+	GVCDirectory *subDir = [[self cacheDataRootDirectory] createSubdirectory:@"data" error:&err];
+
+    return [subDir fullpathForFile:[[node cacheKey] gvc_md5Hash]];
 }
 
 @end

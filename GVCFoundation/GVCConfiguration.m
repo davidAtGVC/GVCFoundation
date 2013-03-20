@@ -35,6 +35,8 @@ GVC_DEFINE_STRVALUE(GVCConfiguration_RESOURCES_FILE, resources.plist)
 @property (strong, nonatomic) NSMutableDictionary *resourceDictionary;
 @property (strong, nonatomic) NSMutableDictionary *resourceGroupDictionary;
 
+@property (strong, nonatomic, readwrite) NSError *lastError;
+
 - (void)checkLocalConfiguration;
 - (void)checkRemoteConfiguration;
 //- (void)storeCachedConfiguration;
@@ -48,11 +50,6 @@ NSString * const GVCConfiguration_sourceURL = @"https://apps.global-village.net/
 @implementation GVCConfiguration
 
 GVC_SINGLETON_CLASS(GVCConfiguration)
-
-@synthesize baseURL;
-@synthesize md5Hashes;
-@synthesize resourceDictionary;
-@synthesize resourceGroupDictionary;
 
 @synthesize operationQueue;
 
@@ -68,7 +65,7 @@ GVC_SINGLETON_CLASS(GVCConfiguration)
         // should be something like
         // https://apps.global-village.net/mobile_configuration/<bundleIdentifier>/<appVersion>/
         [self setBaseURL:GVC_SPRINTF(@"%@/%@/%@", GVCConfiguration_sourceURL, [NSBundle gvc_MainBundleIdentifier], [NSBundle gvc_MainBundleMarketingVersion])];
-        GVCLogInfo(@"Configuration url = %@", [self baseURL]);
+        GVCLogDebug(@"Configuration url = %@", [self baseURL]);
 	}
 	
     return self;
@@ -76,6 +73,8 @@ GVC_SINGLETON_CLASS(GVCConfiguration)
 
 - (void)reloadConfiguration
 {
+	[self setLastError:nil];
+	
     // when the local configuration loads, there may be a new remote configuration URL
     [self checkLocalConfiguration];
     [self checkRemoteConfiguration]; 
@@ -83,12 +82,12 @@ GVC_SINGLETON_CLASS(GVCConfiguration)
 
 - (NSString *)configurationResourcePathForKey:(NSString *)key
 {
-    return [resourceDictionary valueForKey:key];
+    return [[self resourceDictionary] valueForKey:key];
 }
 
 - (NSArray *)configurationResourceKeysForGroup:(NSString *)key
 {
-    NSSet *set = [resourceGroupDictionary valueForKey:key];
+    NSSet *set = [[self resourceGroupDictionary] valueForKey:key];
     return (gvc_IsEmpty(set) ? nil : [set allObjects]);
 }
 
@@ -122,6 +121,10 @@ GVC_SINGLETON_CLASS(GVCConfiguration)
         NSString *dest = [[GVCDirectory DocumentDirectory] fullpathForFile:GVCConfiguration_RESOURCES_FILE];
         NSError *plistError = nil;
         NSData *archive = [NSPropertyListSerialization dataWithPropertyList:store format:NSPropertyListBinaryFormat_v1_0 options:0 error:&plistError];
+
+		if ( plistError != nil )
+			[self setLastError:plistError];
+
         [archive writeToFile:dest atomically:YES];
 	});
 }
@@ -130,11 +133,14 @@ GVC_SINGLETON_CLASS(GVCConfiguration)
 {
     GVCDirectory *docs = [GVCDirectory DocumentDirectory];
     NSError *plistError = nil;
-    GVCLogInfo(@"Docs %@", docs );
 
     if ( [docs fileExists:GVCConfiguration_RESOURCES_FILE] == YES )
     {
         NSDictionary *plist = [NSPropertyListSerialization propertyListWithData:[NSData dataWithContentsOfFile:[docs fullpathForFile:GVCConfiguration_RESOURCES_FILE]] options:NSPropertyListMutableContainers format:nil error:&plistError];
+		
+		if ( plistError != nil )
+			[self setLastError:plistError];
+
         [self setResourceDictionary:[(NSDictionary *)[plist objectForKey:@"resources"] mutableCopy]];
         [self setResourceGroupDictionary:[(NSDictionary *)[plist objectForKey:@"groups"] mutableCopy]];
         [self setMd5Hashes:[(NSDictionary *)[plist objectForKey:@"md5"] mutableCopy]];
@@ -174,11 +180,16 @@ GVC_SINGLETON_CLASS(GVCConfiguration)
 				NSString *bundlePath = [[NSBundle mainBundle] pathForResource:filename ofType:ext inDirectory:subdir];
 				if ( gvc_IsEmpty(bundlePath) == NO )
 				{
-					[docs createSubdirectory:subdir];
-					if ([docs copyFileFrom:bundlePath to:item] == YES)
+					NSError *err = nil;
+					[docs createSubdirectory:subdir error:&err];
+					if ((err == nil) && ([docs copyFileFrom:bundlePath to:item error:&err] == YES))
 					{
 						// add it to the indexes
 						[self updateIndexes:item forGroup:group];
+					}
+					else
+					{
+						[self setLastError:err];
 					}
 				}
 			}
@@ -201,7 +212,6 @@ GVC_SINGLETON_CLASS(GVCConfiguration)
     [rscDownload setAllowSelfSignedCerts:YES];
     [rscDownload setResponseData:[[GVCStreamResponseData alloc] initForFilename:temp]];
     [rscDownload setDidFinishBlock:^(GVCOperation *operation) {
-
         NSError *plistError = nil;
         NSDictionary *plist = [NSPropertyListSerialization propertyListWithData:[NSData dataWithContentsOfFile:temp] options:NSPropertyListImmutable format:nil error:&plistError];
         if ( plist != nil )
@@ -219,10 +229,14 @@ GVC_SINGLETON_CLASS(GVCConfiguration)
                 }
             }
         }
+		else
+		{
+			[self setLastError:plistError];
+		}
     }];
     
     [rscDownload setDidFailWithErrorBlock:^(GVCOperation *operation, NSError *err) {
-        GVCLogError(@"Operation Failed %@", err);
+		[self setLastError:err];
     }];
     [[self operationQueue] addOperation:rscDownload];
 }
@@ -254,36 +268,42 @@ GVC_SINGLETON_CLASS(GVCConfiguration)
         [rscDownload setResponseData:[[GVCStreamResponseData alloc] initForFilename:temp]];
         [rscDownload setDidFinishBlock:^(GVCOperation *operation) {
             NSString *backupName = nil;
+			NSError *err = nil;
             BOOL success = YES;
             
-            [docs createSubdirectory:subdir];
+            [docs createSubdirectory:subdir error:&err];
             if ( [docs fileExists:itemKey] == YES) 
             {
                 backupName = GVC_SPRINTF(@"%@~", itemKey);
-                success = [docs moveFileFrom:itemKey to:backupName];
+                success = [docs moveFileFrom:itemKey to:backupName error:&err];
             }
             
             if (success == YES)
             {
-                success = [docs moveFileFrom:temp to:itemKey];
+                success = [docs moveFileFrom:temp to:itemKey error:&err];
                 if (success == YES)
                 {
                     [self updateIndexes:itemKey forGroup:group];
                     if ( gvc_IsEmpty(backupName) == NO )
                     {
-                        [docs removeFileIfExists:backupName];
+                        [docs removeFileIfExists:backupName error:&err];
                     }
                 }
                 else if ( gvc_IsEmpty(backupName) == NO )
                 {
                     // restore old file
-                    [docs moveFileFrom:backupName to:itemKey];
+                    [docs moveFileFrom:backupName to:itemKey error:&err];
                 }
             }
+			
+			if ( err != nil )
+			{
+				[self setLastError:err];
+			}
         }];
         
         [rscDownload setDidFailWithErrorBlock:^(GVCOperation *operation, NSError *err) {
-            GVCLogError(@"Operation Failed %@", err);
+			[self setLastError:err];
         }];
         [[self operationQueue] addOperation:rscDownload];
 
