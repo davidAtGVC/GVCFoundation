@@ -234,5 +234,14 @@ GVC_DEFINE_STRVALUE(GVCXMLFormQuestionModel_DEFAULT_TYPE, display);
 {
 }
 
+- (NSArray *)choiceArray
+{
+	return [self optionArray];
+}
+
+- (void)setChoiceArray:(NSArray *)array
+{
+}
+
 
 @end
