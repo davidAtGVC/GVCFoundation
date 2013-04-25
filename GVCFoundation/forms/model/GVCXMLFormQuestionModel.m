@@ -180,6 +180,10 @@ GVC_DEFINE_STRVALUE(GVCXMLFormQuestionModel_DEFAULT_TYPE, display);
 	{
 		entryType = GVCFormQuestion_Type_MULTILINE_TEXT;
 	}
+	else if ( [[self type] isEqualToString:@"checkbox"] == YES )
+	{
+		entryType = GVCFormQuestion_Type_BOOLEAN;
+	}
 	else if ( [[self type] isEqualToString:@"select"] == YES )
 	{
 		entryType = GVCFormQuestion_Type_CHOICE;
@@ -213,6 +217,10 @@ GVC_DEFINE_STRVALUE(GVCXMLFormQuestionModel_DEFAULT_TYPE, display);
 			
 		case GVCFormQuestion_Type_DATE:
 			[self setType:@"date"];
+			break;
+
+		case GVCFormQuestion_Type_BOOLEAN:
+			[self setType:@"checkbox"];
 			break;
 			
 		case GVCFormQuestion_Type_NUMBER:

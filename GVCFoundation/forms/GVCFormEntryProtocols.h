@@ -29,6 +29,8 @@ typedef enum
 	GVCFormQuestion_Type_MULTILINE_TEXT,
 	GVCFormQuestion_Type_DATE,
 	GVCFormQuestion_Type_NUMBER,
+	/** value should evolve to True/False, Yes/No, 1/0 */
+	GVCFormQuestion_Type_BOOLEAN,
 	
 	/** question is a single or multiple choice selection */
 	GVCFormQuestion_Type_CHOICE,
