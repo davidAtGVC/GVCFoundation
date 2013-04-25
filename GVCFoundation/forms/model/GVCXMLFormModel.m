@@ -103,12 +103,13 @@
 {
 	GVC_DBC_REQUIRE(
 					GVC_DBC_FACT_NOT_EMPTY([self nodeName]);
+					GVC_DBC_FACT_NOT_EMPTY([self objectIdentifier]);
 					GVC_DBC_FACT_NOT_NIL(outputGenerator);
 					)
 	
 	// implementation
 	[outputGenerator openDocumentWithDeclaration:YES andEncoding:YES];
-	[outputGenerator openElement:[self nodeName]];
+	[outputGenerator openElement:[self nodeName] inNamespace:nil withAttributes:@{@"id": [self objectIdentifier]}];
 	
 	for (GVCXMLFormLabelModel *label in [[self titleDictionary] allValues])
 	{

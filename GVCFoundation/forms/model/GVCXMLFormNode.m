@@ -20,7 +20,6 @@
 	self = [super init];
 	if ( self != nil )
 	{
-		[self setObjectIdentifier:[NSString gvc_StringWithUUID]];
 	}
 	
     return self;

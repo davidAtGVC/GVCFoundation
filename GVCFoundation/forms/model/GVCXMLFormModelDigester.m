@@ -56,6 +56,9 @@
 		GVCXMLDigesterSetChildRule *form_section = [[GVCXMLDigesterSetChildRule alloc] initWithPropertyName:@"section"];
 		[self addRule:form_section forNodePath:@"form/section"];
 
+		GVCXMLDigesterAttributeMapRule *form_attributes = [[GVCXMLDigesterAttributeMapRule alloc] initWithMap:@{@"id": @"objectIdentifier"}];
+		[self addRule:form_attributes forNodeName:@"form"];
+
 		/** Section object */
         GVCXMLDigesterCreateObjectRule *create_section = [[GVCXMLDigesterCreateObjectRule alloc] initForClassname:@"GVCXMLFormSectionModel"];
         [self addRule:create_section forNodePath:@"form/section"];
