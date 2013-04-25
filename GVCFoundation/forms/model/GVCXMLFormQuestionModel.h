@@ -43,5 +43,13 @@ GVC_DEFINE_EXTERN_STR(GVCXMLFormQuestionModel_DEFAULT_TYPE);
  * an array of the GVCFormQuestionChoice to display for choice questions
  */
 @property (strong, nonatomic) NSArray *choiceArray;
+/**
+ * find a single choice having the choice value from the choiceArray
+ */
+- (id <GVCFormQuestionChoice>)choiceMatchingChoiceValue:(NSString *)cvalue;
+/**
+ * find multiple choices having the choice values in the array
+ */
+- (NSArray *)choiceMatchingChoiceValueList:(NSArray *)cvalue;
 
 @end

@@ -30,6 +30,14 @@
 	if ( self != nil )
 	{
 		/** Common rules */
+		GVCXMLDigesterAttributeMapRule *id_attributes = [[GVCXMLDigesterAttributeMapRule alloc] initWithMap:@{@"id": @"objectIdentifier"}];
+		[self addRule:id_attributes forNodeName:@"form"];
+		[self addRule:id_attributes forNodeName:@"title"];
+		[self addRule:id_attributes forNodeName:@"section"];
+		[self addRule:id_attributes forNodeName:@"question"];
+		[self addRule:id_attributes forNodeName:@"prompt"];
+		[self addRule:id_attributes forNodeName:@"choice"];
+
 		GVCXMLDigesterSetChildRule *titles = [[GVCXMLDigesterSetChildRule alloc] initWithPropertyName:@"title"];
 		[self addRule:titles forNodeName:@"title"];
 
@@ -55,9 +63,6 @@
 		
 		GVCXMLDigesterSetChildRule *form_section = [[GVCXMLDigesterSetChildRule alloc] initWithPropertyName:@"section"];
 		[self addRule:form_section forNodePath:@"form/section"];
-
-		GVCXMLDigesterAttributeMapRule *form_attributes = [[GVCXMLDigesterAttributeMapRule alloc] initWithMap:@{@"id": @"objectIdentifier"}];
-		[self addRule:form_attributes forNodeName:@"form"];
 
 		/** Section object */
         GVCXMLDigesterCreateObjectRule *create_section = [[GVCXMLDigesterCreateObjectRule alloc] initForClassname:@"GVCXMLFormSectionModel"];

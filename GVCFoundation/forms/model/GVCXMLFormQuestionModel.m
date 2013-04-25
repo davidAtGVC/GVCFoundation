@@ -11,6 +11,7 @@
 #import "GVCXMLFormOptionModel.h"
 #import "GVCXMLGenerator.h"
 
+#import "NSArray+GVCFoundation.h"
 
 GVC_DEFINE_STRVALUE(GVCXMLFormQuestionModel_DEFAULT_TYPE, display);
 
@@ -243,5 +244,55 @@ GVC_DEFINE_STRVALUE(GVCXMLFormQuestionModel_DEFAULT_TYPE, display);
 {
 }
 
+- (id <GVCFormQuestionChoice>)choiceMatchingChoiceValue:(NSString *)cvalue
+{
+	GVC_DBC_REQUIRE(
+					GVC_DBC_FACT_NOT_EMPTY(cvalue);
+					)
+	
+	// implementation
+	id <GVCFormQuestionChoice>found = nil;
+	if ( gvc_IsEmpty([self choiceArray]) == NO )
+	{
+		NSArray *filtered = [[self choiceArray] gvc_filterArrayForAccept:^BOOL(id item) {
+			id <GVCFormQuestionChoice>choice = item;
+			return [[choice choiceValue] isEqualToString:cvalue];
+		}];
+		GVC_ASSERT([filtered count] <= 1, @"More than one choice for '%@' = %@", cvalue, filtered);
+		
+		if ( gvc_IsEmpty(filtered) == NO)
+		{
+			found = [filtered lastObject];
+		}
+	}
+	
+	GVC_DBC_ENSURE()
+
+	return found;
+}
+/**
+ * find multiple choices having the choice values in the array
+ */
+- (NSArray *)choiceMatchingChoiceValueList:(NSArray *)cvalue
+{
+	GVC_DBC_REQUIRE(
+					GVC_DBC_FACT_NOT_NIL(cvalue);
+					)
+	
+	// implementation
+	NSArray *found = [NSArray array];
+	if ( gvc_IsEmpty([self choiceArray]) == NO )
+	{
+		NSArray *filtered = [[self choiceArray] gvc_filterArrayForAccept:^BOOL(id item) {
+			id <GVCFormQuestionChoice>choice = item;
+			return [cvalue containsObject:[choice choiceValue]];
+		}];
+		found = filtered;
+	}
+	
+	GVC_DBC_ENSURE()
+	
+	return found;
+}
 
 @end

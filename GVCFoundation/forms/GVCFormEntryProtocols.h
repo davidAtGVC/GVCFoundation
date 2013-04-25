@@ -84,6 +84,10 @@ typedef enum
  * an individual value for the specified question, type is determined by the question
  */
 @property (strong, nonatomic) id  submittedValue;
+/**
+ * an individual value for the display
+ */
+- (NSString *)displayValue;
 
 /** For single and multi-choice values */
 - (BOOL)isChoiceSelected:(id <GVCFormQuestionChoice>)choice;
@@ -136,6 +140,14 @@ typedef enum
  * an array of the GVCFormQuestionChoice to display for choice questions
  */
 @property (strong, nonatomic) NSArray *choiceArray;
+/**
+ * find a single choice having the choice value from the choiceArray
+ */
+- (id <GVCFormQuestionChoice>)choiceMatchingChoiceValue:(NSString *)cvalue;
+/**
+ * find multiple choices having the choice values in the array
+ */
+- (NSArray *)choiceMatchingChoiceValueList:(NSArray *)cvalue;
 @end
 
 /**
