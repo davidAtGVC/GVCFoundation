@@ -17,6 +17,9 @@
 #import "GVCXMLDigesterRuleset.h"
 #import "GVCXMLDigesterAttributeMapRule.h"
 #import "GVCXMLDigesterPairAttributeTextRule.h"
+#import "GVCXMLDigesterCreateObjectRule.h"
+#import "GVCXMLDigesterSetChildRule.h"
+#import "GVCXMLDigesterElementNamePropertyRule.h"
 
 @implementation GVCRSSDigester
 

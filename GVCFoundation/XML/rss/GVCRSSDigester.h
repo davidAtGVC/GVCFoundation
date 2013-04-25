@@ -7,7 +7,6 @@
  */
 
 #import "GVCXMLDigester.h"
-#import <GVCFoundation/GVCFoundation.h>
 
 @interface GVCRSSDigester : GVCXMLDigester
 

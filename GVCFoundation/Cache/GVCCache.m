@@ -9,6 +9,9 @@
 #import "GVCCache.h"
 #import "GVCDirectory.h"
 #import "NSString+GVCFoundation.h"
+#import "GVCMacros.h"
+#import "GVCFunctions.h"
+#import "GVCLogger.h"
 
 #define GVCCACHE_QUEUE_SIZE 1000
 

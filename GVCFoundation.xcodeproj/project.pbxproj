@@ -155,6 +155,21 @@
 		056F599F147EEDD10076010D /* GVCMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 056F599C147EEDD10076010D /* GVCMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		056F59A8147EF4630076010D /* GVCFunctionsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 056F59A7147EF4630076010D /* GVCFunctionsTest.m */; };
 		056F59E5147EFC540076010D /* GVCFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 056F5938147EE84D0076010D /* GVCFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		05737FF51728465D00F13971 /* GVCFormEntryProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = 05737FE51728465D00F13971 /* GVCFormEntryProtocols.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		05737FF61728465D00F13971 /* GVCXMLFormLabelModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 05737FE71728465D00F13971 /* GVCXMLFormLabelModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		05737FF71728465D00F13971 /* GVCXMLFormLabelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05737FE81728465D00F13971 /* GVCXMLFormLabelModel.m */; };
+		05737FF81728465D00F13971 /* GVCXMLFormModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 05737FE91728465D00F13971 /* GVCXMLFormModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		05737FF91728465D00F13971 /* GVCXMLFormModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05737FEA1728465D00F13971 /* GVCXMLFormModel.m */; };
+		05737FFA1728465D00F13971 /* GVCXMLFormModelDigester.h in Headers */ = {isa = PBXBuildFile; fileRef = 05737FEB1728465D00F13971 /* GVCXMLFormModelDigester.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		05737FFB1728465D00F13971 /* GVCXMLFormModelDigester.m in Sources */ = {isa = PBXBuildFile; fileRef = 05737FEC1728465D00F13971 /* GVCXMLFormModelDigester.m */; };
+		05737FFC1728465D00F13971 /* GVCXMLFormNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 05737FED1728465D00F13971 /* GVCXMLFormNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		05737FFD1728465D00F13971 /* GVCXMLFormNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 05737FEE1728465D00F13971 /* GVCXMLFormNode.m */; };
+		05737FFE1728465D00F13971 /* GVCXMLFormOptionModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 05737FEF1728465D00F13971 /* GVCXMLFormOptionModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		05737FFF1728465D00F13971 /* GVCXMLFormOptionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05737FF01728465D00F13971 /* GVCXMLFormOptionModel.m */; };
+		057380001728465D00F13971 /* GVCXMLFormQuestionModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 05737FF11728465D00F13971 /* GVCXMLFormQuestionModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		057380011728465D00F13971 /* GVCXMLFormQuestionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05737FF21728465D00F13971 /* GVCXMLFormQuestionModel.m */; };
+		057380021728465D00F13971 /* GVCXMLFormSectionModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 05737FF31728465D00F13971 /* GVCXMLFormSectionModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		057380031728465D00F13971 /* GVCXMLFormSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05737FF41728465D00F13971 /* GVCXMLFormSectionModel.m */; };
 		05749FB316066B35007CF96D /* CodeCoverageSupport.c in Sources */ = {isa = PBXBuildFile; fileRef = 05749FB216066B35007CF96D /* CodeCoverageSupport.c */; };
 		057543E71525475A00160469 /* GVCStopwatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 057543E51525475A00160469 /* GVCStopwatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		057543E81525475A00160469 /* GVCStopwatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 057543E61525475A00160469 /* GVCStopwatch.m */; };
@@ -460,6 +475,21 @@
 		056F599B147EEDD10076010D /* GVCFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCFunctions.m; sourceTree = "<group>"; };
 		056F599C147EEDD10076010D /* GVCMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCMacros.h; sourceTree = "<group>"; };
 		056F59A7147EF4630076010D /* GVCFunctionsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCFunctionsTest.m; sourceTree = "<group>"; };
+		05737FE51728465D00F13971 /* GVCFormEntryProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCFormEntryProtocols.h; sourceTree = "<group>"; };
+		05737FE71728465D00F13971 /* GVCXMLFormLabelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCXMLFormLabelModel.h; sourceTree = "<group>"; };
+		05737FE81728465D00F13971 /* GVCXMLFormLabelModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCXMLFormLabelModel.m; sourceTree = "<group>"; };
+		05737FE91728465D00F13971 /* GVCXMLFormModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCXMLFormModel.h; sourceTree = "<group>"; };
+		05737FEA1728465D00F13971 /* GVCXMLFormModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCXMLFormModel.m; sourceTree = "<group>"; };
+		05737FEB1728465D00F13971 /* GVCXMLFormModelDigester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCXMLFormModelDigester.h; sourceTree = "<group>"; };
+		05737FEC1728465D00F13971 /* GVCXMLFormModelDigester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCXMLFormModelDigester.m; sourceTree = "<group>"; };
+		05737FED1728465D00F13971 /* GVCXMLFormNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCXMLFormNode.h; sourceTree = "<group>"; };
+		05737FEE1728465D00F13971 /* GVCXMLFormNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCXMLFormNode.m; sourceTree = "<group>"; };
+		05737FEF1728465D00F13971 /* GVCXMLFormOptionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCXMLFormOptionModel.h; sourceTree = "<group>"; };
+		05737FF01728465D00F13971 /* GVCXMLFormOptionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCXMLFormOptionModel.m; sourceTree = "<group>"; };
+		05737FF11728465D00F13971 /* GVCXMLFormQuestionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCXMLFormQuestionModel.h; sourceTree = "<group>"; };
+		05737FF21728465D00F13971 /* GVCXMLFormQuestionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCXMLFormQuestionModel.m; sourceTree = "<group>"; };
+		05737FF31728465D00F13971 /* GVCXMLFormSectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCXMLFormSectionModel.h; sourceTree = "<group>"; };
+		05737FF41728465D00F13971 /* GVCXMLFormSectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCXMLFormSectionModel.m; sourceTree = "<group>"; };
 		05749FB216066B35007CF96D /* CodeCoverageSupport.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CodeCoverageSupport.c; sourceTree = "<group>"; };
 		057543E51525475A00160469 /* GVCStopwatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCStopwatch.h; sourceTree = "<group>"; };
 		057543E61525475A00160469 /* GVCStopwatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCStopwatch.m; sourceTree = "<group>"; };
@@ -812,6 +842,7 @@
 				059A3E9616B072DD0047EF66 /* filesystem */,
 				0551D34715166BC90089217F /* Operations */,
 				05E39D8116371CFB007BD9D1 /* formatter */,
+				05737FE41728465D00F13971 /* forms */,
 				05A7BF13148D740300866A42 /* Cache */,
 				05E39D9116373348007BD9D1 /* Networking */,
 				05D186C21504167400EDBE80 /* Parsing */,
@@ -1059,6 +1090,36 @@
 				053F76CD16E93DD0007C7557 /* NSPredicate+GVCFoundation.m */,
 			);
 			path = Additions;
+			sourceTree = "<group>";
+		};
+		05737FE41728465D00F13971 /* forms */ = {
+			isa = PBXGroup;
+			children = (
+				05737FE51728465D00F13971 /* GVCFormEntryProtocols.h */,
+				05737FE61728465D00F13971 /* model */,
+			);
+			path = forms;
+			sourceTree = "<group>";
+		};
+		05737FE61728465D00F13971 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				05737FE71728465D00F13971 /* GVCXMLFormLabelModel.h */,
+				05737FE81728465D00F13971 /* GVCXMLFormLabelModel.m */,
+				05737FE91728465D00F13971 /* GVCXMLFormModel.h */,
+				05737FEA1728465D00F13971 /* GVCXMLFormModel.m */,
+				05737FEB1728465D00F13971 /* GVCXMLFormModelDigester.h */,
+				05737FEC1728465D00F13971 /* GVCXMLFormModelDigester.m */,
+				05737FED1728465D00F13971 /* GVCXMLFormNode.h */,
+				05737FEE1728465D00F13971 /* GVCXMLFormNode.m */,
+				05737FEF1728465D00F13971 /* GVCXMLFormOptionModel.h */,
+				05737FF01728465D00F13971 /* GVCXMLFormOptionModel.m */,
+				05737FF11728465D00F13971 /* GVCXMLFormQuestionModel.h */,
+				05737FF21728465D00F13971 /* GVCXMLFormQuestionModel.m */,
+				05737FF31728465D00F13971 /* GVCXMLFormSectionModel.h */,
+				05737FF41728465D00F13971 /* GVCXMLFormSectionModel.m */,
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 		05779426163EFE580089DBF3 /* xsd */ = {
@@ -1459,6 +1520,14 @@
 				052FB8C716D5CFA800BB849C /* GVCSOAPFaultDetail.h in Headers */,
 				05FC427B16E532E400F2AD0B /* GVCFoundationConstants.h in Headers */,
 				053F76CE16E93DD0007C7557 /* NSPredicate+GVCFoundation.h in Headers */,
+				05737FF51728465D00F13971 /* GVCFormEntryProtocols.h in Headers */,
+				05737FF61728465D00F13971 /* GVCXMLFormLabelModel.h in Headers */,
+				05737FF81728465D00F13971 /* GVCXMLFormModel.h in Headers */,
+				05737FFA1728465D00F13971 /* GVCXMLFormModelDigester.h in Headers */,
+				05737FFC1728465D00F13971 /* GVCXMLFormNode.h in Headers */,
+				05737FFE1728465D00F13971 /* GVCXMLFormOptionModel.h in Headers */,
+				057380001728465D00F13971 /* GVCXMLFormQuestionModel.h in Headers */,
+				057380021728465D00F13971 /* GVCXMLFormSectionModel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1728,6 +1797,13 @@
 				05306B7416BDB35600CED7AE /* NSMethodSignature+GVCFoundation.m in Sources */,
 				052FB8C816D5CFA800BB849C /* GVCSOAPFaultDetail.m in Sources */,
 				053F76CF16E93DD0007C7557 /* NSPredicate+GVCFoundation.m in Sources */,
+				05737FF71728465D00F13971 /* GVCXMLFormLabelModel.m in Sources */,
+				05737FF91728465D00F13971 /* GVCXMLFormModel.m in Sources */,
+				05737FFB1728465D00F13971 /* GVCXMLFormModelDigester.m in Sources */,
+				05737FFD1728465D00F13971 /* GVCXMLFormNode.m in Sources */,
+				05737FFF1728465D00F13971 /* GVCXMLFormOptionModel.m in Sources */,
+				057380011728465D00F13971 /* GVCXMLFormQuestionModel.m in Sources */,
+				057380031728465D00F13971 /* GVCXMLFormSectionModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

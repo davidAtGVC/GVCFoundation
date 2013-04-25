@@ -203,4 +203,20 @@
  */
 #import "GVCISO8601DateFormatter.h"
 
+/* 
+ * forms 
+ */
+#import "GVCFormEntryProtocols.h"
+
+/* 
+ * forms model 
+ */
+#import "GVCXMLFormLabelModel.h"
+#import "GVCXMLFormModel.h"
+#import "GVCXMLFormModelDigester.h"
+#import "GVCXMLFormNode.h"
+#import "GVCXMLFormOptionModel.h"
+#import "GVCXMLFormQuestionModel.h"
+#import "GVCXMLFormSectionModel.h"
+
 #endif // GVCFoundation_h
