@@ -48,6 +48,7 @@
 
 /**
  * Generates a formatted string from this date usng the specified format
+ * http://www.unicode.org/reports/tr35/tr35-25.html#Date_Format_Patterns
  * @param fmt the date format
  * @returns formatted date
  */
