@@ -139,6 +139,10 @@ typedef enum
  */
 @property (strong, nonatomic) NSString *keyword;
 /**
+ * the default keypath to use when setting the initial value, if the submission value is empty
+ */
+@property (strong, nonatomic) NSString *defaultKeypath;
+/**
  * an array of the GVCFormQuestionChoice to display for choice questions
  */
 @property (strong, nonatomic) NSArray *choiceArray;

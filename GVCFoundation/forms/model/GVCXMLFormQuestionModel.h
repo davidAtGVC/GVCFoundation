@@ -21,6 +21,7 @@ GVC_DEFINE_EXTERN_STR(GVCXMLFormQuestionModel_DEFAULT_TYPE);
 
 @property (strong, nonatomic) NSString *keyword;
 @property (strong, nonatomic) NSString *type;
+@property (strong, nonatomic) NSString *defaultKeypath;
 @property (strong, nonatomic) NSString *multiSelect;
 
 @property (strong, nonatomic) NSMutableDictionary *promptDictionary;

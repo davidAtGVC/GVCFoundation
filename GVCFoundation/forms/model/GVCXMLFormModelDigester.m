@@ -75,7 +75,7 @@
         GVCXMLDigesterCreateObjectRule *create_question = [[GVCXMLDigesterCreateObjectRule alloc] initForClassname:@"GVCXMLFormQuestionModel"];
         [self addRule:create_question forNodeName:@"question"];
 
-		GVCXMLDigesterAttributeMapRule *question_attributes = [[GVCXMLDigesterAttributeMapRule alloc] initWithMap:@{@"type": @"type", @"keyword": @"keyword", @"multiSelect":@"multiSelect"}];
+		GVCXMLDigesterAttributeMapRule *question_attributes = [[GVCXMLDigesterAttributeMapRule alloc] initWithMap:@{@"type": @"type", @"keyword": @"keyword", @"multiSelect":@"multiSelect", @"defaultKeypath":@"defaultKeypath"}];
 		[self addRule:question_attributes forNodeName:@"question"];
 
 		GVCXMLDigesterSetChildRule *option = [[GVCXMLDigesterSetChildRule alloc] initWithPropertyName:@"option"];
