@@ -127,6 +127,10 @@ GVC_DEFINE_STRVALUE(GVCXMLFormQuestionModel_DEFAULT_TYPE, display);
 	{
 		[attr setObject:[self keyword] forKey:@"keyword"];
 	}
+	if ( gvc_IsEmpty([self defaultKeypath]) == NO )
+	{
+		[attr setObject:[self defaultKeypath] forKey:@"defaultKeypath"];
+	}
 	if (([[self type] isEqualToString:@"select"] == YES) && (gvc_IsEmpty([self multiSelect]) == NO))
 	{
 		[attr setObject:[self multiSelect] forKey:@"multiSelect"];
