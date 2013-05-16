@@ -41,6 +41,9 @@ typedef id (^GVCCollectionResultBlock)(id item);
 /** combine a variable number or array arguments into one array */
 + (NSArray *)gvc_ArrayByCombining:(NSArray *)one withArray:(NSArray *)two;
 
+/** Return the first obejct for a specific class */
+- (id)gvc_filterForFirstItemOfClass:(Class) clazz;
+
 /** Return a new array with the resulting objects filtered for a specific class */
 - (NSArray *)gvc_filterForClass:(Class) clazz;
 

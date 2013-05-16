@@ -84,6 +84,12 @@
 	return [NSArray gvc_ArrayByOrdering:self byKey:key ascending:ascending];
 }
 
+- (id)gvc_filterForFirstItemOfClass:(Class) clazz
+{
+	NSArray *filtered = [self gvc_filterForClass:clazz];
+    return ([filtered count] == 0 ? nil : [filtered objectAtIndex:0]);
+}
+
 - (NSArray *)gvc_filterForClass:(Class) clazz
 {
     GVC_ASSERT(clazz != nil, @"Filter class is required" );
