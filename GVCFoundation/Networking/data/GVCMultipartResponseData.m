@@ -264,7 +264,20 @@ typedef enum {
                                             [[self currentResponseData] parseResponseHeader:headerName forValue:headerValue]; 
                                         }
                                     }
+									
+									// remove the header
                                     [[self buffer] gvc_removeDataRange:NSMakeRange(0, NSMaxRange(headerRange))];
+
+									// sometimes the data after the header has an additional newline(s)
+									char *bytes = (char *)[[self buffer] bytes];
+									unsigned int inset = 0;
+									while ((bytes[inset] == '\n') || (bytes[inset] == '\r'))
+									{
+										inset ++;
+									}
+									NSRange range = NSMakeRange(0, inset);
+                                    [[self buffer] gvc_removeDataRange:range];
+									
                                     nextState = GVCMultipartResponseData_STATE_in_body;
                                 }
                             }
