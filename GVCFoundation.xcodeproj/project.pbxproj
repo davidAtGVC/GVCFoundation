@@ -253,6 +253,8 @@
 		05D186C9150416B100EDBE80 /* GVCCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D186C5150416B100EDBE80 /* GVCCSVParser.m */; };
 		05D186CA150416B100EDBE80 /* GVCParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 05D186C6150416B100EDBE80 /* GVCParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		05D186CB150416B100EDBE80 /* GVCParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D186C7150416B100EDBE80 /* GVCParser.m */; };
+		05D2BCBB17458690001DF170 /* GVCXMLFormConditionalGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 05D2BCB917458690001DF170 /* GVCXMLFormConditionalGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		05D2BCBC17458690001DF170 /* GVCXMLFormConditionalGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D2BCBA17458690001DF170 /* GVCXMLFormConditionalGroup.m */; };
 		05D7E6661491685D007141C9 /* GVCCacheNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 05D7E6651491685D007141C9 /* GVCCacheNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		05D7E66914919246007141C9 /* GVCCacheTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 05D7E66814919246007141C9 /* GVCCacheTest.m */; };
 		05DC669B14804C4A0033DBBA /* GVCLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 05DC669914804C4A0033DBBA /* GVCLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -576,6 +578,8 @@
 		05D186C5150416B100EDBE80 /* GVCCSVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCCSVParser.m; sourceTree = "<group>"; };
 		05D186C6150416B100EDBE80 /* GVCParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCParser.h; sourceTree = "<group>"; };
 		05D186C7150416B100EDBE80 /* GVCParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCParser.m; sourceTree = "<group>"; };
+		05D2BCB917458690001DF170 /* GVCXMLFormConditionalGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCXMLFormConditionalGroup.h; sourceTree = "<group>"; };
+		05D2BCBA17458690001DF170 /* GVCXMLFormConditionalGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCXMLFormConditionalGroup.m; sourceTree = "<group>"; };
 		05D7E6651491685D007141C9 /* GVCCacheNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCCacheNode.h; sourceTree = "<group>"; };
 		05D7E66814919246007141C9 /* GVCCacheTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCCacheTest.m; sourceTree = "<group>"; };
 		05DC669914804C4A0033DBBA /* GVCLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCLogger.h; sourceTree = "<group>"; };
@@ -1118,6 +1122,8 @@
 				05737FF21728465D00F13971 /* GVCXMLFormQuestionModel.m */,
 				05737FF31728465D00F13971 /* GVCXMLFormSectionModel.h */,
 				05737FF41728465D00F13971 /* GVCXMLFormSectionModel.m */,
+				05D2BCB917458690001DF170 /* GVCXMLFormConditionalGroup.h */,
+				05D2BCBA17458690001DF170 /* GVCXMLFormConditionalGroup.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1528,6 +1534,7 @@
 				05737FFE1728465D00F13971 /* GVCXMLFormOptionModel.h in Headers */,
 				057380001728465D00F13971 /* GVCXMLFormQuestionModel.h in Headers */,
 				057380021728465D00F13971 /* GVCXMLFormSectionModel.h in Headers */,
+				05D2BCBB17458690001DF170 /* GVCXMLFormConditionalGroup.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1804,6 +1811,7 @@
 				05737FFF1728465D00F13971 /* GVCXMLFormOptionModel.m in Sources */,
 				057380011728465D00F13971 /* GVCXMLFormQuestionModel.m in Sources */,
 				057380031728465D00F13971 /* GVCXMLFormSectionModel.m in Sources */,
+				05D2BCBC17458690001DF170 /* GVCXMLFormConditionalGroup.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

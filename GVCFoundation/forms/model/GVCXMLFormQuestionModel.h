@@ -32,6 +32,10 @@ GVC_DEFINE_EXTERN_STR(GVCXMLFormQuestionModel_DEFAULT_TYPE);
 - (NSString *)promptForLanguage:(NSString *)lang;
 
 /** GVC Form Protocol */
+@property (assign, nonatomic, getter = isConditionQuestion) BOOL conditionQuestion;
+
+- (BOOL)submittedValue:(id <GVCFormSubmissionValue>)value passesMatchValue:(id)match;
+
 /**
  * a displayable name for this Question
  */

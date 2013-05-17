@@ -12,6 +12,7 @@
 #import "GVCXMLGenerator.h"
 
 #import "NSArray+GVCFoundation.h"
+#import "NSDate+GVCFoundation.h"
 
 GVC_DEFINE_STRVALUE(GVCXMLFormQuestionModel_DEFAULT_TYPE, display);
 
@@ -26,6 +27,7 @@ GVC_DEFINE_STRVALUE(GVCXMLFormQuestionModel_DEFAULT_TYPE, display);
 	self = [super init];
 	if ( self != nil )
 	{
+		[self setConditionQuestion:NO];
 		[self setType:GVCXMLFormQuestionModel_DEFAULT_TYPE];
 	}
 	
@@ -52,7 +54,6 @@ GVC_DEFINE_STRVALUE(GVCXMLFormQuestionModel_DEFAULT_TYPE, display);
 	{
 		[self setPromptDictionary:[[NSMutableDictionary alloc] init]];
 	}
-	
 	
 	[[self promptDictionary] setObject:prompt forKey:[prompt language]];
 	
@@ -305,6 +306,71 @@ GVC_DEFINE_STRVALUE(GVCXMLFormQuestionModel_DEFAULT_TYPE, display);
 	GVC_DBC_ENSURE()
 	
 	return found;
+}
+
+- (BOOL)submittedValue:(id <GVCFormSubmissionValue>)value passesMatchValue:(id)match
+{
+	GVC_DBC_REQUIRE(
+					GVC_DBC_FACT_NOT_EMPTY(match);
+					)
+	
+	// implementation
+	BOOL passes = NO;
+	if ((value != nil) && ([value submittedValue] != nil) && ([self isConditionQuestion] == YES))
+	{
+		id submittedValue = [value submittedValue];
+		switch ([self entryType])
+		{
+			case GVCFormQuestion_Type_TEXT:
+			case GVCFormQuestion_Type_MULTILINE_TEXT:
+				passes = [[submittedValue description] isEqualToString:[match description]];
+				break;
+				
+			case GVCFormQuestion_Type_CHOICE:
+			{
+				id <GVCFormQuestionChoice> choice = [self choiceMatchingChoiceValue:[match description]];
+				passes = (choice != nil) && ([submittedValue isEqual:choice]);
+				break;
+			}
+				
+			case GVCFormQuestion_Type_MULTI_CHOICE:
+			{
+				NSArray *matchComponents = [[match description] componentsSeparatedByString:@","];
+				NSArray *matchingChoices = [self choiceMatchingChoiceValueList:matchComponents];
+				if ( [submittedValue isKindOfClass:[NSArray class]] == YES)
+				{
+					passes = [matchingChoices gvc_isEqualToArrayInAnyOrder:(NSArray *)submittedValue];
+				}
+				break;
+			}
+				
+			case GVCFormQuestion_Type_DATE:
+			{
+				NSDate *matchDate = [NSDate gvc_DateFromISO8601:match];
+				if ( [submittedValue isKindOfClass:[NSDate class]] == YES )
+				{
+					passes = [submittedValue isEqual:matchDate];
+				}
+				break;
+			}
+				
+			case GVCFormQuestion_Type_BOOLEAN:
+			{
+				passes = ([submittedValue boolValue] == [[match description] boolValue]);
+				break;
+			}
+				
+			case GVCFormQuestion_Type_NUMBER:
+			case GVCFormQuestion_Type_NOTATION:
+			default:
+				break;
+		}
+	}
+	
+	GVC_DBC_ENSURE(
+				   )
+
+	return passes;
 }
 
 @end

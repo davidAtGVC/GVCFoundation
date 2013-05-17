@@ -21,6 +21,9 @@
 
 typedef enum
 {
+	/** Form entry type where sub questions are conditional */
+	GVCFormQuestion_Type_CONDITIONAL,
+	
 	/** Notation is display text, no value */
 	GVCFormQuestion_Type_NOTATION,
 	/** Text is a string value */
@@ -118,6 +121,10 @@ typedef enum
  *
  */
 @protocol GVCFormEntry <GVCFormObject>
+/**
+ * a displayable name for this Question
+ */
+@property (assign, nonatomic) GVCFormQuestion_Type entryType;
 @end
 
 
@@ -129,7 +136,13 @@ typedef enum
 /**
  * a displayable name for this Question
  */
-@property (assign, nonatomic) GVCFormQuestion_Type entryType;
+@property (assign, nonatomic, getter = isConditionQuestion) BOOL conditionQuestion;
+
+/**
+ * for a conditional key question, evaluate the submitted value against the condition group matching value
+ */
+- (BOOL)submittedValue:(id <GVCFormSubmissionValue>)value passesMatchValue:(id)match;
+
 /**
  * a displayable name for this Question
  */
@@ -154,24 +167,29 @@ typedef enum
  * find multiple choices having the choice values in the array
  */
 - (NSArray *)choiceMatchingChoiceValueList:(NSArray *)cvalue;
+
+
 @end
 
 /**
  *
  */
-@protocol GVCFormOptionalGroup <GVCFormEntry>
+@protocol GVCFormConditionalGroup <GVCFormEntry>
 /**
  * a displayable name for this Question
  */
-@property (strong, nonatomic) id <GVCFormQuestion> dependentQuestion;
+@property (strong, nonatomic) id <GVCFormQuestion> question;
 /**
- * the form submitted value must equal this value
+ * the form submitted value must equal this value, must be convertable or matchable to the dependent question value
  */
 @property (strong, nonatomic) id  dependentValue;
+
 /**
  * an array of the GVCFormQuestion to display when the optional group is active
  */
-@property (strong, nonatomic) NSArray *optionalQuestionArray;
+@property (strong, nonatomic) NSArray *conditionalQuestionArray;
+
+- (NSArray *)conditionalQuestionMatchingSubmittedValue:(id <GVCFormSubmissionValue>)value;
 @end
 
 /**

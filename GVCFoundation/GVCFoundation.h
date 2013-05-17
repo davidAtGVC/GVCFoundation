@@ -211,6 +211,7 @@
 /* 
  * forms model 
  */
+#import "GVCXMLFormConditionalGroup.h"
 #import "GVCXMLFormLabelModel.h"
 #import "GVCXMLFormModel.h"
 #import "GVCXMLFormModelDigester.h"

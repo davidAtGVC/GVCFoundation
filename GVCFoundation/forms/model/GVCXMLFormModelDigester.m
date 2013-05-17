@@ -35,6 +35,8 @@
 		[self addRule:id_attributes forNodeName:@"title"];
 		[self addRule:id_attributes forNodeName:@"section"];
 		[self addRule:id_attributes forNodeName:@"question"];
+		[self addRule:id_attributes forNodeName:@"dependent"];
+		[self addRule:id_attributes forNodeName:@"conditional"];
 		[self addRule:id_attributes forNodeName:@"prompt"];
 		[self addRule:id_attributes forNodeName:@"choice"];
 
@@ -70,16 +72,21 @@
 
 		GVCXMLDigesterSetChildRule *question = [[GVCXMLDigesterSetChildRule alloc] initWithPropertyName:@"question"];
 		[self addRule:question forNodePath:@"section/question"];
+		[self addRule:question forNodePath:@"section/conditional"];
 
 		/** Question object */
+		/** Dependent Question object */
         GVCXMLDigesterCreateObjectRule *create_question = [[GVCXMLDigesterCreateObjectRule alloc] initForClassname:@"GVCXMLFormQuestionModel"];
         [self addRule:create_question forNodeName:@"question"];
+        [self addRule:create_question forNodeName:@"dependent"];
 
 		GVCXMLDigesterAttributeMapRule *question_attributes = [[GVCXMLDigesterAttributeMapRule alloc] initWithMap:@{@"type": @"type", @"keyword": @"keyword", @"multiSelect":@"multiSelect", @"defaultKeypath":@"defaultKeypath"}];
 		[self addRule:question_attributes forNodeName:@"question"];
+		[self addRule:question_attributes forNodeName:@"dependent"];
 
 		GVCXMLDigesterSetChildRule *option = [[GVCXMLDigesterSetChildRule alloc] initWithPropertyName:@"option"];
 		[self addRule:option forNodePath:@"question/choices/choice"];
+		[self addRule:option forNodePath:@"dependent/choices/choice"];
 
 		/** Option object */
 		GVCXMLDigesterCreateObjectRule *create_option = [[GVCXMLDigesterCreateObjectRule alloc] initForClassname:@"GVCXMLFormOptionModel"];
@@ -87,7 +94,20 @@
 
 		GVCXMLDigesterAttributeMapRule *option_attributes = [[GVCXMLDigesterAttributeMapRule alloc] initWithMap:@{@"value": @"valueAttribute"}];
 		[self addRule:option_attributes forNodeName:@"choice"];
+
+		/** Conditional Entry object */
+		GVCXMLDigesterCreateObjectRule *create_conditional = [[GVCXMLDigesterCreateObjectRule alloc] initForClassname:@"GVCXMLFormConditionalGroup"];
+        [self addRule:create_conditional forNodeName:@"conditional"];
 		
+		GVCXMLDigesterAttributeMapRule *conditional_attributes = [[GVCXMLDigesterAttributeMapRule alloc] initWithMap:@{@"type": @"type", @"matchvalue": @"matchvalue"}];
+		[self addRule:conditional_attributes forNodeName:@"conditional"];
+
+		GVCXMLDigesterSetChildRule *keyquestion = [[GVCXMLDigesterSetChildRule alloc] initWithPropertyName:@"question"];
+		[self addRule:keyquestion forNodePath:@"conditional/question"];
+
+		GVCXMLDigesterSetChildRule *dependentquestion = [[GVCXMLDigesterSetChildRule alloc] initWithPropertyName:@"dependent"];
+		[self addRule:dependentquestion forNodePath:@"conditional/dependent"];
+
 		// node name rule
 		GVCXMLDigesterElementNamePropertyRule *nodeName = [[GVCXMLDigesterElementNamePropertyRule alloc] initWithPropertyName:@"nodeName"];
 		[self addRule:nodeName forNodeName:@"form"];
@@ -96,6 +116,8 @@
 		[self addRule:nodeName forNodeName:@"question"];
 		[self addRule:nodeName forNodeName:@"prompt"];
 		[self addRule:nodeName forNodeName:@"choice"];
+		[self addRule:nodeName forNodeName:@"conditional"];
+		[self addRule:nodeName forNodeName:@"dependent"];
 		
 	}
 	

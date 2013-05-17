@@ -9,6 +9,7 @@
 #import "GVCXMLFormSectionModel.h"
 #import "GVCXMLFormLabelModel.h"
 #import "GVCXMLFormQuestionModel.h"
+#import "GVCXMLFormConditionalGroup.h"
 #import "GVCXMLGenerator.h"
 
 
@@ -145,7 +146,39 @@
 
 - (NSArray *)entriesPassingAllConditions:(id <GVCFormSubmission>)submission
 {
-	return [self questionArray];
+	GVC_DBC_REQUIRE(
+					GVC_DBC_FACT_NOT_NIL(submission);
+					GVC_DBC_FACT_NOT_EMPTY([self questionArray]);
+					)
+	
+	// implementation
+	NSMutableArray *passingQuestions = [NSMutableArray arrayWithCapacity:[[self questionArray] count]];
+	for (id <GVCFormEntry>entry in [self questionArray])
+	{
+		if ( [entry entryType] != GVCFormQuestion_Type_CONDITIONAL)
+		{
+			[passingQuestions addObject:entry];
+		}
+		else
+		{
+			GVCXMLFormConditionalGroup *group = (GVCXMLFormConditionalGroup *)entry;
+			GVCXMLFormQuestionModel *key = [group question];
+			[passingQuestions addObject:key];
+			
+			id <GVCFormSubmissionValue>value = [submission valueForQuestion:key];
+			NSArray *conditionalPasses = [group conditionalQuestionMatchingSubmittedValue:value];
+			if ( gvc_IsEmpty(conditionalPasses) == NO)
+			{
+				[passingQuestions addObjectsFromArray:conditionalPasses];
+			}
+		}
+	}
+	
+	GVC_DBC_ENSURE(
+				   GVC_DBC_FACT_NOT_NIL(passingQuestions);
+				   )
+
+	return passingQuestions;
 }
 
 - (id <GVCFormQuestion>)questionForKeyword:(NSString *)keyword
