@@ -177,6 +177,29 @@
 
 @implementation NSMutableArray (GVCFoundation)
 
+- (void)gvc_safelyAddObject:(id)anObject
+{
+	if ( anObject != nil )
+	{
+		[self addObject:anObject];
+	}
+}
+
+- (void)gvc_safelyInsertObject:(id)anObject atIndex:(NSUInteger)anindex
+{
+	if ( anObject != nil )
+	{
+		if (anindex < [self count])
+		{
+			[self insertObject:anObject atIndex:anindex];
+		}
+		else
+		{
+			[self addObject:anObject];
+		}
+	}
+}
+
 - (NSMutableArray *) gvc_removeFirstObject
 {
 	if ( [self count] > 0 )

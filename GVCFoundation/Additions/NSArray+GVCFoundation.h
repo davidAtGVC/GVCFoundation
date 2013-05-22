@@ -73,6 +73,12 @@ typedef id (^GVCCollectionResultBlock)(id item);
  */
 @interface NSMutableArray (GVCFoundation)
 
+/** safely add the object if it is not nil */
+- (void)gvc_safelyAddObject:(id)anObject;
+
+/** safely add the object if it is not nil */
+- (void)gvc_safelyInsertObject:(id)anObject atIndex:(NSUInteger)index;
+
 /** remove the first object in the list, returns self */
 - (NSMutableArray *) gvc_removeFirstObject;
 
