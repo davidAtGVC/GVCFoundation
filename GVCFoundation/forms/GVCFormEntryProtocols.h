@@ -156,6 +156,10 @@ typedef enum
  */
 @property (strong, nonatomic) NSString *defaultKeypath;
 /**
+ * a default value.  Primary use is for checkboxes to indicate the "selected" value is other than "True"
+ */
+@property (strong, nonatomic) NSString *value;
+/**
  * an array of the GVCFormQuestionChoice to display for choice questions
  */
 @property (strong, nonatomic) NSArray *choiceArray;

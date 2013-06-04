@@ -80,7 +80,7 @@
         [self addRule:create_question forNodeName:@"question"];
         [self addRule:create_question forNodeName:@"dependent"];
 
-		GVCXMLDigesterAttributeMapRule *question_attributes = [[GVCXMLDigesterAttributeMapRule alloc] initWithMap:@{@"type": @"type", @"keyword": @"keyword", @"multiSelect":@"multiSelect", @"defaultKeypath":@"defaultKeypath"}];
+		GVCXMLDigesterAttributeMapRule *question_attributes = [[GVCXMLDigesterAttributeMapRule alloc] initWithMap:@{@"type": @"type", @"keyword": @"keyword", @"multiSelect":@"multiSelect", @"defaultKeypath":@"defaultKeypath", @"value":@"value"}];
 		[self addRule:question_attributes forNodeName:@"question"];
 		[self addRule:question_attributes forNodeName:@"dependent"];
 

@@ -356,7 +356,15 @@ GVC_DEFINE_STRVALUE(GVCXMLFormQuestionModel_DEFAULT_TYPE, display);
 				
 			case GVCFormQuestion_Type_BOOLEAN:
 			{
-				passes = ([submittedValue boolValue] == [[match description] boolValue]);
+                // the condition could be satisfied on a FALSE
+                if ( gvc_IsEmpty([self value]) == YES )
+                {
+                    passes = ([submittedValue boolValue] == [[match description] boolValue]);
+                }
+                else
+                {
+                    passes = [submittedValue boolValue];
+                }
 				break;
 			}
 				
