@@ -100,6 +100,95 @@
 	return date;
 }
 
+#pragma mark - Date Components and values
+
+- (NSDateComponents *)gvc_componentsForHourMinuteSecond
+{
+	return [[NSCalendar currentCalendar] components:NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit fromDate:self];
+}
+
+- (NSDateComponents *)gvc_componentsForYearMonthDay
+{
+	return [[NSCalendar currentCalendar] components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:self];
+}
+
+- (NSUInteger)gvc_weekday
+{
+	return [[NSCalendar currentCalendar] ordinalityOfUnit:NSDayCalendarUnit inUnit:NSWeekCalendarUnit forDate:self];
+}
+
+- (NSUInteger)gvc_numberOfDaysInMonth
+{
+	return [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:self].length;
+}
+
+
+#pragma mark - Adjusting date values
+
+- (NSDate *)gvc_dateAdjustedToStartOfMonth
+{
+	GVC_DBC_REQUIRE(
+					)
+	
+	NSDate *adjusted = nil;
+	BOOL success = [[NSCalendar currentCalendar] rangeOfUnit:NSMonthCalendarUnit startDate:&adjusted interval:NULL forDate:self];
+	
+	GVC_DBC_ENSURE(
+				   GVC_DBC_FACT(success);
+				   GVC_DBC_FACT_NOT_NIL(adjusted);
+				   )
+
+	return adjusted;
+}
+
+- (NSDate *)gvc_dateAdjustedToEndOfMonth
+{
+	GVC_DBC_REQUIRE(
+					)
+	
+	NSDateComponents *components = [self gvc_componentsForYearMonthDay];
+	[components setDay:(NSInteger)[self gvc_numberOfDaysInMonth]];
+	NSDate *adjusted = [[NSCalendar currentCalendar] dateFromComponents:components];
+	
+	GVC_DBC_ENSURE(
+				   GVC_DBC_FACT_NOT_NIL(adjusted);
+				   )
+	
+	return adjusted;
+}
+- (NSDate *)gvc_dateWithAdjustedHour:(NSInteger)hour minute:(NSInteger)minute second:(NSInteger)second
+{
+	GVC_DBC_REQUIRE(
+					GVC_DBC_FACT((hour >= 0) && (hour < 24));
+					GVC_DBC_FACT((minute >= 0) && (minute < 60));
+					GVC_DBC_FACT((second >= 0) && (second < 60));
+					)
+	
+	unsigned int flags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+	NSDateComponents* components = [[NSCalendar currentCalendar] components:flags fromDate:self];
+	[components setHour:hour];
+	[components setMinute:minute];
+	[components setSecond:second];
+	NSDate *adjusted = [[NSCalendar currentCalendar] dateFromComponents:components];
+
+	GVC_DBC_ENSURE(
+				   GVC_DBC_FACT_NOT_NIL(adjusted);
+				   )
+
+	return adjusted;
+}
+
+- (NSDate *)gvc_dateAdjustedToStartOfDay
+{
+	return [self gvc_dateWithAdjustedHour:0 minute:0 second:0];
+}
+
+- (NSDate *)gvc_dateAdjustedToEndOfDay
+{
+	return [self gvc_dateWithAdjustedHour:23 minute:59 second:59];
+}
+
+#pragma mark - formatting
 - (NSString *)gvc_FormattedDateStyle:(NSDateFormatterStyle)datestyle timeStyle:(NSDateFormatterStyle)timestyle
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];

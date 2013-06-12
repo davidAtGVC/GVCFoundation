@@ -23,7 +23,64 @@
 - (NSString *)gvc_iso8601ShortStringValue;
 - (NSString *)gvc_iso8601StringValue;
 
+#pragma mark - Date Components and values
+/**
+ * @returns the components for the current hour, minute and second
+ */
+- (NSDateComponents *)gvc_componentsForHourMinuteSecond;
 
+/**
+ * @returns the components for the current day, month and year
+ */
+- (NSDateComponents *)gvc_componentsForYearMonthDay;
+
+/**
+ * @returns the weekday number
+ */
+- (NSUInteger)gvc_weekday;
+
+/**
+ * @returns the number of days in the dates month
+ */
+- (NSUInteger)gvc_numberOfDaysInMonth;
+
+
+#pragma mark - Adjusting date values
+
+/**
+ * Creates a date value for the first day of the month
+ * @returns an adjusted date
+ */
+- (NSDate *)gvc_dateAdjustedToStartOfMonth;
+
+/**
+ * Creates a date value for the last day of the month
+ * @returns an adjusted date
+ */
+- (NSDate *)gvc_dateAdjustedToEndOfMonth;
+
+/**
+ * Creates a date value with the time values specified
+ * @param hour the hour of the day
+ * @param minute the minute of the hour
+ * @param second the second of the minute
+ * @returns an adjusted date
+ */
+- (NSDate *)gvc_dateWithAdjustedHour:(NSInteger)hour minute:(NSInteger)minute second:(NSInteger)second;
+
+/**
+ * Creates a date value with the time values set to 0:0:0
+ * @returns an adjusted date
+ */
+- (NSDate *)gvc_dateAdjustedToStartOfDay;
+
+/**
+ * Creates a date value with the time values set to 23:59:59
+ * @returns an adjusted date
+ */
+- (NSDate *)gvc_dateAdjustedToEndOfDay;
+
+#pragma mark - Formatting
 /**
  * Generates a formatted string from this date usng the specified date and time styles
  * @param datestyle the style for the date
