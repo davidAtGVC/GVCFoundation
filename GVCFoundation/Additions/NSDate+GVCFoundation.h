@@ -44,6 +44,21 @@
  */
 - (NSUInteger)gvc_numberOfDaysInMonth;
 
+/**
+ * @returns the year date component
+ */
+- (NSInteger)gvc_year;
+
+/**
+ * @returns the month date component
+ */
+- (NSInteger)gvc_monthOfYear;
+
+/**
+ * @returns the day of the month date component
+ */
+- (NSInteger)gvc_dayOfMonth;
+
 
 #pragma mark - Adjusting date values
 

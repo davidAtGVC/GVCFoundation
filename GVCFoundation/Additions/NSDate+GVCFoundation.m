@@ -122,6 +122,26 @@
 	return [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:self].length;
 }
 
+- (NSInteger)gvc_year
+{
+	NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+	NSDateComponents *comp = [gregorian components:NSYearCalendarUnit fromDate:self];
+	return [comp year];
+}
+
+- (NSInteger)gvc_monthOfYear
+{
+	NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+	NSDateComponents *comp = [gregorian components:NSMonthCalendarUnit fromDate:self];
+	return [comp month];
+}
+
+- (NSInteger)gvc_dayOfMonth
+{
+	NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+	NSDateComponents *comp = [gregorian components:NSDayCalendarUnit fromDate:self];
+	return [comp day];
+}
 
 #pragma mark - Adjusting date values
 
