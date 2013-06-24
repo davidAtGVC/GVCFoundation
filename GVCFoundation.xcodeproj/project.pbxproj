@@ -262,6 +262,7 @@
 		05E091F21594F01B00C6B1A0 /* GVCKeychain.h in Headers */ = {isa = PBXBuildFile; fileRef = 05E091F01594F01B00C6B1A0 /* GVCKeychain.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		05E091F31594F01B00C6B1A0 /* GVCKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E091F11594F01B00C6B1A0 /* GVCKeychain.m */; };
 		05E168A21483E2A70042823C /* GVCReaderWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 05E168A11483E2A70042823C /* GVCReaderWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		05E193911774EBDF0031A92D /* GVCCalendarEventProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 05E193901774EBDF0031A92D /* GVCCalendarEventProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		05E39D8416371CFB007BD9D1 /* GVCISO8601DateFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 05E39D8216371CFB007BD9D1 /* GVCISO8601DateFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		05E39D8516371CFB007BD9D1 /* GVCISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 05E39D8316371CFB007BD9D1 /* GVCISO8601DateFormatter.m */; };
 		05E39DAE16373348007BD9D1 /* GVCMultipartResponseData.h in Headers */ = {isa = PBXBuildFile; fileRef = 05E39D9316373348007BD9D1 /* GVCMultipartResponseData.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -587,6 +588,7 @@
 		05E091F01594F01B00C6B1A0 /* GVCKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCKeychain.h; sourceTree = "<group>"; };
 		05E091F11594F01B00C6B1A0 /* GVCKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCKeychain.m; sourceTree = "<group>"; };
 		05E168A11483E2A70042823C /* GVCReaderWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCReaderWriter.h; sourceTree = "<group>"; };
+		05E193901774EBDF0031A92D /* GVCCalendarEventProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCCalendarEventProtocol.h; sourceTree = "<group>"; };
 		05E39D8216371CFB007BD9D1 /* GVCISO8601DateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCISO8601DateFormatter.h; sourceTree = "<group>"; };
 		05E39D8316371CFB007BD9D1 /* GVCISO8601DateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCISO8601DateFormatter.m; sourceTree = "<group>"; };
 		05E39D9316373348007BD9D1 /* GVCMultipartResponseData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCMultipartResponseData.h; sourceTree = "<group>"; };
@@ -851,6 +853,7 @@
 				05E39D9116373348007BD9D1 /* Networking */,
 				05D186C21504167400EDBE80 /* Parsing */,
 				05D186C31504167500EDBE80 /* XML */,
+				05E1938F1774EBDF0031A92D /* protocols */,
 				056F599A147EEDD10076010D /* GVCFunctions.h */,
 				056F599B147EEDD10076010D /* GVCFunctions.m */,
 				05C2E32B1669172A00FDEE0D /* GVCInvocation.h */,
@@ -1308,6 +1311,14 @@
 			path = XML;
 			sourceTree = "<group>";
 		};
+		05E1938F1774EBDF0031A92D /* protocols */ = {
+			isa = PBXGroup;
+			children = (
+				05E193901774EBDF0031A92D /* GVCCalendarEventProtocol.h */,
+			);
+			path = protocols;
+			sourceTree = "<group>";
+		};
 		05E39D8116371CFB007BD9D1 /* formatter */ = {
 			isa = PBXGroup;
 			children = (
@@ -1535,6 +1546,7 @@
 				057380001728465D00F13971 /* GVCXMLFormQuestionModel.h in Headers */,
 				057380021728465D00F13971 /* GVCXMLFormSectionModel.h in Headers */,
 				05D2BCBB17458690001DF170 /* GVCXMLFormConditionalGroup.h in Headers */,
+				05E193911774EBDF0031A92D /* GVCCalendarEventProtocol.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

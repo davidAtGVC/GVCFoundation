@@ -161,4 +161,11 @@
  */
 - (NSUInteger) gvc_yearsBetweenDate:(NSDate *)aDate;
 
+/**
+ * compares the 2 dates only for the included components
+ * example: 
+	[myDate gvc_isDate:[NSDate date] matchingComponents:(NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSHourCalendarUnit)]
+ */
+- (BOOL)gvc_isDate:(NSDate *)date matchingComponents:(NSUInteger)compUnits;
+
 @end

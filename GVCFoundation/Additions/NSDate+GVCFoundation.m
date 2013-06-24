@@ -289,4 +289,17 @@
 	return diff;
 }
 
+#pragma mark - component comparison
+- (BOOL)gvc_isDate:(NSDate *)date matchingComponents:(NSUInteger)compUnits
+{
+	BOOL isEqual = NO;
+	if ( date != nil )
+	{
+		NSDateComponents *components1 = [[NSCalendar currentCalendar] components:compUnits fromDate:self];
+		NSDateComponents *components2 = [[NSCalendar currentCalendar] components:compUnits fromDate:date];
+		
+		isEqual = ((components1.year == components2.year) && (components1.month == components2.month) && (components1.day == components2.day)  && (components1.hour == components2.hour) && (components1.minute == components2.minute) && (components1.second == components2.second));
+	}
+	return isEqual;
+}
 @end

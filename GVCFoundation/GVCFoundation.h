@@ -220,4 +220,9 @@
 #import "GVCXMLFormQuestionModel.h"
 #import "GVCXMLFormSectionModel.h"
 
+/* 
+ * protocols 
+ */
+#import "GVCCalendarEventProtocol.h"
+
 #endif // GVCFoundation_h
