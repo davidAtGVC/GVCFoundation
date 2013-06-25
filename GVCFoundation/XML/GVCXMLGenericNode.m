@@ -209,4 +209,9 @@
 	return array;
 }
 
+- (void)generateOutput:(GVCXMLGenerator *)generator
+{
+	// does nothing
+}
+
 @end
