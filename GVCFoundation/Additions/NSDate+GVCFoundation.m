@@ -59,9 +59,9 @@
 	[sISO8601 setTimeStyle:NSDateFormatterFullStyle];
 	
 	[sISO8601 setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss"];
-	[sISO8601 setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
+//	[sISO8601 setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
 	
-	return [[sISO8601 stringFromDate:self] stringByAppendingString:@"Z"];
+	return [sISO8601 stringFromDate:self]; // stringByAppendingString:@"Z"];
 }
 
 + (NSDate *)gvc_DateFromYear:(NSInteger)y month:(NSInteger)m day:(NSInteger)d hour:(NSInteger)h minute:(NSInteger)mn second:(NSInteger)s
@@ -207,6 +207,27 @@
 {
 	return [self gvc_dateWithAdjustedHour:23 minute:59 second:59];
 }
+
+- (NSDate *)gvc_dateRoundUpToMinuteMark:(NSInteger)min;
+{
+    GVC_DBC_REQUIRE(
+                    GVC_DBC_FACT((min >= 0) && (min < 60));
+    );
+    
+    NSInteger modulus = (60 * min);
+    NSInteger interval = (NSInteger)[self timeIntervalSinceReferenceDate];
+    NSInteger remainder = (interval % modulus);
+    NSInteger rounded = interval + (modulus - remainder);
+    
+    NSDate *roundedDate = [NSDate dateWithTimeIntervalSinceReferenceDate:(NSTimeInterval)rounded];
+    
+    GVC_DBC_ENSURE(
+    );
+    
+    return roundedDate;
+}
+
+
 
 #pragma mark - formatting
 - (NSString *)gvc_FormattedDateStyle:(NSDateFormatterStyle)datestyle timeStyle:(NSDateFormatterStyle)timestyle

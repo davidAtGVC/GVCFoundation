@@ -168,4 +168,10 @@
  */
 - (BOOL)gvc_isDate:(NSDate *)date matchingComponents:(NSUInteger)compUnits;
 
+/**
+ * round the date up to the nearest x minute mark.  for example using 5 would round to 35, 40, 45 ...
+ */
+- (NSDate *)gvc_dateRoundUpToMinuteMark:(NSInteger)min;
+
+
 @end
