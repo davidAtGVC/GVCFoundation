@@ -81,6 +81,11 @@
 #import "GVCNetOperation.h"
 
 /* 
+ * Networking reachability 
+ */
+#import "Reachability.h"
+
+/* 
  * Networking session 
  */
 #import "GVCHTTPSession.h"

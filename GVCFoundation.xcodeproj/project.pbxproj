@@ -110,6 +110,10 @@
 		05412D991511701000919C57 /* GVCRSSDigester.h in Headers */ = {isa = PBXBuildFile; fileRef = 05412D971511701000919C57 /* GVCRSSDigester.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		05412D9A1511701000919C57 /* GVCRSSDigester.m in Sources */ = {isa = PBXBuildFile; fileRef = 05412D981511701000919C57 /* GVCRSSDigester.m */; };
 		05412D9C1511812400919C57 /* GVCRSSDigestTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 05412D9B1511812400919C57 /* GVCRSSDigestTest.m */; };
+		0543E61317846714007466A3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0543E61217846714007466A3 /* SystemConfiguration.framework */; };
+		0543E61417846778007466A3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0543E61217846714007466A3 /* SystemConfiguration.framework */; };
+		0543E618178467B4007466A3 /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 0543E616178467B4007466A3 /* Reachability.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0543E619178467B4007466A3 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 0543E617178467B4007466A3 /* Reachability.m */; };
 		0544174E1561E58700329BB1 /* multipart-response.http in Resources */ = {isa = PBXBuildFile; fileRef = 0544174D1561E58700329BB1 /* multipart-response.http */; };
 		054472C11599D70000DF90BA /* NSDateAdditionsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 054472C01599D70000DF90BA /* NSDateAdditionsTest.m */; };
 		0546BE631516BBD500140C4D /* NSError+GVCFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 0546BE611516BBD500140C4D /* NSError+GVCFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -403,6 +407,9 @@
 		05412D971511701000919C57 /* GVCRSSDigester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCRSSDigester.h; sourceTree = "<group>"; };
 		05412D981511701000919C57 /* GVCRSSDigester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCRSSDigester.m; sourceTree = "<group>"; };
 		05412D9B1511812400919C57 /* GVCRSSDigestTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCRSSDigestTest.m; sourceTree = "<group>"; };
+		0543E61217846714007466A3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		0543E616178467B4007466A3 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		0543E617178467B4007466A3 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		0544174D1561E58700329BB1 /* multipart-response.http */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "multipart-response.http"; sourceTree = "<group>"; };
 		054472C01599D70000DF90BA /* NSDateAdditionsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDateAdditionsTest.m; sourceTree = "<group>"; };
 		0546BE611516BBD500140C4D /* NSError+GVCFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+GVCFoundation.h"; sourceTree = "<group>"; };
@@ -647,6 +654,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0543E61317846714007466A3 /* SystemConfiguration.framework in Frameworks */,
 				056F5934147EE84D0076010D /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -655,6 +663,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0543E61417846778007466A3 /* SystemConfiguration.framework in Frameworks */,
 				055E72731594F38300C8DCC4 /* Security.framework in Frameworks */,
 				05CEF7DC153C647F006A3E5F /* CFNetwork.framework in Frameworks */,
 				056F5942147EE84D0076010D /* SenTestingKit.framework in Frameworks */,
@@ -753,6 +762,15 @@
 			path = soap;
 			sourceTree = "<group>";
 		};
+		0543E615178467B4007466A3 /* reachability */ = {
+			isa = PBXGroup;
+			children = (
+				0543E616178467B4007466A3 /* Reachability.h */,
+				0543E617178467B4007466A3 /* Reachability.m */,
+			);
+			path = reachability;
+			sourceTree = "<group>";
+		};
 		0551D34715166BC90089217F /* Operations */ = {
 			isa = PBXGroup;
 			children = (
@@ -831,6 +849,7 @@
 		056F5932147EE84D0076010D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0543E61217846714007466A3 /* SystemConfiguration.framework */,
 				055E72711594F34600C8DCC4 /* Security.framework */,
 				05CEF7DB153C647F006A3E5F /* CFNetwork.framework */,
 				056F5933147EE84D0076010D /* Foundation.framework */,
@@ -1336,6 +1355,7 @@
 				05E39DA216373348007BD9D1 /* operation */,
 				05E39DA716373348007BD9D1 /* session */,
 				05E39DC616373366007BD9D1 /* action */,
+				0543E615178467B4007466A3 /* reachability */,
 				05E39D9716373348007BD9D1 /* GVCNetworking.h */,
 				05E39D9816373348007BD9D1 /* GVCNetworking.m */,
 				05E39D9916373348007BD9D1 /* GVCReachability.h */,
@@ -1547,6 +1567,7 @@
 				057380021728465D00F13971 /* GVCXMLFormSectionModel.h in Headers */,
 				05D2BCBB17458690001DF170 /* GVCXMLFormConditionalGroup.h in Headers */,
 				05E193911774EBDF0031A92D /* GVCCalendarEventProtocol.h in Headers */,
+				0543E618178467B4007466A3 /* Reachability.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1824,6 +1845,7 @@
 				057380011728465D00F13971 /* GVCXMLFormQuestionModel.m in Sources */,
 				057380031728465D00F13971 /* GVCXMLFormSectionModel.m in Sources */,
 				05D2BCBC17458690001DF170 /* GVCXMLFormConditionalGroup.m in Sources */,
+				0543E619178467B4007466A3 /* Reachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
