@@ -13,7 +13,7 @@
 #import "GVCDirectory.h"
 #import "GVCFileOperation.h"
 #import "GVCLogger.h"
-#import "GVCNetOperation.h"
+#import "GVCHTTPOperation.h"
 #import "GVCNetResponseData.h"
 
 #import "NSBundle+GVCFoundation.h"
@@ -208,35 +208,41 @@ GVC_SINGLETON_CLASS(GVCConfiguration)
 
     NSString *remoteURL = remoteURL = GVC_SPRINTF(@"%@/%@", [self baseURL], GVCConfiguration_RESOURCES_FILE);
     NSURL *url = [NSURL URLWithString:remoteURL];
-    GVCNetOperation *rscDownload = [[GVCNetOperation alloc] initForURL:url];
+    GVCHTTPOperation *rscDownload = [[GVCHTTPOperation alloc] initForURL:url];
     [rscDownload setAllowSelfSignedCerts:YES];
     [rscDownload setResponseData:[[GVCStreamResponseData alloc] initForFilename:temp]];
     [rscDownload setDidFinishBlock:^(GVCOperation *operation) {
         NSError *plistError = nil;
-        NSDictionary *plist = [NSPropertyListSerialization propertyListWithData:[NSData dataWithContentsOfFile:temp] options:NSPropertyListImmutable format:nil error:&plistError];
-        if ( plist != nil )
-        {
-            NSArray *groups = [plist allKeys];
-            for ( NSString *group in groups)
-            {
-                NSArray *templateList = (NSArray *)[plist objectForKey:group];
-                for (NSDictionary *item in templateList )
-                {
-                    NSString *itemKey = [[item allKeys] lastObject];
-                    NSString *md5 = [item objectForKey:itemKey];
-                    
-                    [self processRemoteResource:itemKey md5:md5 forGroup:group];
-                }
-            }
-        }
-		else
+		NSInteger statusCode = [[(GVCHTTPOperation *)operation lastResponse] statusCode];
+		if ((statusCode >= 200) && (statusCode < 300))
 		{
-			[self setLastError:plistError];
+			NSDictionary *plist = [NSPropertyListSerialization propertyListWithData:[NSData dataWithContentsOfFile:temp] options:NSPropertyListImmutable format:nil error:&plistError];
+			if ( plist != nil )
+			{
+				NSArray *groups = [plist allKeys];
+				for ( NSString *group in groups)
+				{
+					NSArray *templateList = (NSArray *)[plist objectForKey:group];
+					for (NSDictionary *item in templateList )
+					{
+						NSString *itemKey = [[item allKeys] lastObject];
+						NSString *md5 = [item objectForKey:itemKey];
+						
+						[self processRemoteResource:itemKey md5:md5 forGroup:group];
+					}
+				}
+			}
+			else
+			{
+				[self setLastError:plistError];
+			}
 		}
+		[[NSFileManager defaultManager] removeItemAtPath:temp error:nil];
     }];
     
     [rscDownload setDidFailWithErrorBlock:^(GVCOperation *operation, NSError *err) {
 		[self setLastError:err];
+		[[NSFileManager defaultManager] removeItemAtPath:temp error:nil];
     }];
     [[self operationQueue] addOperation:rscDownload];
 }
