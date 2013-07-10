@@ -256,6 +256,15 @@
 	return [formatter stringFromDate:self];
 }
 
++ (NSDate *)gvc_DateFromString:(NSString *)value format:(NSString *)fmt
+{
+    GVC_ASSERT_NOT_EMPTY(value);
+    GVC_ASSERT_NOT_EMPTY(fmt);
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:fmt];
+	return [formatter dateFromString:value];
+}
+
 
 
 #pragma mark - Date comparison

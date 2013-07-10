@@ -121,10 +121,20 @@
 /**
  * Generates a formatted string from this date usng the specified format
  * http://www.unicode.org/reports/tr35/tr35-25.html#Date_Format_Patterns
+ * http://www.unicode.org/reports/tr35/tr35-25.html#Date_Field_Symbol_Table
  * @param fmt the date format
  * @returns formatted date
  */
 - (NSString *)gvc_FormattedStringValue:(NSString *)fmt;
+
+/**
+ * Generates a date from a formatted string usng the specified format
+ * http://www.unicode.org/reports/tr35/tr35-25.html#Date_Format_Patterns
+ * http://www.unicode.org/reports/tr35/tr35-25.html#Date_Field_Symbol_Table
+ * @param fmt the date format
+ * @returns formatted date
+ */
++ (NSDate *)gvc_DateFromString:(NSString *)value format:(NSString *)fmt;
 
 #pragma mark - Date comparison 
 

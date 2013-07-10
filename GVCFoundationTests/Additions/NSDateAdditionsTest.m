@@ -59,5 +59,19 @@
 	STAssertEqualObjects( longFmt, testdate, @"Date failed format");
 }
 
+- (void)testDateFormats
+{
+    NSDate *testdate = [NSDate gvc_DateFromYear:2009 month:02 day:8 hour:0 minute:0 second:0];
+	STAssertNotNil( testdate, @"Failed to allocate date" );
+
+    NSString *formatted = [testdate gvc_FormattedStringValue:@"dd/MM/yy"];
+	STAssertNotNil( formatted, @"Failed to format date" );
+    STAssertEqualObjects( formatted, @"08/02/09", @"Formatted date is wrong" );
+    
+    NSDate *reverse = [NSDate gvc_DateFromString:@"08/02/09" format:@"dd/MM/yy"];
+	STAssertNotNil( reverse, @"Failed to reverse format date" );
+    STAssertEqualObjects( reverse, testdate, @"reverse date is wrong" );
+
+}
 
 @end
