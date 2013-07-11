@@ -74,4 +74,70 @@
 
 }
 
+- (void)testISODurationParsing
+{
+	NSDictionary *testDurations = @{
+		 @"P3Y6M4DT12H30M5S": [NSNumber numberWithDouble:110842205],
+		 @"P2W": [NSNumber numberWithDouble:(14 * 60 * 60 * 24)],
+		 };
+	
+	for (NSString *iso in [testDurations allKeys])
+	{
+		NSNumber *number = [testDurations objectForKey:iso];
+		NSTimeInterval interval = [NSDate gvc_iso8601DurationInterval:iso];
+		
+		STAssertTrue(interval > 0, @"Time interval for %@ should be greater than 0", iso);
+		STAssertTrue([number doubleValue] == interval, @"Parsed value does not match %ld != %ld", [number doubleValue], (long)interval);
+	}
+}
+
+- (void)testISODurationFormatting
+{
+	NSDate *referenceDate = [NSDate gvc_DateFromYear:2009 month:2 day:8 hour:1 minute:2 second:3];
+
+	NSDictionary *testDurations = @{
+		 @"P1Y": [NSDate gvc_DateFromYear:2010 month:2 day:8 hour:1 minute:2 second:3],
+		 @"P1M": [NSDate gvc_DateFromYear:2009 month:3 day:8 hour:1 minute:2 second:3],
+		 @"P1D": [NSDate gvc_DateFromYear:2009 month:2 day:9 hour:1 minute:2 second:3],
+		 @"PT1H": [NSDate gvc_DateFromYear:2009 month:2 day:8 hour:2 minute:2 second:3],
+		 @"PT1M": [NSDate gvc_DateFromYear:2009 month:2 day:8 hour:1 minute:3 second:3],
+		 @"PT1S": [NSDate gvc_DateFromYear:2009 month:2 day:8 hour:1 minute:2 second:4],
+	     @"P3Y6M4DT12H30M5S": [NSDate gvc_DateFromYear:2012 month:8 day:12 hour:13 minute:32 second:8],
+		 @"P14D": [NSDate gvc_DateFromYear:2009 month:02 day:22 hour:1 minute:2 second:3],
+		 };
+	
+	for (NSString *iso in [testDurations allKeys])
+	{
+		NSDate *testDate = [testDurations objectForKey:iso];
+		NSString *format = [referenceDate gvc_iso8601DurationFromDate:testDate];
+		
+		STAssertNotNil(format, @"Time dit not generate format");
+		STAssertEqualObjects(iso, format, @"Formated value does not match '%@' != '%@'", iso, format);
+	}
+}
+
+- (void)testISODurationTimeIntervalFormatting
+{
+	NSDictionary *testDurations = @{
+								 @"P3Y6M4DT12H30M5S": [NSNumber numberWithDouble:110719805],
+								 @"P14D": [NSNumber numberWithDouble:(14 * 60 * 60 * 24)],
+								 @"P1Y": [NSNumber numberWithDouble:(365*24*60*60)],
+								 @"P1M": [NSNumber numberWithDouble:(31*24*60*60)],
+								 @"P1D": [NSNumber numberWithDouble:(24*60*60)],
+								 @"PT1H": [NSNumber numberWithDouble:(60*60)],
+								 @"PT1M": [NSNumber numberWithDouble:60],
+								 @"PT1S": [NSNumber numberWithDouble:1]
+		 };
+	
+	for (NSString *iso in [testDurations allKeys])
+	{
+		NSNumber *number = [testDurations objectForKey:iso];
+		NSString *format = [NSDate gvc_iso8601DurationFromInterval:[number doubleValue]];
+		
+		STAssertNotNil(format, @"Time dit not generate format");
+		STAssertEqualObjects(iso, format, @"Formated value does not match '%@' != '%@'", iso, format);
+	}
+}
+
+
 @end

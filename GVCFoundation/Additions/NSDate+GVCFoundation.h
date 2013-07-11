@@ -184,4 +184,19 @@
 - (NSDate *)gvc_dateRoundUpToMinuteMark:(NSInteger)min;
 
 
+/**
+ *
+ */
++ (NSTimeInterval)gvc_iso8601DurationInterval:(NSString *)duration;
+
+/**
+ *
+ */
++ (NSString *)gvc_iso8601DurationFromInterval:(NSTimeInterval)duration;
+
+/**
+ *
+ */
+- (NSString *)gvc_iso8601DurationFromDate:(NSDate *)date;
+
 @end

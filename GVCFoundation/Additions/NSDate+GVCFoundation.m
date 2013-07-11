@@ -332,4 +332,125 @@
 	}
 	return isEqual;
 }
+
+
+#pragma mark - ISO 8601 duration
+// duration is in the format "P3Y6M4DT12H30M5S" OR "P2W"
+// The P simply indicates that this is a duration, this should be the first character.
+// The T is the separator between the date portion (day, month, year) and the time portion (hour, minute, second).
++ (NSTimeInterval)gvc_iso8601DurationInterval:(NSString *)duration
+{
+	GVC_DBC_FACT_NOT_EMPTY(duration);
+	
+	// implementation
+	NSTimeInterval interval = 0;
+	if ([duration characterAtIndex:0] == 'P')
+	{
+		NSScanner *iso8601duration = [NSScanner scannerWithString:duration];
+		[iso8601duration setCharactersToBeSkipped:[NSCharacterSet characterSetWithCharactersInString:@"P"]];
+		
+		BOOL isTimePortion = NO;
+		while ( [iso8601duration isAtEnd] == NO)
+		{
+			double value;
+			NSString *units;
+			char cUnit;
+			
+			if ([iso8601duration scanDouble:&value])
+			{
+				if ([iso8601duration scanCharactersFromSet:[NSCharacterSet uppercaseLetterCharacterSet] intoString:&units])
+				{
+					for (NSUInteger i = 0; i < [units length]; ++i)
+					{
+						cUnit = [units characterAtIndex:i];
+						
+						switch (cUnit)
+						{
+							case 'Y':
+								interval += 31557600 * value;
+								break;
+							case 'M':
+								interval +=  isTimePortion ? 60 * value : 2629800 * value;
+								break;
+							case 'W':
+								interval += 604800 * value;
+								break;
+							case 'D':
+								interval += 86400 * value;
+								break;
+							case 'H':
+								interval += 3600 * value;
+								break;
+							case 'S':
+								interval += value;
+								break;
+							case 'T':
+								isTimePortion=YES;
+								break;
+						}
+					}
+				}
+			}
+			else
+			{
+				break;
+			}
+		}
+
+	}
+
+	return interval;
+}
+
++ (NSString *)gvc_iso8601DurationFromInterval:(NSTimeInterval)duration
+{
+	NSDate *startdate = [NSDate dateWithTimeIntervalSince1970:0];
+	NSDate *enddate = [NSDate dateWithTimeIntervalSince1970:duration];
+
+	return [startdate gvc_iso8601DurationFromDate:enddate];
+}
+
+- (NSString *)gvc_iso8601DurationFromDate:(NSDate *)date
+{
+	NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+	NSDateComponents *components = [gregorianCalendar components: (NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit ) fromDate:self toDate:date options:0];
+	
+	NSMutableString *buffer = [NSMutableString stringWithString:@"P"];
+	if ( [components year] > 0 )
+	{
+		[buffer appendFormat:@"%ldY", (long)[components year]];
+	}
+	
+	if ( [components month] > 0 )
+	{
+		[buffer appendFormat:@"%ldM", (long)[components month]];
+	}
+	
+	if ( [components day] > 0 )
+	{
+		[buffer appendFormat:@"%ldD", (long)[components day]];
+	}
+	
+	if (([components hour] > 0) || ([components minute] > 0) || ([components second] > 0))
+	{
+		[buffer appendString:@"T"];
+		if ( [components hour] > 0 )
+		{
+			[buffer appendFormat:@"%ldH", (long)[components hour]];
+		}
+		
+		if ( [components minute] > 0 )
+		{
+			[buffer appendFormat:@"%ldM", (long)[components minute]];
+		}
+		
+		if ( [components second] > 0 )
+		{
+			[buffer appendFormat:@"%ldS", (long)[components second]];
+		}
+	}
+	
+	return buffer;
+}
+
 @end
