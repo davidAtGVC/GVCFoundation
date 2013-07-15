@@ -13,6 +13,8 @@
 #import "GVCFunctions.h"
 #import "GVCLogger.h"
 #import "NSString+GVCFoundation.h"
+#import "NSArray+GVCFoundation.h"
+#import "NSDictionary+GVCFoundation.h"
 
 typedef enum {
 	GVCCallbackNodeType_ROOT,
@@ -162,6 +164,31 @@ typedef enum {
 	return root;
 }
 
+- (NSObject *)callbackValue:(NSObject *)obj forKeypath:(NSString *)key
+{
+	NSObject *value = nil;
+
+	@try {
+		value = [obj valueForKeyPath:key];
+	}
+	@catch (NSException *objExc)
+	{
+		GVCLogError(@"invalid key '%@' on obj %@", key, obj );
+		if (([@"NSUnknownKeyException" isEqualToString:[objExc name]] == YES) && ([self callback] != obj))
+		{
+			@try {
+				value = [[self callback] valueForKeyPath:key];
+			}
+			@catch (NSException *callExc)
+			{
+				GVCLogError(@"  also invalid key '%@' on obj %@", key, callback );
+			}
+		}
+	}
+
+	return value;
+}
+
 - (void)writeOutput:(GVCCallbackNode *)node callback:(NSObject *)obj
 {
 	if ( [node type] == GVCCallbackNodeType_STR )
@@ -171,56 +198,39 @@ typedef enum {
 	else
 	{
 		NSString *keyPrefix = [node string];
-		NSString *format = nil;
 		NSObject *value = nil;
-		NSRange range = [keyPrefix rangeOfString:@"@format"];
-		if ( range.length == 7 )
-		{
-			format = [keyPrefix substringFromIndex:range.location + range.length + 1];
-			keyPrefix = [keyPrefix substringToIndex:range.location - 1];
-		}
-		
-		@try {
-			value = [obj valueForKeyPath:keyPrefix];
-		}
-		@catch (NSException *objExc) 
-		{
-			GVCLogError(@"invalid key '%@' on obj %@", [node string], obj );
-			if (([@"NSUnknownKeyException" isEqualToString:[objExc name]] == YES) && ([self callback] != obj))
-			{
-				@try {
-					value = [[self callback] valueForKeyPath:[node string]];
-				}
-				@catch (NSException *callExc) 
-				{
-					GVCLogError(@"  also invalid key '%@' on obj %@", [node string], callback );
-				}
-			}
-		}
-		
-		if ((value != nil) && (gvc_IsEmpty(format) == NO))
-		{
-			if ( [value isKindOfClass:[NSDate class]] == YES )
-			{
-				NSDateFormatter *standardFormat = [[NSDateFormatter alloc] init];
-				[standardFormat setDateFormat:format];
-				value = [standardFormat stringFromDate:(NSDate *)value];
-			}
-			else if ( [value isKindOfClass:[NSNumber class]] == YES )
-			{
-				NSNumberFormatter *standardFormat = [[NSNumberFormatter alloc] init];
-				
-				[standardFormat setNumberStyle:NSNumberFormatterDecimalStyle];
-				value = [standardFormat stringFromNumber:(NSNumber *)value];
-			}
-		}
-		
 		if ([[node children] count] == 0)
 		{
+			NSString *format = nil;
+			NSRange range = [keyPrefix rangeOfString:@"@format"];
+			if ( range.length == 7 )
+			{
+				format = [keyPrefix substringFromIndex:range.location + range.length + 1];
+				keyPrefix = [keyPrefix substringToIndex:range.location - 1];
+			}
+			value = [self callbackValue:obj forKeypath:keyPrefix];
+			
+			if ((value != nil) && (gvc_IsEmpty(format) == NO))
+			{
+				if ( [value isKindOfClass:[NSDate class]] == YES )
+				{
+					NSDateFormatter *standardFormat = [[NSDateFormatter alloc] init];
+					[standardFormat setDateFormat:format];
+					value = [standardFormat stringFromDate:(NSDate *)value];
+				}
+				else if ( [value isKindOfClass:[NSNumber class]] == YES )
+				{
+					NSNumberFormatter *standardFormat = [[NSNumberFormatter alloc] init];
+					
+					[standardFormat setNumberStyle:NSNumberFormatterDecimalStyle];
+					value = [standardFormat stringFromNumber:(NSNumber *)value];
+				}
+			}
+
 			if ((value == nil) || (value == [NSNull null]))
 			{
 					// FIXME
-				[[self output] writeString:@"-null-"];
+				[[self output] writeString:@""];
 			}
 			else
 			{
@@ -229,17 +239,47 @@ typedef enum {
 		}
 		else
 		{
-			if ( [value isKindOfClass:[NSArray class]] == YES )
+			NSString *groupkey = nil;
+			NSRange range = [keyPrefix rangeOfString:@"@group"];
+			if ( range.length == 6 )
 			{
-				NSArray *arrayValue = (NSArray *)value;
+				groupkey = [keyPrefix substringFromIndex:range.location + range.length + 1];
+				keyPrefix = [keyPrefix substringToIndex:range.location - 1];
+			}
+			value = [self callbackValue:obj forKeypath:keyPrefix];
+
+			if ( gvc_IsEmpty(groupkey) == NO)
+			{
+				if ( [value isKindOfClass:[NSArray class]] == YES)
+				{
+					NSDictionary *group = [NSDictionary gvc_groupArray:(NSArray *)value block:^NSString *(id item) {
+						return [item valueForKeyPath:groupkey];
+					}];
+					
+					for ( NSString *groupName in [group gvc_sortedKeys])
+					{
+						NSArray *items = [group objectForKey:groupName];
+						for (NSObject *item in items)
+						{
+							[self writeOutputArray:[node children] callback:item];
+						}
+					}
+				}
+			}
+			else if ( [value conformsToProtocol:@protocol(NSFastEnumeration)] == YES )
+			{
+				id <NSFastEnumeration>arrayValue = (id <NSFastEnumeration>)value;
 				for (NSObject *item in arrayValue)
 				{
 					[self writeOutputArray:[node children] callback:item];
 				}
 			}
-			else if (([value isKindOfClass:[NSNumber class]] == YES) && ([(NSNumber *)value intValue] > 0))
+			else if ([value isKindOfClass:[NSNumber class]] == YES)
 			{
-				[self writeOutputArray:[node children] callback:obj];
+				if ([(NSNumber *)value boolValue] == YES)
+				{
+					[self writeOutputArray:[node children] callback:obj];
+				}
 			}
 			else if ( value != nil )
 			{
