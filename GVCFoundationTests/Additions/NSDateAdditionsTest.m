@@ -79,6 +79,9 @@
 	NSDictionary *testDurations = @{
 		 @"P3Y6M4DT12H30M5S": [NSNumber numberWithDouble:110842205],
 		 @"P2W": [NSNumber numberWithDouble:(14 * 60 * 60 * 24)],
+		 @"PT30S": [NSNumber numberWithDouble:(30)],
+		 @"PT30M": [NSNumber numberWithDouble:(30 * 60)],
+		 @"PT1H20M15S": [NSNumber numberWithDouble:((1 * GVC_HOUR) + (20 * GVC_MINUTE) + (15 * GVC_SECOND))],
 		 };
 	
 	for (NSString *iso in [testDurations allKeys])

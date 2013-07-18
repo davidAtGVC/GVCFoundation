@@ -346,10 +346,17 @@
 	NSTimeInterval interval = 0;
 	if ([duration characterAtIndex:0] == 'P')
 	{
-		NSScanner *iso8601duration = [NSScanner scannerWithString:duration];
-		[iso8601duration setCharactersToBeSkipped:[NSCharacterSet characterSetWithCharactersInString:@"P"]];
-		
 		BOOL isTimePortion = NO;
+
+		duration = [duration substringFromIndex:1];
+		if ([duration characterAtIndex:0] == 'T')
+		{
+			duration = [duration substringFromIndex:1];
+			isTimePortion = YES;
+		}
+		
+		NSScanner *iso8601duration = [NSScanner scannerWithString:duration];
+		
 		while ( [iso8601duration isAtEnd] == NO)
 		{
 			double value;
@@ -370,7 +377,7 @@
 								interval += 31557600 * value;
 								break;
 							case 'M':
-								interval +=  isTimePortion ? 60 * value : 2629800 * value;
+								interval += isTimePortion ? 60 * value : 2629800 * value;
 								break;
 							case 'W':
 								interval += 604800 * value;
