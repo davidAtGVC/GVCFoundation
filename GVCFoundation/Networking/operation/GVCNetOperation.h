@@ -65,7 +65,7 @@ typedef void (^GVCNetOperationAuthChallengeBlock)(NSURLConnection *connection, N
 	// secure connection
 @property (assign, nonatomic)  BOOL allowSelfSignedCerts;
 
-@property (readwrite, copy) GVCNetOperationAuthAgainstProtectionSpaceBlock authEvaluationBlock;
-@property (readwrite, copy) GVCNetOperationAuthChallengeBlock authChallengeBlock;
+@property (copy, nonatomic) GVCNetOperationAuthAgainstProtectionSpaceBlock authEvaluationBlock;
+@property (copy, nonatomic) GVCNetOperationAuthChallengeBlock authChallengeBlock;
 
 @end

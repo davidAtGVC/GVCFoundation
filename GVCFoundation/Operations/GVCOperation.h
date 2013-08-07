@@ -62,19 +62,19 @@ typedef void (^GVCOperationProgressBlock)(NSUInteger itemNumber, NSUInteger tota
 @interface GVCOperation : NSOperation
 
 /** Performed on the main thread. */
-@property (readwrite, copy) GVCOperationBlock didStartBlock;
+@property (copy, nonatomic) GVCOperationBlock didStartBlock;
 
 /** Performed on the main thread. */
-@property (readwrite, copy) GVCOperationBlock didFinishBlock;
+@property (copy, nonatomic) GVCOperationBlock didFinishBlock;
 
 /** Performed on the main thread. */
-@property (readwrite, copy) GVCOperationErrorBlock didFailWithErrorBlock;
+@property (copy, nonatomic) GVCOperationErrorBlock didFailWithErrorBlock;
 
 /** Performed on the main thread. */
-@property (readwrite, copy) GVCOperationProgressBlock progressBlock;
+@property (copy, nonatomic) GVCOperationProgressBlock progressBlock;
 
 /** Performed on the operation thread. */
-@property (readwrite, copy) GVCOperationBlock willFinishBlock;
+@property (copy, nonatomic) GVCOperationBlock willFinishBlock;
 
 @property (strong) NSError *operationError;
 
