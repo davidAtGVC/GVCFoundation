@@ -1,0 +1,340 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Cars Report</title>
+  <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+    <style type="text/css">
+  	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td
+  	{
+  		margin: 0;
+  		padding: 0;
+  		border: 0;
+  		outline: 0;
+  		font-size: 100%;
+  		vertical-align: baseline;
+  		background: transparent;
+  	}
+  	
+  	ol, ul
+  	{
+  		list-style: none;
+  		list-style-image: none;
+  		list-style-position: outside;
+  		list-style-type: none;
+  	}
+  	
+  	ins { text-decoration: none; }
+  	del { text-decoration: line-through; }
+  	
+  	/* tables still need 'cellspacing="0"' in the markup ^_^_^_^_^ */
+  	table
+  	{
+  		border-collapse: collapse;
+  		border-spacing: 0;
+  	}
+  	
+  	caption, th, td
+  	{
+  		text-align: left;
+  		font-weight: normal;
+  	}
+  	
+  	table, td, th { vertical-align: middle; }
+  	blockquote:before, blockquote:after, q:before, q:after { content: none; }
+  	blockquote, q { quotes: "" ""; }
+  	a img { border: none; }
+  	abbr, acronym { border-bottom-width: 0; }
+  	strong { font-weight: bold; }
+  	em { font-style: italic; }
+  	
+  	/* =common
+  	----------------------------------------------------------------------------------------- */
+  	
+  	body
+  	{
+  		font: 12px/20px Helvetica, Arial, sans-serif;
+  		color: #555;
+  		text-shadow: 1px 1px 0 #fff;
+  	}
+  	  	
+  	p { margin: 0 0 16px; }
+  	
+  	/* heading styles */
+  	h2
+  	{
+  		position: relative;
+/*   		width: 578px; */
+  		margin: 0 0 16px -20px;
+  		padding: 2px 10px;
+  		background-color: #555;
+  		border: 1px solid #444;
+  		border-top-color: #111;
+  		border-left-color: #111;
+  		color: #f8f8f8;
+  		font: normal 18px/24px Helvetica, Arial, sans-serif;
+  		text-shadow: none;
+  		text-transform: uppercase;
+  	}
+  	
+  	h3
+  	{
+  		position: relative;
+/*   		width: 568px; */
+  		margin: 0 0 16px -10px;
+  		padding: 4px 10px;
+  		background-color: #ebebeb;
+  		border: 1px solid #ddd;
+  		border-top-color: #bcbcbc;
+  		border-left-color: #bcbcbc;
+  		color: #666;
+  		font: bold 14px/20px Helvetica, Arial, sans-serif;
+  		text-transform: uppercase;
+  	}
+  	
+  	h4
+  	{
+  		position: relative;
+/*   		width: 578px; */
+  		margin: 0 0 14px 0;
+  		padding: 4px 0;
+  		border-bottom: 1px solid #ddd;
+  		font: bold 14px/20px Helvetica, Arial, sans-serif;
+  	}
+  	
+  	h5
+  	{
+  		position: relative;
+/*   		width: 578px; */
+  		margin: 0 0 12px 0;
+  		padding: 4px 0;
+  		font: bold 14px/18px Helvetica, Arial, sans-serif;
+  		font-variant: small-caps;
+  	}
+  	
+  	.floatRight { float: right; }
+  	
+  	/* list styles */
+  	#content ul, #content ol
+  	{
+  		margin: 0 0 16px;
+  		padding: 0 0 0 24px;
+  	}
+  	
+  	.disc li { list-style-type: disc; }
+  	.square li { list-style-type: square; }
+  	.circle li { list-style-type: circle; }
+  	.lowerAlphabet li { list-style-type: lower-alpha; }
+  	.upperAlphabet li { list-style-type: upper-alpha; }
+  	.decimal li { list-style-type: decimal; }
+  	
+  	/* table styles */
+  	table, table.default
+  	{
+  		margin: 0 0 16px;
+  		border-collapse: collapse;
+  		border: 1px solid #ccc;
+  	}
+  	
+  	table.default td, table.default th
+  	{
+  		padding: 4px 8px;
+  		border: 1px solid #ddd;
+  	}
+  	
+  	table.default th
+  	{
+  		background-color: #eee;
+  		font-weight: bold;
+  	}
+  	
+  	abbr { border-bottom: thin dotted; }
+  	abbr:hover, abbr:focus, abbr.noVisual { border-bottom: 0 none; }
+  	acronym { border-bottom: thin dotted; }
+  	acronym:hover, acronym:focus, acronym.noVisual { border-bottom: 0 none; }
+  	
+  	/* give anyone of this class to an image to float it left or right */
+  	.left
+  	{
+  		float: left;
+  		margin: 5px 16px 5px 0;
+  	}
+  	
+  	.right
+  	{
+  		float: right;
+  		margin: 5px 0 5px 16px;
+  	}
+  	
+  	.clear { clear: both; }
+  	
+  	/* =headerSection
+  	----------------------------------------------------------------------------------------- */
+  	
+  	#headerWrapper
+  	{
+  		position: relative;
+  		z-index: 100;
+  		overflow: hidden;
+  		clear: both;
+  		width: 100%;
+  		background: #ebebeb;
+  		padding: 15px 5px 5px 5px;
+  	}
+  	
+  	#header
+  	{
+  		width: 800px;
+  		top: 0;
+  	}
+  	
+  	#label
+  	{
+  		overflow: hidden;
+  		float: left;
+  		width: 300px;
+  	}
+  	
+  	p.contact
+  	{
+  		overflow: hidden;
+  		text-align: right;
+  	}
+  	
+  	#health
+  	{
+  		overflow: hidden;
+  		float: right;
+  		width: 450px;
+  	}
+  	
+  	h1#title
+  	{
+  		width: 100%;
+  		margin: 0 0 12px;
+  		padding: 0 0 8px;
+  		font: 20px/30px Helvetica, Arial, sans-serif;
+  		color: #333;
+  		text-transform: uppercase;
+  		text-align: right;
+  	}
+  	
+  	
+  	/* =content
+  	----------------------------------------------------------------------------------------- */
+  	
+  	#contentWrapper
+  	{
+  		position: relative;
+  		z-index: 100;
+  		overflow: hidden;
+  		clear: both;
+  		width: 100%;
+  		margin: 5px 0 0;
+  	}
+  	
+  	#content
+  	{
+  		position: relative;
+  		float: right;
+  		width: 90%;
+  		margin: 0 0 20px;
+  		top: 0;
+  	}
+  	
+  	/* =sections
+  	----------------------------------------------------------------------------------------- */
+  	#vitalsigns td { text-align: center; }
+
+  	/* =footer/copyright
+  	----------------------------------------------------------------------------------------- */
+  	
+  	#footer
+  	{
+/*   		width: 100%; */
+  		background-color: #555;
+  		padding: 6px 0;
+  	}
+  	
+  	#footer a
+  	{
+  		color: #eee;
+  		text-decoration: none;
+  		text-shadow: 1px 1px 0 #444;
+  	}
+  	
+  	#footer a:hover, #footer a:focus
+  	{
+  		background: transparent;
+  		text-decoration: underline;
+  	}
+  	
+  	#copyright
+  	{
+/*   		width: 960px; */
+  		margin: 0 auto;
+  		color: #ccc;
+  		text-shadow: 1px 1px 0 #444;
+  	}
+  	
+  	#copyright p
+  	{
+  		margin: 0;
+  		padding: 0;
+  	}
+  	  	
+  	.clearfix:after
+  	{
+  		content: ".";
+  		display: block;
+  		height: 0;
+  		clear: both;
+  		visibility: hidden;
+  	}
+  	
+  	.clearfix { display: inline-block; }
+  	</style>
+</head>
+
+<body>
+  <div id="headerWrapper">
+    <div id="header">
+      <div id="label">
+        <h1 id="title">[reportFullname]</h1>
+      </div>
+    </div>
+  </div>
+
+<div id="contentWrapper" class="clearfix">
+  <div id="content">
+  
+    <!-- Cars -->
+    [hasCars 
+    <div id="problems" class="section">
+      <h2>Number of Cars [carsDb.count]</h2>
+      
+      [carsDb 
+      <h3>[make] <em class="floatRight">[today.@format.LONGDATE]</em></h3>
+      <ul class="disc">
+		<li><strong>Model</strong> [model]</li>
+		<li><strong>Year</strong> [year]</li>
+		<li><strong>Price</strong> [price]</li>
+	  </ul>
+      <p>[desc]</p>
+      ]
+    </div>
+    ]
+
+    <!-- end #content -->
+  </div>
+  <!-- end #contentWrapper -->
+</div>
+
+  <div id="footer">
+    <div id="copyright">
+      <p>GVCCallbackFilterTest</p>
+    </div>
+  </div>
+</body>
+</html>

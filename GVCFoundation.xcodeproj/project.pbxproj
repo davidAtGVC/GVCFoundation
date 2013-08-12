@@ -316,6 +316,8 @@
 		05F8B883155E51ED00625B01 /* GVCConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F8B881155E51ED00625B01 /* GVCConfiguration.m */; };
 		05F8B88B155E7EE200625B01 /* GVCConfigurationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F8B88A155E7EE200625B01 /* GVCConfigurationTest.m */; };
 		05FC427B16E532E400F2AD0B /* GVCFoundationConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 05FC427A16E532E400F2AD0B /* GVCFoundationConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		05FCE3EF17B96ED9009F33AF /* GVCCallbackFilterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 05FCE3EE17B96ED9009F33AF /* GVCCallbackFilterTest.m */; };
+		05FCE3FF17B980BD009F33AF /* CarsReportTemplate.html in Resources */ = {isa = PBXBuildFile; fileRef = 05FCE3FE17B980BC009F33AF /* CarsReportTemplate.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -647,6 +649,8 @@
 		05F8B881155E51ED00625B01 /* GVCConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCConfiguration.m; sourceTree = "<group>"; };
 		05F8B88A155E7EE200625B01 /* GVCConfigurationTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCConfigurationTest.m; sourceTree = "<group>"; };
 		05FC427A16E532E400F2AD0B /* GVCFoundationConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCFoundationConstants.h; sourceTree = "<group>"; };
+		05FCE3EE17B96ED9009F33AF /* GVCCallbackFilterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCCallbackFilterTest.m; sourceTree = "<group>"; };
+		05FCE3FE17B980BC009F33AF /* CarsReportTemplate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = CarsReportTemplate.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -929,6 +933,7 @@
 				0594FA6B1509AFB800614D48 /* GVCResourceTestCase.m */,
 				05F8B88A155E7EE200625B01 /* GVCConfigurationTest.m */,
 				05749FB216066B35007CF96D /* CodeCoverageSupport.c */,
+				05FCE3EE17B96ED9009F33AF /* GVCCallbackFilterTest.m */,
 			);
 			path = GVCFoundationTests;
 			sourceTree = "<group>";
@@ -1162,6 +1167,7 @@
 		0594FA4C15099D7100614D48 /* Test */ = {
 			isa = PBXGroup;
 			children = (
+				05FCE3FE17B980BC009F33AF /* CarsReportTemplate.html */,
 				052FB8BF16D5C50E00BB849C /* SOAP-Fault.xml */,
 				057543EA15254C0C00160469 /* itunesTop300.xml */,
 				05BB433A1515155D007DD3A2 /* sample-rss-2.xml */,
@@ -1665,6 +1671,7 @@
 				05EAE0A81565572F004F5126 /* LocalConfiguration.xml in Resources */,
 				05EAE0A91565572F004F5126 /* RemoteConfiguration.xml in Resources */,
 				052FB8C016D5C50E00BB849C /* SOAP-Fault.xml in Resources */,
+				05FCE3FF17B980BD009F33AF /* CarsReportTemplate.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1876,6 +1883,7 @@
 				054472C11599D70000DF90BA /* NSDateAdditionsTest.m in Sources */,
 				05749FB316066B35007CF96D /* CodeCoverageSupport.c in Sources */,
 				052FB8C416D5C65C00BB849C /* GVCXMLRecursiveParserDelegateTest.m in Sources */,
+				05FCE3EF17B96ED9009F33AF /* GVCCallbackFilterTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,6 +15,7 @@
 #import "NSString+GVCFoundation.h"
 #import "NSArray+GVCFoundation.h"
 #import "NSDictionary+GVCFoundation.h"
+#import "NSDate+GVCFoundation.h"
 
 typedef enum {
 	GVCCallbackNodeType_ROOT,
@@ -214,9 +215,24 @@ typedef enum {
 			{
 				if ( [value isKindOfClass:[NSDate class]] == YES )
 				{
-					NSDateFormatter *standardFormat = [[NSDateFormatter alloc] init];
-					[standardFormat setDateFormat:format];
-					value = [standardFormat stringFromDate:(NSDate *)value];
+                    if ( [format isEqualToString:@"LONGDATETIME"] == YES )
+                    {
+                        value = [(NSDate *)value gvc_FormattedDateStyle:(NSDateFormatterLongStyle) timeStyle:(NSDateFormatterLongStyle)];
+                    }
+                    else if ( [format isEqualToString:@"LONGDATE"] == YES )
+                    {
+                        value = [(NSDate *)value gvc_FormattedDate:NSDateFormatterLongStyle];
+                    }
+                    else if ( [format isEqualToString:@"LONGTIME"] == YES )
+                    {
+                        value = [(NSDate *)value gvc_FormattedTime:NSDateFormatterLongStyle];
+                    }
+                    else
+                    {
+                        NSDateFormatter *standardFormat = [[NSDateFormatter alloc] init];
+                        [standardFormat setDateFormat:format];
+                        value = [standardFormat stringFromDate:(NSDate *)value];
+                    }
 				}
 				else if ( [value isKindOfClass:[NSNumber class]] == YES )
 				{
