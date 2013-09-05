@@ -13,9 +13,37 @@
 
 @implementation GVCXMLNamespace
 
+static NSMutableDictionary *gvc_NamespaceCache = nil;
++ (NSMutableDictionary *)namespaceCache
+{
+	static dispatch_once_t gvc_NamespaceCache_Dispatch;
+	dispatch_once(&gvc_NamespaceCache_Dispatch, ^{
+        gvc_NamespaceCache = [[NSMutableDictionary alloc] init];
+    });
+	return gvc_NamespaceCache;
+}
+
 + (id <GVCXMLNamespaceDeclaration>)namespaceForPrefix:(NSString *)pfx andURI:(NSString *)u;
 {
-    return [[self alloc] initWithPrefix:pfx uri:u];
+	NSMutableString *buffer = [NSMutableString stringWithCapacity:10];
+    if (gvc_IsEmpty(pfx) == NO)
+    {
+        [buffer appendString:pfx];
+        [buffer appendString:@":"];
+    }
+	[buffer appendString:u];
+	
+	id <GVCXMLNamespaceDeclaration> namespace = [[GVCXMLNamespace namespaceCache] objectForKey:buffer];
+	if ( namespace == nil )
+	{
+		namespace = [[self alloc] initWithPrefix:pfx uri:u];
+		if ( namespace != nil )
+		{
+			[[GVCXMLNamespace namespaceCache] setObject:namespace forKey:buffer];
+		}
+	}
+
+    return namespace;
 }
 
 - initWithPrefix:(NSString *)name uri:(NSString *)u
