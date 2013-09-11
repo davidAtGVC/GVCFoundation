@@ -78,12 +78,26 @@ static inline BOOL gvc_IsEmpty(id thing)
 })
 
 
-	// convenient macro to create a formatted string
+// convenient macro to create a formatted string
 #define GVC_SPRINTF(FORMAT, ... )  [NSString stringWithFormat:(FORMAT), ##__VA_ARGS__]
+
+/**
+ * This allows a simple way to suppress the arc "performSelector may cause a leak because its selector is unknown" warning. Example
+ * <pre>
+	id result = nil;
+	GVC_SuppressPerformSelectorLeakWarning(result = [_target performSelector:_action withObject:self] );
+	</pre>
+ */
+#define GVC_SuppressPerformSelectorLeakWarning(action) do { \
+	_Pragma("clang diagnostic push") \
+	_Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"") \
+	action; \
+	_Pragma("clang diagnostic pop") \
+} while (0)
 
 
 #pragma mark - Properties
-/**	
+/**
  The following macro is for specifying property (ivar) names to KVC or KVO methods. These methods generally take strings, but strings don't get checked for typos by the compiler. If you write GVC_PROPERTY(badvalue) instead of GVC_PROPERTY(propname), the compiler will immediately complain that it doesn't know the selector 'badvalue', and thus point out the typo. For this to work, you need to make sure the warning -Wunknown-selector is on.
  
  Example:
