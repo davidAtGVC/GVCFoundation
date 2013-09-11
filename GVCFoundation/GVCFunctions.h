@@ -29,6 +29,11 @@ GVC_EXTERN void gcv_SwizzleClassMethod(Class c, SEL orig, SEL new);
  */
 GVC_EXTERN void gcv_SwizzleInstanceMethod(Class c, SEL orig, SEL new);
 
+/**
+ * This function will perform an Objective-C instance method swap between the original selector and the block implementation
+ */
+GVC_EXTERN BOOL gvc_SwizzleInstanceMethodWithWithBlock(Class c, SEL origSEL, SEL newSEL, id block);
+
 #pragma mark - Collection Functions
 
 /**

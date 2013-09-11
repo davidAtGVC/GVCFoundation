@@ -8,7 +8,9 @@
 
 #import <objc/runtime.h>
 #import <Foundation/Foundation.h>
+
 #import "GVCFunctions.h"
+#import "GVCLogger.h"
 #import "NSBundle+GVCFoundation.h"
 #import "NSData+GVCFoundation.h"
 #import "NSArray+GVCFoundation.h"
@@ -35,14 +37,56 @@ void gcv_SwizzleClassMethod(Class c, SEL orig, SEL new)
 /* 
  * taken from an example at http://www.cocoadev.com/index.pl?MethodSwizzling
  */
-void gcv_SwizzleInstanceMethod(Class c, SEL orig, SEL new)
+void gcv_SwizzleInstanceMethod(Class c, SEL origSEL, SEL newSEL)
 {
-    Method origMethod = class_getInstanceMethod(c, orig);
-    Method newMethod = class_getInstanceMethod(c, new);
-    if (class_addMethod(c, orig, method_getImplementation(newMethod), method_getTypeEncoding(newMethod)))
-        class_replaceMethod(c, new, method_getImplementation(origMethod), method_getTypeEncoding(origMethod));
+	GVC_ASSERT(c != nil, @"Class is required for swizzling");
+	GVC_ASSERT(origSEL != nil, @"Original selector is required for swizzling");
+	GVC_ASSERT(newSEL != nil, @"Replacement selector is required for swizzling");
+
+    Method origMethod = class_getInstanceMethod(c, origSEL);
+    Method newMethod = class_getInstanceMethod(c, newSEL);
+
+    if (class_addMethod(c, origSEL, method_getImplementation(newMethod), method_getTypeEncoding(newMethod)))
+	{
+        class_replaceMethod(c, newSEL, method_getImplementation(origMethod), method_getTypeEncoding(origMethod));
+	}
     else
+	{
 		method_exchangeImplementations(origMethod, newMethod);
+	}
+}
+
+BOOL gvc_SwizzleInstanceMethodWithWithBlock(Class c, SEL origSEL, SEL newSEL, id block)
+{
+	GVC_ASSERT(c != nil, @"Class is required for swizzling");
+	GVC_ASSERT(origSEL != nil, @"Original selector is required for swizzling");
+	GVC_ASSERT(newSEL != nil, @"Replacement selector is required for swizzling");
+	GVC_ASSERT(block != nil, @"Block is required for swizzling (block based)");
+
+    Method origMethod = class_getInstanceMethod(c, origSEL);
+    const char *encoding = method_getTypeEncoding(origMethod);
+    IMP impl = imp_implementationWithBlock(block);
+	BOOL success = class_addMethod(c, newSEL, impl, encoding);
+
+    if (success == YES)
+	{
+        Method newMethod = class_getInstanceMethod(c, newSEL);
+        GVC_ASSERT(strcmp(method_getTypeEncoding(origMethod), method_getTypeEncoding(newMethod)) == 0, @"Method parameters must be the same for swizzling.");
+
+        if (class_addMethod(c, origSEL, method_getImplementation(newMethod), encoding))
+		{
+            class_replaceMethod(c, newSEL, method_getImplementation(origMethod), encoding);
+        }
+		else
+		{
+            method_exchangeImplementations(origMethod, newMethod);
+        }
+    }
+	else
+	{
+        GVCLogError(@"Failed to add method: %@ on %@", NSStringFromSelector(newSEL), c);
+    }
+    return success;
 }
 
 
