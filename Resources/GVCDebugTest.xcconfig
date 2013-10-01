@@ -1,0 +1,12 @@
+//
+//  GVCDebigConfig.xcconfig
+//
+//  Created by David Aspinall on 11-03-12.
+//  Copyright 2011 Global Village Consulting Inc. All rights reserved.
+//
+
+#include "GVCDebug.xcconfig"
+
+// For measuring code coverage
+GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES
+GCC_GENERATE_TEST_COVERAGE_FILES = YES
