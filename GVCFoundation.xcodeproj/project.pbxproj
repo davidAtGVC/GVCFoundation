@@ -505,6 +505,7 @@
 		05737FF31728465D00F13971 /* GVCXMLFormSectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCXMLFormSectionModel.h; sourceTree = "<group>"; };
 		05737FF41728465D00F13971 /* GVCXMLFormSectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCXMLFormSectionModel.m; sourceTree = "<group>"; };
 		057408F217FB86510069576B /* GVCFoundationTestCaseObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCFoundationTestCaseObserver.m; sourceTree = "<group>"; };
+		057408F417FB8FCD0069576B /* GCOVR_exportenv.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = GCOVR_exportenv.sh; sourceTree = "<group>"; };
 		05749FB216066B35007CF96D /* CodeCoverageSupport.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CodeCoverageSupport.c; sourceTree = "<group>"; };
 		057543E51525475A00160469 /* GVCStopwatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCStopwatch.h; sourceTree = "<group>"; };
 		057543E61525475A00160469 /* GVCStopwatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCStopwatch.m; sourceTree = "<group>"; };
@@ -956,6 +957,7 @@
 			children = (
 				0594FA4C15099D7100614D48 /* Test */,
 				056F595B147EED900076010D /* BuildKitHeader.sh */,
+				057408F417FB8FCD0069576B /* GCOVR_exportenv.sh */,
 				056F595C147EED900076010D /* GitIgnore.txt */,
 				0599399A160506E80020BDD9 /* BuildDocs.sh */,
 				05F1A62E15EAA87600568FEE /* BuildDoxygen.sh */,
@@ -1593,6 +1595,7 @@
 				056F592C147EE84D0076010D /* Sources */,
 				056F592D147EE84D0076010D /* Frameworks */,
 				056F592E147EE84D0076010D /* Headers */,
+				057408F517FB902E0069576B /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1710,6 +1713,19 @@
 			shellPath = /bin/sh;
 			shellScript = "${PROJECT_DIR}/Resources/BuildKitHeader.sh";
 			showEnvVarsInLog = 0;
+		};
+		057408F517FB902E0069576B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PROJECT_DIR}/Resources/GCOVR_exportenv.sh";
 		};
 		059939991605041B0020BDD9 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
