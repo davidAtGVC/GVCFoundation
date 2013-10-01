@@ -66,13 +66,32 @@ const NSString *ITUNES_URL = @"http://ax.phobos.apple.com.edgesuite.net/WebObjec
 	}];
 	[[self queue] addOperation:xml_op];
 	
-	int count = 0;
-    while (hasCalledBack == NO && count < 10)
-	{
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
+    int count = 0;
+    while (([[self queue] operationCount] > 0) && (count < 1000))
+    {
         count++;
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:500]];
+        if ((count%100 == 0) && ([[self queue] operationCount] > 0))
+        {
+            NSUInteger total = [[self queue] operationCount];
+            NSInteger ready = 0;
+            NSInteger executing = 0;
+            NSInteger finished = 0;
+            
+            for (NSOperation *op in [[self queue] operations])
+            {
+                if ( [op isReady] == YES)
+                    ready++;
+                
+                if ( [op isExecuting] == YES)
+                    executing++;
+                
+                if ( [op isFinished] == YES)
+                    finished++;
+            }
+            GVCLogDebug(@"%d/%d: Operations Ready %d Executing %d Finished %d / Total %d", count%100, count, ready, executing, finished, total);
+        }
     }
-
 }
 
 // All code under test must be linked into the Unit Test bundle
@@ -120,10 +139,31 @@ const NSString *ITUNES_URL = @"http://ax.phobos.apple.com.edgesuite.net/WebObjec
 
 	[[self queue] addOperation:url_Op];
 	
-    while (hasCalledBack == NO)
-	{
-        GVCLogError(@"letting runloop ...");
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:30]];
+    int count = 0;
+    while (([[self queue] operationCount] > 0) && (count < 1000))
+    {
+        count++;
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:500]];
+        if ((count%100 == 0) && ([[self queue] operationCount] > 0))
+        {
+            NSUInteger total = [[self queue] operationCount];
+            NSInteger ready = 0;
+            NSInteger executing = 0;
+            NSInteger finished = 0;
+            
+            for (NSOperation *op in [[self queue] operations])
+            {
+                if ( [op isReady] == YES)
+                    ready++;
+                
+                if ( [op isExecuting] == YES)
+                    executing++;
+                
+                if ( [op isFinished] == YES)
+                    finished++;
+            }
+            GVCLogDebug(@"%d/%d: Operations Ready %d Executing %d Finished %d / Total %d", count%100, count, ready, executing, finished, total);
+        }
     }
     STAssertTrue(hasCalledBack, @"Operation not finished");
     
@@ -195,12 +235,31 @@ const NSString *ITUNES_URL = @"http://ax.phobos.apple.com.edgesuite.net/WebObjec
     [[self queue] addOperation:xml_op];
 	[[self queue] addOperation:url_Op];
 	
-	int count = 0;
-    while (hasCalledBack == NO && count < 20)
-	{
-        GVCLogError(@"letting runloop %d", count);
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:20]];
+    int count = 0;
+    while (([[self queue] operationCount] > 0) && (count < 1000))
+    {
         count++;
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:500]];
+        if ((count%100 == 0) && ([[self queue] operationCount] > 0))
+        {
+            NSUInteger total = [[self queue] operationCount];
+            NSInteger ready = 0;
+            NSInteger executing = 0;
+            NSInteger finished = 0;
+            
+            for (NSOperation *op in [[self queue] operations])
+            {
+                if ( [op isReady] == YES)
+                    ready++;
+                
+                if ( [op isExecuting] == YES)
+                    executing++;
+                
+                if ( [op isFinished] == YES)
+                    finished++;
+            }
+            GVCLogDebug(@"%d/%d: Operations Ready %d Executing %d Finished %d / Total %d", count%100, count, ready, executing, finished, total);
+        }
     }
     STAssertTrue(hasCalledBack, @"Operation not finished");
     

@@ -63,13 +63,32 @@
 	}];
 	[[self queue] addOperation:apple_Op];
 	
-	int count = 0;
-    while (hasCalledBack == NO && count < 10)
-	{
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
+    int count = 0;
+    while (([[self queue] operationCount] > 0) && (count < 1000))
+    {
         count++;
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:500]];
+        if ((count%100 == 0) && ([[self queue] operationCount] > 0))
+        {
+            NSUInteger total = [[self queue] operationCount];
+            NSInteger ready = 0;
+            NSInteger executing = 0;
+            NSInteger finished = 0;
+            
+            for (NSOperation *op in [[self queue] operations])
+            {
+                if ( [op isReady] == YES)
+                    ready++;
+                
+                if ( [op isExecuting] == YES)
+                    executing++;
+                
+                if ( [op isFinished] == YES)
+                    finished++;
+            }
+            GVCLogDebug(@"%d/%d: Operations Ready %d Executing %d Finished %d / Total %d", count%100, count, ready, executing, finished, total);
+        }
     }
-
 }
 
 /** media.local is a test that only works in my home.  need to find a public site
@@ -96,13 +115,32 @@
 	}];
 	[[self queue] addOperation:ftp_Op];
 	
-	int count = 0;
-    while (hasCalledBack == NO && count < 10)
-	{
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
+    int count = 0;
+    while (([[self queue] operationCount] > 0) && (count < 1000))
+    {
         count++;
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:500]];
+        if ((count%100 == 0) && ([[self queue] operationCount] > 0))
+        {
+            NSUInteger total = [[self queue] operationCount];
+            NSInteger ready = 0;
+            NSInteger executing = 0;
+            NSInteger finished = 0;
+            
+            for (NSOperation *op in [[self queue] operations])
+            {
+                if ( [op isReady] == YES)
+                    ready++;
+                
+                if ( [op isExecuting] == YES)
+                    executing++;
+                
+                if ( [op isFinished] == YES)
+                    finished++;
+            }
+            GVCLogDebug(@"%d/%d: Operations Ready %d Executing %d Finished %d / Total %d", count%100, count, ready, executing, finished, total);
+        }
     }
-	
 }
 
 - (void)xtestSelfSignedCertFail
@@ -122,11 +160,31 @@
 	
 	[[self queue] addOperation:url_Op];
 	
-	int count = 0;
-    while (hasCalledBack == NO && count < 10)
-	{
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
+    int count = 0;
+    while (([[self queue] operationCount] > 0) && (count < 1000))
+    {
         count++;
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:500]];
+        if ((count%100 == 0) && ([[self queue] operationCount] > 0))
+        {
+            NSUInteger total = [[self queue] operationCount];
+            NSInteger ready = 0;
+            NSInteger executing = 0;
+            NSInteger finished = 0;
+            
+            for (NSOperation *op in [[self queue] operations])
+            {
+                if ( [op isReady] == YES)
+                    ready++;
+                
+                if ( [op isExecuting] == YES)
+                    executing++;
+                
+                if ( [op isFinished] == YES)
+                    finished++;
+            }
+            GVCLogDebug(@"%d/%d: Operations Ready %d Executing %d Finished %d / Total %d", count%100, count, ready, executing, finished, total);
+        }
     }
 }
 
@@ -159,13 +217,32 @@
 	
 	[[self queue] addOperation:url_Op];
 	
-	int count = 0;
-    while (hasCalledBack == NO && count < 10)
-	{
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
+    int count = 0;
+    while (([[self queue] operationCount] > 0) && (count < 1000))
+    {
         count++;
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:500]];
+        if ((count%100 == 0) && ([[self queue] operationCount] > 0))
+        {
+            NSUInteger total = [[self queue] operationCount];
+            NSInteger ready = 0;
+            NSInteger executing = 0;
+            NSInteger finished = 0;
+            
+            for (NSOperation *op in [[self queue] operations])
+            {
+                if ( [op isReady] == YES)
+                    ready++;
+                
+                if ( [op isExecuting] == YES)
+                    executing++;
+                
+                if ( [op isFinished] == YES)
+                    finished++;
+            }
+            GVCLogDebug(@"%d/%d: Operations Ready %d Executing %d Finished %d / Total %d", count%100, count, ready, executing, finished, total);
+        }
     }
-	
 }
 
 
