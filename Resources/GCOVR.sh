@@ -9,7 +9,6 @@ export PATH
 source /Volumes/BUILD/Jenkins/xcode_build/${JOB_NAME}/env.sh
 mkdir -p ${WORKSPACE}/gcovr
 
-
 (
 # /usr/local/bin/gcovr --help
 cd ${OBJECT_FILE_DIR_normal}/${CURRENT_ARCH}
