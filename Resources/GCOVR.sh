@@ -16,11 +16,11 @@ cd ${OBJECT_FILE_DIR_normal}/${CURRENT_ARCH}
 
 echo
 echo "XML"
-/usr/local/bin/gcovr -r ${WORKSPACE}/${JOB_NAME} --xml -o ${WORKSPACE}/gcovr/coverage.5.xml
+/usr/local/bin/gcovr -r ${WORKSPACE}/${JOB_NAME} --xml -o ${WORKSPACE}/gcovr/coverage.xml
 
 echo
 echo "HTML"
-/usr/local/bin/gcovr -r ${WORKSPACE}/${JOB_NAME} --html -o ${WORKSPACE}/gcovr/coverage.5.xml
+/usr/local/bin/gcovr -r ${WORKSPACE}/${JOB_NAME} --html -o ${WORKSPACE}/gcovr/coverage.html
 
 ) > /tmp/${JOB_NAME}-gcovr.log 2>&1
 
