@@ -15,11 +15,11 @@ mkdir -p ${WORKSPACE}/gcovr
 
 echo
 echo "XML"
-/usr/local/bin/gcovr -r . --object-directory=${OBJECT_FILE_DIR_normal}/${CURRENT_ARCH} --xml -o gcovr/coverage.xml
+/usr/local/bin/gcovr -r ${WORKSPACE}/${JOB_NAME} --object-directory=${OBJECT_FILE_DIR_normal}/${CURRENT_ARCH} --xml -o gcovr/coverage.xml
 
 echo
 echo "HTML"
-/usr/local/bin/gcovr -r . --object-directory=${OBJECT_FILE_DIR_normal}/${CURRENT_ARCH} --html -o gcovr/coverage.html
+/usr/local/bin/gcovr -r ${WORKSPACE}/${JOB_NAME} --object-directory=${OBJECT_FILE_DIR_normal}/${CURRENT_ARCH} --html -o gcovr/coverage.html
 
 ) > /tmp/${JOB_NAME}-gcovr.log 2>&1
 
