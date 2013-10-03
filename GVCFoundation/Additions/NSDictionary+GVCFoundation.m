@@ -43,6 +43,32 @@
 	return results;
 }
 
++ (NSDictionary *)gvc_groupUniqueArray:(NSArray *)array block:(GVCGroupResultBlock)evaluator
+{
+    GVC_DBC_REQUIRE(
+					GVC_DBC_FACT_NOT_NIL(evaluator);
+					)
+	
+	// implementation
+    NSMutableDictionary *results = [[NSMutableDictionary alloc] initWithCapacity:[array count]];
+    if ( gvc_IsEmpty(array) == NO)
+    {
+        for (NSObject *obj in array)
+        {
+            NSString *key = evaluator(obj);
+            GVC_ASSERT([results objectForKey:key] == nil, @"Evaluator returned non unique value for key %@ in object %@", key, obj);
+            
+            results[key] = obj;
+        }
+    }
+	
+	GVC_DBC_ENSURE(
+				   GVC_DBC_FACT_NOT_NIL(results);
+				   GVC_DBC_FACT([results count] == [array count]);
+				   )
+	return results;
+}
+
 - (NSArray *)gvc_sortedKeys
 {
 	return [[self allKeys] gvc_sortedStringArray];
