@@ -43,7 +43,7 @@
 - (void)testgvc_sortedKeys
 {
     NSDictionary *unsorted = @{ @"a": @"a", @"bbb":@"bbb", @"ddd":@"ddd", @"aaa":@"aaa", @"eae":@"eae", @"cc":@"cc", @"1":@"1" };
-    NSArray *sorted = @[ @"a", @"aaa", @"bbb", @"cc", @"ddd", @"eae", @"1" ];
+    NSArray *sorted = @[ @"1", @"a", @"aaa", @"bbb", @"cc", @"ddd", @"eae" ];
 
     NSArray *dictSort = [unsorted gvc_sortedKeys];
     STAssertTrue(gcv_IsEqualCollection( dictSort, sorted), @"'%@' != sorted '%@'", dictSort, sorted );
