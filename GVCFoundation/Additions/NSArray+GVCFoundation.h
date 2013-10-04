@@ -44,6 +44,9 @@ typedef id (^GVCCollectionResultBlock)(id item);
 /** Return the first obejct for a specific class */
 - (id)gvc_filterForFirstItemOfClass:(Class) clazz;
 
+/** Return the first obejct that passes the test */
+- (id)gvc_filterForFirstItemForAccept:(GVCCollectionAcceptBlock)evaluator;
+
 /** Return a new array with the resulting objects filtered for a specific class */
 - (NSArray *)gvc_filterForClass:(Class) clazz;
 

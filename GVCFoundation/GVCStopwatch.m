@@ -15,9 +15,6 @@
 
 @implementation GVCStopwatch
 
-@synthesize timestart;
-@synthesize timestop;
-
 - (id)init
 {
 	self = [super init];

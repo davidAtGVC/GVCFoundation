@@ -313,6 +313,8 @@
 		05EAE0A91565572F004F5126 /* RemoteConfiguration.xml in Resources */ = {isa = PBXBuildFile; fileRef = 05EAE0A61565572F004F5126 /* RemoteConfiguration.xml */; };
 		05F6478715385F7400EFF492 /* GVCCallbackFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 05F6478515385F7400EFF492 /* GVCCallbackFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		05F6478815385F7400EFF492 /* GVCCallbackFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F6478615385F7400EFF492 /* GVCCallbackFilter.m */; };
+		05F893B117FF062D0044DA31 /* GVCCSVGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 05F893AF17FF062D0044DA31 /* GVCCSVGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		05F893B217FF062D0044DA31 /* GVCCSVGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F893B017FF062D0044DA31 /* GVCCSVGenerator.m */; };
 		05F8B882155E51ED00625B01 /* GVCConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 05F8B880155E51ED00625B01 /* GVCConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		05F8B883155E51ED00625B01 /* GVCConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F8B881155E51ED00625B01 /* GVCConfiguration.m */; };
 		05F8B88B155E7EE200625B01 /* GVCConfigurationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F8B88A155E7EE200625B01 /* GVCConfigurationTest.m */; };
@@ -649,6 +651,8 @@
 		05F1A62F15EAA87600568FEE /* doxygen.config */ = {isa = PBXFileReference; lastKnownFileType = text; path = doxygen.config; sourceTree = "<group>"; };
 		05F6478515385F7400EFF492 /* GVCCallbackFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCCallbackFilter.h; sourceTree = "<group>"; };
 		05F6478615385F7400EFF492 /* GVCCallbackFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCCallbackFilter.m; sourceTree = "<group>"; };
+		05F893AF17FF062D0044DA31 /* GVCCSVGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCCSVGenerator.h; sourceTree = "<group>"; };
+		05F893B017FF062D0044DA31 /* GVCCSVGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCCSVGenerator.m; sourceTree = "<group>"; };
 		05F8B880155E51ED00625B01 /* GVCConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCConfiguration.h; sourceTree = "<group>"; };
 		05F8B881155E51ED00625B01 /* GVCConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCConfiguration.m; sourceTree = "<group>"; };
 		05F8B88A155E7EE200625B01 /* GVCConfigurationTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCConfigurationTest.m; sourceTree = "<group>"; };
@@ -901,6 +905,8 @@
 				05D186BF1504160300EDBE80 /* GVCStack.m */,
 				0597A9EA15068E9600D177AC /* GVCTextGenerator.h */,
 				0597A9EB15068E9600D177AC /* GVCTextGenerator.m */,
+				05F893AF17FF062D0044DA31 /* GVCCSVGenerator.h */,
+				05F893B017FF062D0044DA31 /* GVCCSVGenerator.m */,
 				057543E51525475A00160469 /* GVCStopwatch.h */,
 				057543E61525475A00160469 /* GVCStopwatch.m */,
 				05F8B880155E51ED00625B01 /* GVCConfiguration.h */,
@@ -1504,6 +1510,7 @@
 				051054081507AEE5002CDA3C /* GVCXMLText.h in Headers */,
 				0510540C1507AF22002CDA3C /* GVCXMLParserDelegate.h in Headers */,
 				055F98C3150FFA8C00D243AB /* GVCXMLNode.h in Headers */,
+				05F893B117FF062D0044DA31 /* GVCCSVGenerator.h in Headers */,
 				055F98C7150FFF4000D243AB /* GVCXMLContainerNode.h in Headers */,
 				05412D9315116FE500919C57 /* GVCRSSLink.h in Headers */,
 				05412D9615116FE500919C57 /* GVCRSSFeed.h in Headers */,
@@ -1770,6 +1777,7 @@
 				05DC669C14804C4A0033DBBA /* GVCLogger.m in Sources */,
 				055C5AF2148D294600B2FC03 /* GVCStringWriter.m in Sources */,
 				05A7BF17148D756200866A42 /* GVCCache.m in Sources */,
+				05F893B217FF062D0044DA31 /* GVCCSVGenerator.m in Sources */,
 				0521B838148E73C800FD75AF /* NSFileManager+GVCFoundation.m in Sources */,
 				05D186B81504136A00EDBE80 /* NSCharacterSet+GVCFoundation.m in Sources */,
 				05D186BD150415E800EDBE80 /* GVCPair.m in Sources */,

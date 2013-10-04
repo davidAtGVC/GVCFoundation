@@ -103,6 +103,18 @@
     return [results copy];
 }
 
+- (id)gvc_filterForFirstItemForAccept:(GVCCollectionAcceptBlock)evaluator
+{
+    GVC_ASSERT(evaluator != nil, @"Evaluator block is required" );
+
+    NSIndexSet *indexes = [self indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+		stop = evaluator(obj);
+		return stop;
+	}];
+
+	return ((gvc_IsEmpty(indexes) == NO) ? [self objectAtIndex:[indexes firstIndex]] : nil);
+}
+
 - (NSArray *)gvc_filterArrayForAccept:(GVCCollectionAcceptBlock)evaluator
 {
     GVC_ASSERT(evaluator != nil, @"Evaluator block is required" );
