@@ -21,11 +21,6 @@
 
 @implementation GVCFileWriter
 
-@synthesize filename;
-@synthesize fileStream;
-@synthesize writerStatus;
-@synthesize stringEncoding;
-
 + (GVCFileWriter *)writerForFilename:(NSString *)file
 {
 	return [[GVCFileWriter alloc] initForFilename:file];
@@ -72,12 +67,13 @@
 
 - (void)openWriter
 {
-	GVC_ASSERT( writerStatus == GVC_IO_Status_INITIAL, @"Cannot open writer more than once" );
-	GVC_ASSERT( gvc_IsEmpty(filename) == NO, @"Cannot open writer for unknown file" );
+	GVC_ASSERT( [self writerStatus] == GVC_IO_Status_INITIAL, @"Cannot open writer more than once" );
+	GVC_ASSERT( gvc_IsEmpty([self filename]) == NO, @"Cannot open writer for unknown file" );
 	
 	[self setFileStream:[NSOutputStream outputStreamToFileAtPath:[self filename] append:NO]];
-	[fileStream setDelegate:self];
-	[fileStream open];
+	[[self fileStream] setDelegate:self];
+//	[[self fileStream] scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+	[[self fileStream] open];
 	[self setWriterStatus:GVC_IO_Status_OPEN];
 }
 
@@ -87,19 +83,19 @@
 
 - (void)writeData:(NSData *)data
 {
-	GVC_ASSERT( writerStatus == GVC_IO_Status_OPEN, @"Cannot write unless writer is open" );
+	GVC_ASSERT( [self writerStatus] == GVC_IO_Status_OPEN, @"Cannot write unless writer is open" );
     GVC_ASSERT( data != nil, @"No data" );
 
-	[fileStream write:[data bytes] maxLength:[data length]];
+	[[self fileStream] write:[data bytes] maxLength:[data length]];
 }
 
 - (void)writeString:(NSString *)str
 {
-	GVC_ASSERT( writerStatus == GVC_IO_Status_OPEN, @"Cannot write unless writer is open" );
+	GVC_ASSERT( [self writerStatus] == GVC_IO_Status_OPEN, @"Cannot write unless writer is open" );
     GVC_ASSERT( str != nil, @"No message" );
 	
 	NSData *dta = [str dataUsingEncoding:[self stringEncoding]];
-	[fileStream write:[dta bytes] maxLength:[dta length]];
+	[[self fileStream] write:[dta bytes] maxLength:[dta length]];
 }
 
 - (void)writeFormat:(NSString *)fmt, ...
@@ -116,16 +112,43 @@
 
 - (void)closeWriter
 {
-    if ( writerStatus > GVC_IO_Status_INITIAL )
+    if ( [self writerStatus] > GVC_IO_Status_INITIAL )
     {
-        GVC_ASSERT( writerStatus == GVC_IO_Status_OPEN, @"Cannot close writer unless writer is open" );
-        [fileStream close];
+        GVC_ASSERT( [self writerStatus] == GVC_IO_Status_OPEN, @"Cannot close writer unless writer is open" );
+        [[self fileStream] close];
     }
     [self setWriterStatus:GVC_IO_Status_CLOSED];
 }
 
 - (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode
 {
+	switch (eventCode)
+	{
+
+		case NSStreamEventOpenCompleted:
+			GVCLogError(@"NSStreamEventOpenCompleted %@", [self filename]);
+			break;
+
+		case NSStreamEventHasBytesAvailable:
+			GVCLogError(@"NSStreamEventOpenCompleted %@", [self filename]);
+			break;
+
+		case NSStreamEventHasSpaceAvailable:
+			GVCLogError(@"NSStreamEventOpenCompleted %@", [self filename]);
+			break;
+
+		case NSStreamEventErrorOccurred:
+			GVCLogError(@"NSStreamEventOpenCompleted %@", [self filename]);
+			break;
+
+		case NSStreamEventEndEncountered:
+			GVCLogError(@"NSStreamEventOpenCompleted %@", [self filename]);
+			break;
+
+		case NSStreamEventNone:
+		default:
+			break;
+	}
 	if ( eventCode == NSStreamEventErrorOccurred )
 		GVCLogNSError( GVCLoggerLevel_ERROR, [aStream streamError] ); 
 }

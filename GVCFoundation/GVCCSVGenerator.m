@@ -153,16 +153,4 @@
     [self writeField:string];
 }
 
-- (void)writeFormat:(NSString *)fmt, ...
-{
-    GVC_ASSERT(fmt != nil, @"No message" );
-
-	va_list args;
-	va_start(args, fmt);
-	NSString *message = [[NSString alloc] initWithFormat:fmt arguments:args];
-	va_end(args);
-
-	[self writeString:message];
-}
-
 @end

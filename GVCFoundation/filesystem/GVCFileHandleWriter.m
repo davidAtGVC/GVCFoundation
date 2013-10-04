@@ -130,13 +130,7 @@
 	GVC_ASSERT( [self writerStatus] == GVC_IO_Status_OPEN, @"Cannot write unless writer is open" );
     GVC_ASSERT( str != nil, @"No message" );
 
-	dispatch_group_async( group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-		if (([self log] != [NSFileHandle fileHandleWithStandardError]) && ([self log] != [NSFileHandle fileHandleWithStandardOutput]))
-        {
-//			[[self log] seekToEndOfFile];
-        }
-        [[self log] writeData:[str dataUsingEncoding:[self stringEncoding]]];
-	});
+    [[self log] writeData:[str dataUsingEncoding:[self stringEncoding]]];
 }
 
 - (void)writeFormat:(NSString *)fmt, ...
