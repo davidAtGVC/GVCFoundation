@@ -17,6 +17,9 @@
 
 void gvc_UpdateMissingLocalizations(NSString *key, NSString *value);
 
+GVC_DEFINE_STR(GVCFOUNDATION_NotLocalized);
+
+
 /* 
  * taken from an example at http://www.cocoadev.com/index.pl?MethodSwizzling
  */
@@ -152,8 +155,8 @@ NSString *gvc_LocalizedString(NSString *key)
 
 NSString *gvc_LocalizedStringWithDefaultValue(NSString *key, NSString *defValue)
 {
-	NSString *localValue = [[NSBundle mainBundle] localizedStringForKey:key value:key table:nil];
-	if ((localValue == nil) || ([localValue isEqualToString:key] == YES))
+	NSString *localValue = [[NSBundle mainBundle] localizedStringForKey:key value:GVCFOUNDATION_NotLocalized table:nil];
+	if ((localValue == nil) || ([localValue isEqualToString:GVCFOUNDATION_NotLocalized] == YES))
 	{
 		gvc_UpdateMissingLocalizations( key, defValue );
 		localValue = GVC_SPRINTF(@"\u21E5 %@ \u21E4", defValue);
@@ -163,8 +166,8 @@ NSString *gvc_LocalizedStringWithDefaultValue(NSString *key, NSString *defValue)
 
 NSString *gvc_LocalizedFormat(NSString *key, NSString *fmt, ...)
 {
-	NSString *localFmt = [[NSBundle mainBundle] localizedStringForKey:key value:fmt table:nil];
-	if ((localFmt == nil) || ([localFmt isEqualToString:fmt] == YES))
+	NSString *localFmt = [[NSBundle mainBundle] localizedStringForKey:key value:GVCFOUNDATION_NotLocalized table:nil];
+	if ((localFmt == nil) || ([localFmt isEqualToString:GVCFOUNDATION_NotLocalized] == YES))
 	{
 		gvc_UpdateMissingLocalizations( key, fmt );
 		localFmt = GVC_SPRINTF(@"\u21E5 %@ \u21E4", fmt);
