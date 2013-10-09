@@ -156,7 +156,7 @@ NSString *gvc_LocalizedStringWithDefaultValue(NSString *key, NSString *defValue)
 	if ((localValue == nil) || ([localValue isEqualToString:key] == YES))
 	{
 		gvc_UpdateMissingLocalizations( key, defValue );
-		localValue = defValue;
+		localValue = GVC_SPRINTF(@"\u21E5 %@ \u21E4", defValue);
 	}
 	return localValue;
 }
@@ -167,7 +167,7 @@ NSString *gvc_LocalizedFormat(NSString *key, NSString *fmt, ...)
 	if ((localFmt == nil) || ([localFmt isEqualToString:fmt] == YES))
 	{
 		gvc_UpdateMissingLocalizations( key, fmt );
-		localFmt = fmt;
+		localFmt = GVC_SPRINTF(@"\u21E5 %@ \u21E4", fmt);
 	}
     
 	va_list argList;
