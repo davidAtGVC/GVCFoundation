@@ -46,7 +46,7 @@ GVC_SINGLETON_CLASS(GVCFoundation)
 @end
 
 @implementation GVCFoundationTests
-@synthesize origUUID;
+
 - (void)setUp
 {
     [super setUp];
@@ -68,10 +68,10 @@ GVC_SINGLETON_CLASS(GVCFoundation)
 	NSString *allocUUID = [allocInit uuid];
 
 	STAssertEquals(shared, allocInit, @"Shared instances should be equal" );
-	STAssertFalse(gvc_IsEmpty(origUUID), @"UUID should be initialized in init '%@'", origUUID);
+	STAssertFalse(gvc_IsEmpty([self origUUID]), @"UUID should be initialized in init '%@'", [self origUUID]);
 	STAssertFalse(gvc_IsEmpty(allocUUID), @"UUID should be initialized in init '%@'", allocUUID);
 	
-	STAssertTrue([origUUID isEqual:allocUUID], @"UUID's changed after alloc/init %@ = %@", origUUID, allocUUID);
+	STAssertTrue([[self origUUID] isEqual:allocUUID], @"UUID's changed after alloc/init %@ = %@", [self origUUID], allocUUID);
     STAssertTrue( [[shared uuid] isEqual:[allocInit uuid]], @"%@ = %@", [shared uuid], [allocInit uuid]);
 }
 
@@ -79,7 +79,7 @@ GVC_SINGLETON_CLASS(GVCFoundation)
 {
 	GVCFoundation *shared = [GVCFoundation sharedGVCFoundation];
 	STAssertFalse(gvc_IsEmpty([shared uuid]), @"UUID should be initialized in init '%@'", [shared uuid]);
-	STAssertTrue([origUUID isEqual:[shared uuid]], @"UUID's changed after scope change %@ = %@", origUUID, [shared uuid]);
+	STAssertTrue([[self origUUID] isEqual:[shared uuid]], @"UUID's changed after scope change %@ = %@", [self origUUID], [shared uuid]);
 
 }
 

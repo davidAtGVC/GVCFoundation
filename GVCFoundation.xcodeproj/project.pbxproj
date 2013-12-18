@@ -78,6 +78,7 @@
 		0510540D1507AF22002CDA3C /* GVCXMLParserDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0510540B1507AF22002CDA3C /* GVCXMLParserDelegate.m */; };
 		051054101507B1FE002CDA3C /* GVCXMLParseNodeDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0510540E1507B1FE002CDA3C /* GVCXMLParseNodeDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		051054111507B1FE002CDA3C /* GVCXMLParseNodeDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0510540F1507B1FE002CDA3C /* GVCXMLParseNodeDelegate.m */; };
+		0513A0C01822B1AC009A5CC3 /* GVCMacrosTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0513A0BF1822B1AC009A5CC3 /* GVCMacrosTest.m */; };
 		0515171F1512CD8C006258CD /* GVCRSSEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 0515171D1512CD8C006258CD /* GVCRSSEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		051517201512CD8C006258CD /* GVCRSSEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 0515171E1512CD8C006258CD /* GVCRSSEntry.m */; };
 		051517241512CDEF006258CD /* GVCRSSNode.h in Headers */ = {isa = PBXBuildFile; fileRef = 051517221512CDEF006258CD /* GVCRSSNode.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -380,6 +381,7 @@
 		0510540B1507AF22002CDA3C /* GVCXMLParserDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCXMLParserDelegate.m; sourceTree = "<group>"; };
 		0510540E1507B1FE002CDA3C /* GVCXMLParseNodeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCXMLParseNodeDelegate.h; sourceTree = "<group>"; };
 		0510540F1507B1FE002CDA3C /* GVCXMLParseNodeDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCXMLParseNodeDelegate.m; sourceTree = "<group>"; };
+		0513A0BF1822B1AC009A5CC3 /* GVCMacrosTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCMacrosTest.m; sourceTree = "<group>"; };
 		0515171D1512CD8C006258CD /* GVCRSSEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCRSSEntry.h; sourceTree = "<group>"; };
 		0515171E1512CD8C006258CD /* GVCRSSEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCRSSEntry.m; sourceTree = "<group>"; };
 		051517221512CDEF006258CD /* GVCRSSNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCRSSNode.h; sourceTree = "<group>"; };
@@ -935,6 +937,7 @@
 				0555FD08151C02B700E0A216 /* Network */,
 				0594FA5F15099D8700614D48 /* XML */,
 				056F5950147EE84D0076010D /* GVCFoundationTests.m */,
+				0513A0BF1822B1AC009A5CC3 /* GVCMacrosTest.m */,
 				056F59A7147EF4630076010D /* GVCFunctionsTest.m */,
 				05C2C7EA14852992004E04C0 /* GVCLogTest.m */,
 				056F594A147EE84D0076010D /* Supporting Files */,
@@ -1898,6 +1901,7 @@
 				0521B83A148E833C00FD75AF /* GVCDirectoryTest.m in Sources */,
 				05D7E66914919246007141C9 /* GVCCacheTest.m in Sources */,
 				0594FA6415099DBF00614D48 /* GVCISO8601DateFormatterTest.m in Sources */,
+				0513A0C01822B1AC009A5CC3 /* GVCMacrosTest.m in Sources */,
 				0594FA661509A1EB00614D48 /* CSVParserTest.m in Sources */,
 				0594FA6C1509AFB800614D48 /* GVCResourceTestCase.m in Sources */,
 				0567E0CD1509D3710039ABEF /* GVCXMLParseNodeDelegateTest.m in Sources */,

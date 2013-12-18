@@ -37,6 +37,14 @@ static inline BOOL gvc_IsEmpty(id thing)
 	|| ([thing respondsToSelector:@selector(count)]  && [(NSArray *)thing count] == 0);
 }
 
+#pragma mark - nil or isEqual test
+/** if canBeNil is true AND both objects are nil, then return true, else if both objects are NOT nil and the same class and isEqual: the return true */
+static inline BOOL gvc_IsEqual(BOOL canBeNil, id thing, id other)
+{
+    return ((canBeNil == YES) && (thing == nil) && (other == nil))
+    || ((thing != nil) && (other != nil) && ([thing isKindOfClass:[other class]] == YES) && ([thing isEqual:other] == YES));
+}
+
 #pragma mark - char constants
 #define GVC_DOMAIN_SEPARATOR ((char)'/')
 
