@@ -18,7 +18,8 @@ GVC_DEFINE_STR( GVCNetOperationErrorDomain )
 
 // Internal properties
 
-enum {
+typedef NS_ENUM(NSInteger, GVC_NetOperation_State)
+{
     GVC_NetOperation_State_INITIAL, 
     GVC_NetOperation_State_EXECUTING, 
     GVC_NetOperation_State_FINISHED

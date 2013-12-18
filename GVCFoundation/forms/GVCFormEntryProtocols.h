@@ -19,7 +19,7 @@
 		-- Form Value -> Question
  */
 
-typedef enum
+typedef NS_ENUM(NSInteger, GVCFormQuestion_Type)
 {
 	/** Form entry type where sub questions are conditional */
 	GVCFormQuestion_Type_CONDITIONAL,
@@ -38,7 +38,7 @@ typedef enum
 	/** question is a single or multiple choice selection */
 	GVCFormQuestion_Type_CHOICE,
 	GVCFormQuestion_Type_MULTI_CHOICE
-} GVCFormQuestion_Type;
+};
 
 
 @protocol GVCFormObject;

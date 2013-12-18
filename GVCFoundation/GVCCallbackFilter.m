@@ -17,11 +17,11 @@
 #import "NSDictionary+GVCFoundation.h"
 #import "NSDate+GVCFoundation.h"
 
-typedef enum {
+typedef NS_ENUM(NSInteger, GVCCallbackNodeType) {
 	GVCCallbackNodeType_ROOT,
 	GVCCallbackNodeType_STR,
 	GVCCallbackNodeType_MTH
-} GVCCallbackNodeType;
+};
 
 
 @interface  GVCCallbackNode  : NSObject 

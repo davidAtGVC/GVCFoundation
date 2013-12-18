@@ -14,15 +14,15 @@
 
 GVC_DEFINE_EXTERN_STR(GVCOperationErrorDomain);
 
-typedef enum
+typedef NS_ENUM(NSInteger, GVCOperation_ErrorType)
 {
 	/** enum value for operation cancelled as an error */
     GVCOperation_ErrorType_CANCELLED = 1,
 	/** enum value for operation error was unhandled */
 	GVCOperation_ErrorType_UNHANDLED
-} GVCOperation_ErrorType;
+};
 
-typedef enum
+typedef NS_ENUM(NSInteger, GVCOperation_Type)
 {
 	/** enum value for normal operation */
 	GVCOperation_Type_NORMAL = 0,
@@ -30,7 +30,7 @@ typedef enum
 	GVCOperation_Type_CORE_DATA,
 	/** enum value for network operation */
 	GVCOperation_Type_NETWORK
-} GVCOperation_Type;
+};
 
 /**
  * Operation block declaration is used for the start and finished operation blocks

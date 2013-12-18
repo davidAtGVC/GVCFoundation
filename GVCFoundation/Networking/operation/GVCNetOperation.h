@@ -11,13 +11,14 @@
 //
 // negative error codes are errors from the module
 
-enum {
+typedef NS_ENUM(NSInteger, HTTPOperationError)
+{
     kQHTTPOperationErrorResponseTooLarge = -1,
     kQHTTPOperationErrorOnOutputStream   = -2,
     kQHTTPOperationErrorBadContentType   = -3
 };
 
-typedef enum
+typedef NS_ENUM(NSInteger, GVC_NetOperation_ErrorType)
 {
     GVC_NetOperation_ErrorType_CONNECT_FAIL = -1,
     GVC_NetOperation_ErrorType_TIMED_OUT = -2,
@@ -32,7 +33,7 @@ typedef enum
 	GVC_NetOperation_ErrorType_OUTPUT_STREAM = -11,
 	GVC_NetOperation_ErrorType_UNHANDLED = -100
 	
-} GVC_NetOperation_ErrorType;
+};
 
 GVC_DEFINE_EXTERN_STR( GVCNetOperationErrorDomain )
 

@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "GVCOperation.h"
 
-typedef enum 
+typedef NS_ENUM(NSInteger, GVCFileOperation_Type)
 {
     GVCFileOperation_Type_CREATE = 1,
     GVCFileOperation_Type_COPY,
@@ -17,7 +17,7 @@ typedef enum
     GVCFileOperation_Type_APPEND,
     GVCFileOperation_Type_OVERWRITE,
 	GVCFileOperation_Type_UNKNOWN
-} GVCFileOperation_Type;
+};
 
 GVC_DEFINE_EXTERN_STR( GVCFileOperationErrorDomain )
 

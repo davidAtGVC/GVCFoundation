@@ -17,7 +17,8 @@
 #import "NSString+GVCFoundation.h"
 #import "NSData+GVCFoundation.h"
 
-typedef enum {
+typedef NS_ENUM(NSInteger, GVCMultipartResponseData_STATE)
+{
     GVCMultipartResponseData_STATE_not_found,
     GVCMultipartResponseData_STATE_initial,
     GVCMultipartResponseData_STATE_boundary,
@@ -25,7 +26,7 @@ typedef enum {
     GVCMultipartResponseData_STATE_in_body,
     GVCMultipartResponseData_STATE_at_end,
     GVCMultipartResponseData_STATE_failed
-} GVCMultipartResponseData_STATE;
+};
 
 @interface GVCMultipartResponseData ()
 @property (assign, nonatomic) GVCMultipartResponseData_STATE multipart_state;

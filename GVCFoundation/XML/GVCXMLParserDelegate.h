@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "GVCXMLParsingModel.h"
 
-typedef enum _GVCXMLParserDelegate_Status 
+typedef NS_ENUM(NSInteger, GVCXMLParserDelegate_Status)
 {
 	GVCXMLParserDelegate_Status_INITIAL,
 	GVCXMLParserDelegate_Status_PROCESSING,
@@ -16,7 +16,7 @@ typedef enum _GVCXMLParserDelegate_Status
 	GVCXMLParserDelegate_Status_FAILURE,
 	GVCXMLParserDelegate_Status_PARSE_FAILED,
 	GVCXMLParserDelegate_Status_VALIDATION_FAILED
-} GVCXMLParserDelegate_Status;
+};
 
 @class GVCStack;
 
