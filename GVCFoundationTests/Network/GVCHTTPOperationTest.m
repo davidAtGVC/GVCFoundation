@@ -6,7 +6,7 @@
  *
  */
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import <GVCFoundation/GVCFoundation.h>
 #import "GVCResourceTestCase.h"
 
@@ -45,7 +45,7 @@
 		GVCLogError(@"Received %d of %d", bytes, totalBytes);
 	}];
 	[apple_Op setDidFinishBlock:^(GVCOperation *operation) {
-		STAssertTrue(NO, @"Operation should have failed with error");
+		XCTAssertTrue(NO, @"Operation should have failed with error");
 		hasCalledBack = YES;
 	}];
 	[apple_Op setDidFailWithErrorBlock:^(GVCOperation *operation, NSError *err) {
@@ -92,7 +92,7 @@
 	
 	NSError *tstErr = nil;
 	GVCDirectory *testRoot = [[GVCDirectory TempDirectory] createSubdirectory:GVC_CLASSNAME(self) error:&tstErr];
-	STAssertNil(tstErr, @"Failed to create subdirectory");
+	XCTAssertNil(tstErr, @"Failed to create subdirectory");
 	
     [apple_Op setResponseData:[[GVCStreamResponseData alloc] initForFilename:[testRoot uniqueFilename]]];
 	[apple_Op setProgressBlock:^(NSUInteger bytes, NSUInteger totalBytes, NSString *status){

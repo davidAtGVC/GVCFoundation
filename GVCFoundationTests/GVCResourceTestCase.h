@@ -6,7 +6,7 @@
  *
  */
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import <Foundation/Foundation.h>
 #import <GVCFoundation/GVCFoundation.h>
 
@@ -25,7 +25,7 @@ GVC_DEFINE_EXTERN_STR(XML_patientProfile_response)
 GVC_DEFINE_EXTERN_STR(XML_sample_soap)
 
 
-@interface GVCResourceTestCase : SenTestCase
+@interface GVCResourceTestCase : XCTestCase
 - (NSString *)pathForResource:(NSString *)name extension:(NSString *)ext;
 @end
 

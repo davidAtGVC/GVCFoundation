@@ -6,7 +6,7 @@
  *
  */
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import <GVCFoundation/GVCFoundation.h>
 #import "GVCResourceTestCase.h"
 
@@ -53,12 +53,12 @@
 
 		NSError *tstErr = nil;
 		GVCDirectory *testRoot = [[GVCDirectory TempDirectory] createSubdirectory:GVC_CLASSNAME(self) error:&tstErr];
-		STAssertNil(tstErr, @"Failed to create subdirectory");
+		XCTAssertNil(tstErr, @"Failed to create subdirectory");
 		[data writeToFile:[testRoot fullpathForFile:@"apple.com.html"] atomically:YES];
 		hasCalledBack = YES;
 	}];
 	[apple_Op setDidFailWithErrorBlock:^(GVCOperation *operation, NSError *err) {
-		STAssertTrue(NO, @"Operation failed with error %@", err);
+		XCTAssertTrue(NO, @"Operation failed with error %@", err);
 		hasCalledBack = YES;
 	}];
 	[[self queue] addOperation:apple_Op];
@@ -105,12 +105,12 @@
 	[ftp_Op setDidFinishBlock:^(GVCOperation *operation) {
         GVCMemoryResponseData *respData = (GVCMemoryResponseData *)[(GVCNetOperation *)operation responseData];
 		NSData *data = [respData responseBody];
-		STAssertTrue(data == nil, @"Basic url connection should work, but no data");
+		XCTAssertTrue(data == nil, @"Basic url connection should work, but no data");
 		hasCalledBack = YES;
 	}];
 	[ftp_Op setDidFailWithErrorBlock:^(GVCOperation *operation, NSError *err) {
 		GVCLogError(@"Operation failed with error %@", err);
-		STAssertTrue(NO, @"Operation failed with %@", err);
+		XCTAssertTrue(NO, @"Operation failed with %@", err);
 		hasCalledBack = YES;
 	}];
 	[[self queue] addOperation:ftp_Op];
@@ -150,7 +150,7 @@
 	NSURL *url = [NSURL URLWithString:@"https://media.local."];
 	GVCNetOperation *url_Op = [[GVCNetOperation alloc] initForURL:url];
 	[url_Op setDidFinishBlock:^(GVCOperation *operation) {
-		STAssertTrue(NO, @"Operation should have failed with error");
+		XCTAssertTrue(NO, @"Operation should have failed with error");
 		hasCalledBack = YES;
 	}];
 	[url_Op setDidFailWithErrorBlock:^(GVCOperation *operation, NSError *err) {
@@ -203,15 +203,15 @@
 
 		NSError *tstErr = nil;
 		GVCDirectory *testRoot = [[GVCDirectory TempDirectory] createSubdirectory:GVC_CLASSNAME(self) error:&tstErr];
-		STAssertNil(tstErr, @"Failed to create subdirectory");
+		XCTAssertNil(tstErr, @"Failed to create subdirectory");
 
 		[data writeToFile:[testRoot fullpathForFile:@"media-local.html"] atomically:YES];
-		STAssertTrue(data != nil, @"Self signed server should have returned a page");
-		STAssertTrue([data length] > 10, @"Self signed server should have content");
+		XCTAssertTrue(data != nil, @"Self signed server should have returned a page");
+		XCTAssertTrue([data length] > 10, @"Self signed server should have content");
 		hasCalledBack = YES;
 	}];
 	[url_Op setDidFailWithErrorBlock:^(GVCOperation *operation, NSError *err) {
-		STAssertTrue(NO, @"Operation should have succeeded. %@", err);
+		XCTAssertTrue(NO, @"Operation should have succeeded. %@", err);
 		hasCalledBack = YES;
 	}];
 	

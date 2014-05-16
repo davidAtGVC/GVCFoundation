@@ -6,11 +6,11 @@
  *
  */
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import <GVCFoundation/GVCFoundation.h>
 
 #pragma mark - Interface declaration
-@interface NSDateAdditionsTest : SenTestCase
+@interface NSDateAdditionsTest : XCTestCase
 
 @end
 
@@ -42,7 +42,7 @@
 
 	NSDate *date_1 = [iso8601LongDateFormatter dateFromString:iso_1];
 
-	STAssertNotNil(date_1, @"Failed to parse date %@", iso_1);
+	XCTAssertNotNil(date_1, @"Failed to parse date %@", iso_1);
 	
 
 }
@@ -50,27 +50,27 @@
 - (void)testISOParser
 {
 	NSDate *testdate = [NSDate gvc_DateFromYear:2009 month:02 day:8 hour:0 minute:0 second:0];
-	STAssertNotNil( testdate, @"Failed to allocate date" );
+	XCTAssertNotNil( testdate, @"Failed to allocate date" );
 	
 	NSDate *shortFmt = [NSDate gvc_DateFromISO8601ShortValue:@"2009-02-08"];
-	STAssertEqualObjects( shortFmt, testdate, @"Date failed format" );
+	XCTAssertEqualObjects( shortFmt, testdate, @"Date failed format" );
 	
 	NSDate *longFmt = [NSDate gvc_DateFromISO8601:@"2009-02-08T00:00:00"];
-	STAssertEqualObjects( longFmt, testdate, @"Date failed format");
+	XCTAssertEqualObjects( longFmt, testdate, @"Date failed format");
 }
 
 - (void)testDateFormats
 {
     NSDate *testdate = [NSDate gvc_DateFromYear:2009 month:02 day:8 hour:0 minute:0 second:0];
-	STAssertNotNil( testdate, @"Failed to allocate date" );
+	XCTAssertNotNil( testdate, @"Failed to allocate date" );
 
     NSString *formatted = [testdate gvc_FormattedStringValue:@"dd/MM/yy"];
-	STAssertNotNil( formatted, @"Failed to format date" );
-    STAssertEqualObjects( formatted, @"08/02/09", @"Formatted date is wrong" );
+	XCTAssertNotNil( formatted, @"Failed to format date" );
+    XCTAssertEqualObjects( formatted, @"08/02/09", @"Formatted date is wrong" );
     
     NSDate *reverse = [NSDate gvc_DateFromString:@"08/02/09" format:@"dd/MM/yy"];
-	STAssertNotNil( reverse, @"Failed to reverse format date" );
-    STAssertEqualObjects( reverse, testdate, @"reverse date is wrong" );
+	XCTAssertNotNil( reverse, @"Failed to reverse format date" );
+    XCTAssertEqualObjects( reverse, testdate, @"reverse date is wrong" );
 
 }
 
@@ -89,8 +89,8 @@
 		NSNumber *number = [testDurations objectForKey:iso];
 		NSTimeInterval interval = [NSDate gvc_iso8601DurationInterval:iso];
 		
-		STAssertTrue(interval > 0, @"Time interval for %@ should be greater than 0", iso);
-		STAssertTrue([number doubleValue] == interval, @"Parsed value does not match %ld != %ld", [number doubleValue], (long)interval);
+		XCTAssertTrue(interval > 0, @"Time interval for %@ should be greater than 0", iso);
+		XCTAssertTrue([number doubleValue] == interval, @"Parsed value does not match %ld != %ld", [number doubleValue], (long)interval);
 	}
 }
 
@@ -114,8 +114,8 @@
 		NSDate *testDate = [testDurations objectForKey:iso];
 		NSString *format = [referenceDate gvc_iso8601DurationFromDate:testDate];
 		
-		STAssertNotNil(format, @"Time dit not generate format");
-		STAssertEqualObjects(iso, format, @"Formated value does not match '%@' != '%@'", iso, format);
+		XCTAssertNotNil(format, @"Time dit not generate format");
+		XCTAssertEqualObjects(iso, format, @"Formated value does not match '%@' != '%@'", iso, format);
 	}
 }
 
@@ -137,8 +137,8 @@
 		NSNumber *number = [testDurations objectForKey:iso];
 		NSString *format = [NSDate gvc_iso8601DurationFromInterval:[number doubleValue]];
 		
-		STAssertNotNil(format, @"Time dit not generate format");
-		STAssertEqualObjects(iso, format, @"Formated value does not match '%@' != '%@'", iso, format);
+		XCTAssertNotNil(format, @"Time dit not generate format");
+		XCTAssertEqualObjects(iso, format, @"Formated value does not match '%@' != '%@'", iso, format);
 	}
 }
 

@@ -6,11 +6,11 @@
  *
  */
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import <GVCFoundation/GVCFoundation.h>
 
 #pragma mark - Interface declaration
-@interface GVCFunctionsTest : SenTestCase
+@interface GVCFunctionsTest : XCTestCase
 
 @end
 
@@ -34,13 +34,13 @@
 {
 	NSString *testStr = nil;
 	
-	STAssertTrue(gvc_IsEmpty(testStr), @"nil string should be detected as IsEmpty = true");
+	XCTAssertTrue(gvc_IsEmpty(testStr), @"nil string should be detected as IsEmpty = true");
 	
 	testStr = [NSString gvc_EmptyString];
-	STAssertTrue(gvc_IsEmpty(testStr), @"Empty string should be detected as IsEmpty = true");
+	XCTAssertTrue(gvc_IsEmpty(testStr), @"Empty string should be detected as IsEmpty = true");
 	
 	testStr = @"NotEmpty";
-	STAssertFalse(gvc_IsEmpty(testStr), @"String should be detected as '%@'", testStr);
+	XCTAssertFalse(gvc_IsEmpty(testStr), @"String should be detected as '%@'", testStr);
 }
 
 - (void)testgcv_IsEqualCollection
@@ -49,8 +49,8 @@
 	NSArray *arrayB = [NSArray arrayWithObjects:@"D", @"CC", @"AAA", @"DDDD", nil];
 	NSArray *arrayC = [NSArray arrayWithObjects:@"D", @"CC", @"XXX", @"DDDD", nil];
 
-	STAssertTrue(gcv_IsEqualCollection(arrayA, arrayB), @"Arrays should be equal %@ != %@", arrayA, arrayB);
-	STAssertFalse(gcv_IsEqualCollection(arrayA, arrayC), @"Arrays should not be equal %@ != %@", arrayA, arrayC);
+	XCTAssertTrue(gcv_IsEqualCollection(arrayA, arrayB), @"Arrays should be equal %@ != %@", arrayA, arrayB);
+	XCTAssertFalse(gcv_IsEqualCollection(arrayA, arrayC), @"Arrays should not be equal %@ != %@", arrayA, arrayC);
 	
 }
 @end

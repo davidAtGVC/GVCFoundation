@@ -100,14 +100,14 @@ typedef enum {
         {
             [self setCurrentResponseData:[[GVCMemoryResponseData alloc] init]];
         }
-        success = [[self currentResponseData] openData:NSURLResponseUnknownLength error:err];
+        success = [[self currentResponseData] openData:0 error:err];
         [[self multipart_responses] addObject:[self currentResponseData]];
     }
 
     return success;
 }
 
-- (BOOL)openData:(long long)expectedLength error:(NSError **)err
+- (BOOL)openData:(NSInteger)expectedLength error:(NSError **)err
 {
     BOOL success = [super openData:expectedLength error:err];
     GVC_ASSERT_NOT_NIL([self httpHeaders]);

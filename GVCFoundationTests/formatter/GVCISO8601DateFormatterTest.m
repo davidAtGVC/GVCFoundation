@@ -6,11 +6,11 @@
  *
  */
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import <GVCFoundation/GVCFoundation.h>
 
 #pragma mark - Interface declaration
-@interface GVCISO8601DateFormatterTest : SenTestCase
+@interface GVCISO8601DateFormatterTest : XCTestCase
 @property (strong, nonatomic) NSDate *currentDate;
 @property (strong, nonatomic) NSDate *pastDate;
 @property (strong, nonatomic) NSDate *futureDate;
@@ -61,7 +61,7 @@
 	[formatter setFormat:GVCISO8601DateFormatter_Calendar];
 	NSString *iso_1 = @"2012-06-26T07:37:05Z";
 	NSDate *date_1 = [formatter dateFromString:iso_1];
-	STAssertNotNil(date_1, @"Failed to parse date %@", date_1);
+	XCTAssertNotNil(date_1, @"Failed to parse date %@", date_1);
 }
 
 - (void)testFullMilisecParse
@@ -70,7 +70,7 @@
 	[formatter setFormat:GVCISO8601DateFormatter_Calendar];
 	NSString *iso_1 = @"2012-06-26T07:37:05.444Z";
 	NSDate *date_1 = [formatter dateFromString:iso_1];
-	STAssertNotNil(date_1, @"Failed to parse date %@", date_1);
+	XCTAssertNotNil(date_1, @"Failed to parse date %@", date_1);
 }
 
 - (void)testDateAsLongISOFormat
@@ -81,7 +81,7 @@
 	
 	NSDate *testDate = [NSDate gvc_DateFromYear:2000 month:10 day:5 hour:12 minute:6 second:3];
 	NSString *iso_1 = [formatter stringFromDate:testDate];
-	STAssertNotNil(iso_1, @"Failed to generate date %@", testDate);
+	XCTAssertNotNil(iso_1, @"Failed to generate date %@", testDate);
 //	STAssertEqualObjects(@"2000-10-05T12:06:03+119304128", iso_1, @"Generated dates do not match");
 }
 

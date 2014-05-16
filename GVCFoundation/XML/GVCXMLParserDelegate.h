@@ -42,7 +42,7 @@ typedef enum _GVCXMLParserDelegate_Status
 
 - (BOOL)isReady;
 
-@property (assign, nonatomic, readonly) GVCXMLParserDelegate_Status status;
+@property (assign, nonatomic) GVCXMLParserDelegate_Status status;
 @property (strong, nonatomic) NSError *xmlError;
 
 @property (strong, nonatomic) NSString *xmlFilename;

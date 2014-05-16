@@ -141,6 +141,7 @@
  */
 - (NSArray *)entryArray
 {
+    _entryArray = nil;
 	return [self questionArray];
 }
 

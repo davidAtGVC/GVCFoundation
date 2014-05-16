@@ -6,11 +6,11 @@
  *
  */
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import <GVCFoundation/GVCFoundation.h>
 
 #pragma mark - Interface declaration
-@interface NSDictionaryAdditionsTest : SenTestCase
+@interface NSDictionaryAdditionsTest : XCTestCase
 
 @end
 
@@ -46,7 +46,7 @@
     NSArray *sorted = @[ @"1", @"a", @"aaa", @"bbb", @"cc", @"ddd", @"eae" ];
 
     NSArray *dictSort = [unsorted gvc_sortedKeys];
-    STAssertTrue(gcv_IsEqualCollection( dictSort, sorted), @"'%@' != sorted '%@'", dictSort, sorted );
+    XCTAssertTrue(gcv_IsEqualCollection( dictSort, sorted), @"'%@' != sorted '%@'", dictSort, sorted );
 }
 
 @end

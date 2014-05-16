@@ -47,7 +47,7 @@
         
         [self setResponseData:[[GVCMultipartResponseData alloc] init]];
         [(GVCMultipartResponseData *)[self responseData] parseResponseHeaders:headers];
-        [(GVCMultipartResponseData *)[self responseData] openData:-1 error:nil];
+        [(GVCMultipartResponseData *)[self responseData] openData:0 error:nil];
 
         [(GVCMultipartResponseData *)[self responseData] addReponsePart:[[NSData alloc] initWithContentsOfFile:responseFilePath1] withHeaders:[NSDictionary dictionaryWithObject:@"application/xop+xml" forKey:@"content-type"]];
 

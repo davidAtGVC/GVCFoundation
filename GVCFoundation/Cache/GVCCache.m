@@ -279,12 +279,12 @@ GVC_SINGLETON_CLASS(GVCCache)
     [[NSFileManager defaultManager] removeItemAtPath:[self cacheDataPath] error:nil];
 }
 
-- (unsigned long long)dataSize
+- (NSUInteger)dataSize
 {
-    unsigned long long size = 0L;
+    NSUInteger size = 0L;
     if ( cacheData != nil )
     {
-        size = (unsigned long long)[cacheData length];
+        size = (NSUInteger)[cacheData length];
     }
     else
     {

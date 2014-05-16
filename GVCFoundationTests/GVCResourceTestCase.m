@@ -35,13 +35,13 @@ GVC_DEFINE_STRVALUE(XML_sample_soap, sample_soap)
 
 - (NSString *)pathForResource:(NSString *)name extension:(NSString *)ext
 {
-	STAssertNotNil(name, @"Resource name cannot be nil");
-	STAssertNotNil(ext, @"Resource extension cannot be nil");
+	XCTAssertNotNil(name, @"Resource name cannot be nil");
+	XCTAssertNotNil(ext, @"Resource extension cannot be nil");
 	
 	NSString *file = [[NSBundle bundleForClass:[self class]] pathForResource:name ofType:ext];
 	
-	STAssertNotNil(file, @"Unable to locate %@.%@ file", name, ext);
-	STAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:file], @"File does not exist %@", file);
+	XCTAssertNotNil(file, @"Unable to locate %@.%@ file", name, ext);
+	XCTAssertTrue([[NSFileManager defaultManager] fileExistsAtPath:file], @"File does not exist %@", file);
 	
 	return file;
 }

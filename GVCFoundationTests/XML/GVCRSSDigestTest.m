@@ -6,7 +6,7 @@
  *
  */
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import <GVCFoundation/GVCFoundation.h>
 #import "GVCResourceTestCase.h"
 
@@ -36,12 +36,12 @@
 	//[[GVCLogger sharedGVCLogger] setLoggerLevel:GVCLoggerLevel_INFO];
 	NSError *tstErr = nil;
 	GVCDirectory *testRoot = [[GVCDirectory TempDirectory] createSubdirectory:GVC_CLASSNAME(self) error:&tstErr];
-	STAssertNil(tstErr, @"Failed to create subdirectory");
+	XCTAssertNil(tstErr, @"Failed to create subdirectory");
 
 	GVCRSSDigester *parser = [[GVCRSSDigester alloc] init];
 	[parser setXmlFilename:[self pathForResource:file extension:@"xml"]];
 	GVCXMLParserDelegate_Status stat = [parser parse];
-	STAssertTrue(stat == GVCXMLParserDelegate_Status_SUCCESS, @"%@ Parse status = %d", file, stat);
+	XCTAssertTrue(stat == GVCXMLParserDelegate_Status_SUCCESS, @"%@ Parse status = %d", file, stat);
 	
 	GVCRSSFeed *feed = [parser digestValueForPath:root];
 	GVCFileWriter *writer = [GVCFileWriter writerForFilename:[testRoot fullpathForFile:file]];

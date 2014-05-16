@@ -76,7 +76,7 @@
 
 - (SEL)findBestSelectorForMethodPattern:(NSString *)methodPattern class:(Class)clazz bestCandidate:(SEL)bestSelector
 {
-	NSUInteger count = 0;
+	unsigned int count = 0;
     Method *methods = class_copyMethodList(clazz, &count);
     
     for (NSUInteger i = 0; i < count; i++)

@@ -139,7 +139,6 @@
 		056874F81582A87E00031B5A /* GVCDemoDelayedOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 056874F61582A87E00031B5A /* GVCDemoDelayedOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		056874F91582A87E00031B5A /* GVCDemoDelayedOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 056874F71582A87E00031B5A /* GVCDemoDelayedOperation.m */; };
 		056F5934147EE84D0076010D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056F5933147EE84D0076010D /* Foundation.framework */; };
-		056F5942147EE84D0076010D /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056F5941147EE84D0076010D /* SenTestingKit.framework */; };
 		056F5945147EE84D0076010D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 056F5933147EE84D0076010D /* Foundation.framework */; };
 		056F5948147EE84D0076010D /* libGVCFoundation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 056F5930147EE84D0076010D /* libGVCFoundation.a */; };
 		056F594E147EE84D0076010D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 056F594C147EE84D0076010D /* InfoPlist.strings */; };
@@ -444,8 +443,7 @@
 		056F5933147EE84D0076010D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		056F5937147EE84D0076010D /* GVCFoundation-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GVCFoundation-Prefix.pch"; sourceTree = "<group>"; };
 		056F5938147EE84D0076010D /* GVCFoundation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GVCFoundation.h; sourceTree = "<group>"; };
-		056F5940147EE84D0076010D /* GVCFoundationTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GVCFoundationTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		056F5941147EE84D0076010D /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		056F5940147EE84D0076010D /* GVCFoundationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GVCFoundationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		056F594B147EE84D0076010D /* GVCFoundationTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GVCFoundationTests-Info.plist"; sourceTree = "<group>"; };
 		056F594D147EE84D0076010D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		056F5950147EE84D0076010D /* GVCFoundationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GVCFoundationTests.m; sourceTree = "<group>"; };
@@ -678,7 +676,6 @@
 				0543E61417846778007466A3 /* SystemConfiguration.framework in Frameworks */,
 				055E72731594F38300C8DCC4 /* Security.framework in Frameworks */,
 				05CEF7DC153C647F006A3E5F /* CFNetwork.framework in Frameworks */,
-				056F5942147EE84D0076010D /* SenTestingKit.framework in Frameworks */,
 				056F5945147EE84D0076010D /* Foundation.framework in Frameworks */,
 				056F5948147EE84D0076010D /* libGVCFoundation.a in Frameworks */,
 			);
@@ -853,7 +850,7 @@
 			isa = PBXGroup;
 			children = (
 				056F5930147EE84D0076010D /* libGVCFoundation.a */,
-				056F5940147EE84D0076010D /* GVCFoundationTests.octest */,
+				056F5940147EE84D0076010D /* GVCFoundationTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -865,7 +862,6 @@
 				055E72711594F34600C8DCC4 /* Security.framework */,
 				05CEF7DB153C647F006A3E5F /* CFNetwork.framework */,
 				056F5933147EE84D0076010D /* Foundation.framework */,
-				056F5941147EE84D0076010D /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1629,8 +1625,8 @@
 			);
 			name = GVCFoundationTests;
 			productName = GVCFoundationTests;
-			productReference = 056F5940147EE84D0076010D /* GVCFoundationTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productReference = 056F5940147EE84D0076010D /* GVCFoundationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -1638,6 +1634,7 @@
 		056F5927147EE84C0076010D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastTestingUpgradeCheck = 0510;
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Global Village Consulting";
 			};
@@ -1992,7 +1989,7 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GVCFoundation/GVCFoundation-Prefix.pch";
@@ -2004,7 +2001,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
-				WRAPPER_EXTENSION = octest;
 			};
 			name = DebugTest;
 		};
@@ -2118,7 +2114,7 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GVCFoundation/GVCFoundation-Prefix.pch";
@@ -2130,7 +2126,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -2139,7 +2134,7 @@
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GVCFoundation/GVCFoundation-Prefix.pch";
@@ -2151,7 +2146,6 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};

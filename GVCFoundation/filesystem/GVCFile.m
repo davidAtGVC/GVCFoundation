@@ -76,7 +76,7 @@
 	return [[NSFileManager defaultManager] attributesOfItemAtPath:[self fullpath] error:nil];
 }
 
-- (unsigned long long)fileSize
+- (NSUInteger)fileSize
 {
 	return [[self attributes] fileSize];
 }
