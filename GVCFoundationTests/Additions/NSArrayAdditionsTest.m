@@ -62,7 +62,7 @@
         total += [(NSString *)item length];
     };
     [[self alphaArray] gvc_performOnEach:each];
-	XCTAssertTrue(total == 15, @"Total length expected was 15, result was %d", total );
+	XCTAssertTrue(total == 15, @"Total length expected was 15, result was %@", @(total) );
 }
 
 

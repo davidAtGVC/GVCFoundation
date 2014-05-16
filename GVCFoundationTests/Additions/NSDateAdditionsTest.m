@@ -90,7 +90,7 @@
 		NSTimeInterval interval = [NSDate gvc_iso8601DurationInterval:iso];
 		
 		XCTAssertTrue(interval > 0, @"Time interval for %@ should be greater than 0", iso);
-		XCTAssertTrue([number doubleValue] == interval, @"Parsed value does not match %ld != %ld", [number doubleValue], (long)interval);
+		XCTAssertTrue([number doubleValue] == interval, @"Parsed value does not match %@ != %@", number, @(interval));
 	}
 }
 

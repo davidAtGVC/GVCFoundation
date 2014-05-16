@@ -52,7 +52,7 @@
 	GVCXMLDigester *parser = [GVCXMLDigester digesterWithConfiguration:[self pathForResource:XML_Agent_Digest extension:@"xml"]];
 	[parser setXmlFilename:[self pathForResource:XML_Agent_OIDs extension:@"xml"]];
 	GVCXMLParserDelegate_Status stat = [parser parse];
-	XCTAssertTrue(stat == GVCXMLParserDelegate_Status_SUCCESS, @"Parse status = %d", stat);
+	XCTAssertTrue(stat == GVCXMLParserDelegate_Status_SUCCESS, @"Parse status = %@", @(stat));
 	
     NSObject *agents = [parser digestValueForPath:@"agents"];
 	GVCLogError(@"Agents %@", agents);

@@ -26,14 +26,14 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
-      buildConfiguration = "Debug">
+      buildConfiguration = "DebugTest">
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "056F593F147EE84D0076010D"
-               BuildableName = "GVCFoundationTests.octest"
+               BuildableName = "GVCFoundationTests.xctest"
                BlueprintName = "GVCFoundationTests"
                ReferencedContainer = "container:GVCFoundation.xcodeproj">
             </BuildableReference>

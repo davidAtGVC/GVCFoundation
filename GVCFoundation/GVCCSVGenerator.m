@@ -105,7 +105,7 @@
 	if ( [[self writer] writerStatus] < GVC_IO_Status_OPEN )
 		[self open];
 
-	GVC_ASSERT( [[self writer] writerStatus] == GVC_IO_Status_OPEN, @"Writer status should be open is %d", [[self writer] writerStatus] );
+	GVC_ASSERT( [[self writer] writerStatus] == GVC_IO_Status_OPEN, @"Writer status should be open is %@", @([[self writer] writerStatus]) );
 
 	NSMutableString *buffer = [[NSMutableString alloc] init];
 	NSUInteger fieldNumber = [self currentField];

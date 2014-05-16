@@ -39,7 +39,7 @@
 	GVCXMLParseNodeDelegate *parser = [[GVCXMLParseNodeDelegate alloc] init];
 	[parser setXmlFilename:[self pathForResource:XML_Agent_OIDs extension:@"xml"]];
 	GVCXMLParserDelegate_Status stat = [parser parse];
-	XCTAssertTrue(stat == GVCXMLParserDelegate_Status_SUCCESS, @"Parse status = %d", stat);
+	XCTAssertTrue(stat == GVCXMLParserDelegate_Status_SUCCESS, @"Parse status = %@", @(stat));
 	
 	GVCXMLDocument *doc = [parser document];
 	GVCLogError(@"Document %@", doc);

@@ -291,7 +291,7 @@ typedef NS_ENUM(NSInteger, GVC_NetOperation_State)
     if ([[self responseData] hasDataReceived] == NO) 
 	{
 		NSError *err = nil;
-		if ( [[self responseData] openData:[[self lastResponse] expectedContentLength] error:&err] == NO )
+		if ( [[self responseData] openData:(NSInteger)[[self lastResponse] expectedContentLength] error:&err] == NO )
 		{
 			[self operationDidFailWithError:err];
 			success = NO;

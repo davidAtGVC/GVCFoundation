@@ -24,7 +24,7 @@
 	NSString *empty = [NSString gvc_EmptyString];
 
 	XCTAssertNotNil(empty, @"Empty string should not be nil" );
-	XCTAssertEqual([empty length], (NSUInteger)0, @"Empty string should be length 0 not %d", [empty length] );
+	XCTAssertEqual([empty length], 0U, @"Empty string should be length 0 not %@", @([empty length]) );
 }
 
 - (void)testUUID

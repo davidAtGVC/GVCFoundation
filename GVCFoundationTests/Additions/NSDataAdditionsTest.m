@@ -38,7 +38,7 @@ void printfBytes(const char *name, const unsigned char *bytes, NSUInteger length
         {
             printf("%c", ((isspace(name[i]) == YES) ? '_' : name[i] ));
         }
-        printf("[%d] = {\n\t", length);
+        printf("[%ld] = {\n\t", (unsigned long)length);
         for (NSUInteger i = 0; i < length; i++)
         {
             printf("0x%02X", (unsigned char)bytes[i]);
@@ -196,7 +196,7 @@ void printfBytes(const char *name, const unsigned char *bytes, NSUInteger length
     XCTAssertNotNil(data, @"No Data");
     
     unsigned char charsmd5_cars[16] = {0x5E,0x06,0x9C,0xD0,0xEA,0x1F,0xBF,0xC2,0xFD,0x71,0x75,0xE4,0xA9,0x5E,0x02,0x0A};
-    NSData *correctMD5_cars = [NSData dataWithBytesNoCopy:charsmd5_cars length:16];
+    NSData *correctMD5_cars = [NSData dataWithBytesNoCopy:charsmd5_cars length:16 freeWhenDone:NO];
     NSData *carsMd5 = [data gvc_md5Digest];
 	XCTAssertNotNil(carsMd5, @"Faild to decode");
 	XCTAssertEqualObjects(correctMD5_cars, carsMd5, @"MD5 failed");
@@ -206,7 +206,7 @@ void printfBytes(const char *name, const unsigned char *bytes, NSUInteger length
     XCTAssertNotNil(data, @"No Data");
     
     unsigned char charsmd5_vocab[16] = {0xDC,0x5B,0xDE,0xAD,0x69,0xB9,0x30,0x5D,0xAD,0x8A,0x38,0x37,0x8D,0xA3,0x51,0x0F};
-    NSData *correctMD5_vocab = [NSData dataWithBytesNoCopy:charsmd5_vocab length:16];
+    NSData *correctMD5_vocab = [NSData dataWithBytesNoCopy:charsmd5_vocab length:16 freeWhenDone:NO];
     NSData *vocabMd5 = [data gvc_md5Digest];
 	XCTAssertNotNil(vocabMd5, @"Faild to decode");
 	XCTAssertEqualObjects(correctMD5_vocab, vocabMd5, @"MD5 failed");
@@ -222,7 +222,7 @@ void printfBytes(const char *name, const unsigned char *bytes, NSUInteger length
         0xF6, 0x58, 0x8F, 0x84, 0xD9, 0xD1, 0x59, 0x19, 0x29, 0x30, 0x40, 0xCD, 0x2B, 0xFF, 0xA5, 0x34,
         0x0E, 0x49, 0x93, 0x6B
     };
-    NSData *correctSHA1_cars = [NSData dataWithBytesNoCopy:charsSHA1_cars length:20];
+    NSData *correctSHA1_cars = [NSData dataWithBytesNoCopy:charsSHA1_cars length:20 freeWhenDone:NO];
     NSData *carsSHA1 = [data gvc_sha1Digest];
 	XCTAssertNotNil(carsSHA1, @"Faild to decode");
 	XCTAssertEqualObjects(correctSHA1_cars, carsSHA1, @"SHA1 failed");
@@ -235,7 +235,7 @@ void printfBytes(const char *name, const unsigned char *bytes, NSUInteger length
         0x84, 0x71, 0x54, 0xBD, 0xA5, 0xFD, 0x54, 0x9C, 0xCF, 0xD6, 0x6D, 0xC8, 0xFF, 0x93, 0x70, 0x07,
         0xDC, 0xC6, 0xE2, 0xC3
     };
-    NSData *correctSHA1_vocab = [NSData dataWithBytesNoCopy:charsSHA1_vocab length:20];
+    NSData *correctSHA1_vocab = [NSData dataWithBytesNoCopy:charsSHA1_vocab length:20 freeWhenDone:NO];
     NSData *vocabSHA1 = [data gvc_sha1Digest];
 	XCTAssertNotNil(vocabSHA1, @"Faild to decode");
 	XCTAssertEqualObjects(correctSHA1_vocab, vocabSHA1, @"SHA1 failed");

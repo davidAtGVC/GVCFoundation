@@ -85,6 +85,7 @@
 		051517281512D235006258CD /* GVCRSSText.h in Headers */ = {isa = PBXBuildFile; fileRef = 051517261512D235006258CD /* GVCRSSText.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		051517291512D235006258CD /* GVCRSSText.m in Sources */ = {isa = PBXBuildFile; fileRef = 051517271512D235006258CD /* GVCRSSText.m */; };
 		051C88E515613C2C00A4D7F6 /* GVCHeaderSetTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 051C88E415613C2C00A4D7F6 /* GVCHeaderSetTest.m */; };
+		051FBE5F19269A28008BF5D2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 051FBE5E19269A28008BF5D2 /* XCTest.framework */; };
 		0521B837148E73C800FD75AF /* NSFileManager+GVCFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 0521B835148E73C800FD75AF /* NSFileManager+GVCFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0521B838148E73C800FD75AF /* NSFileManager+GVCFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0521B836148E73C800FD75AF /* NSFileManager+GVCFoundation.m */; };
 		0521B83A148E833C00FD75AF /* GVCDirectoryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0521B839148E833C00FD75AF /* GVCDirectoryTest.m */; };
@@ -174,7 +175,6 @@
 		057380011728465D00F13971 /* GVCXMLFormQuestionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05737FF21728465D00F13971 /* GVCXMLFormQuestionModel.m */; };
 		057380021728465D00F13971 /* GVCXMLFormSectionModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 05737FF31728465D00F13971 /* GVCXMLFormSectionModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		057380031728465D00F13971 /* GVCXMLFormSectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 05737FF41728465D00F13971 /* GVCXMLFormSectionModel.m */; };
-		057408F317FB86510069576B /* GVCFoundationTestCaseObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 057408F217FB86510069576B /* GVCFoundationTestCaseObserver.m */; };
 		057543E71525475A00160469 /* GVCStopwatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 057543E51525475A00160469 /* GVCStopwatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		057543E81525475A00160469 /* GVCStopwatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 057543E61525475A00160469 /* GVCStopwatch.m */; };
 		057543EB15254C0C00160469 /* itunesTop300.xml in Resources */ = {isa = PBXBuildFile; fileRef = 057543EA15254C0C00160469 /* itunesTop300.xml */; };
@@ -386,6 +386,7 @@
 		051517261512D235006258CD /* GVCRSSText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCRSSText.h; sourceTree = "<group>"; };
 		051517271512D235006258CD /* GVCRSSText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCRSSText.m; sourceTree = "<group>"; };
 		051C88E415613C2C00A4D7F6 /* GVCHeaderSetTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCHeaderSetTest.m; sourceTree = "<group>"; };
+		051FBE5E19269A28008BF5D2 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		0521B835148E73C800FD75AF /* NSFileManager+GVCFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+GVCFoundation.h"; sourceTree = "<group>"; };
 		0521B836148E73C800FD75AF /* NSFileManager+GVCFoundation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+GVCFoundation.m"; sourceTree = "<group>"; };
 		0521B839148E833C00FD75AF /* GVCDirectoryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCDirectoryTest.m; sourceTree = "<group>"; };
@@ -505,7 +506,6 @@
 		05737FF21728465D00F13971 /* GVCXMLFormQuestionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCXMLFormQuestionModel.m; sourceTree = "<group>"; };
 		05737FF31728465D00F13971 /* GVCXMLFormSectionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCXMLFormSectionModel.h; sourceTree = "<group>"; };
 		05737FF41728465D00F13971 /* GVCXMLFormSectionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCXMLFormSectionModel.m; sourceTree = "<group>"; };
-		057408F217FB86510069576B /* GVCFoundationTestCaseObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCFoundationTestCaseObserver.m; sourceTree = "<group>"; };
 		057408F417FB8FCD0069576B /* GCOVR_exportenv.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = GCOVR_exportenv.sh; sourceTree = "<group>"; };
 		057543E51525475A00160469 /* GVCStopwatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GVCStopwatch.h; sourceTree = "<group>"; };
 		057543E61525475A00160469 /* GVCStopwatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GVCStopwatch.m; sourceTree = "<group>"; };
@@ -673,6 +673,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				051FBE5F19269A28008BF5D2 /* XCTest.framework in Frameworks */,
 				0543E61417846778007466A3 /* SystemConfiguration.framework in Frameworks */,
 				055E72731594F38300C8DCC4 /* Security.framework in Frameworks */,
 				05CEF7DC153C647F006A3E5F /* CFNetwork.framework in Frameworks */,
@@ -858,6 +859,7 @@
 		056F5932147EE84D0076010D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				051FBE5E19269A28008BF5D2 /* XCTest.framework */,
 				0543E61217846714007466A3 /* SystemConfiguration.framework */,
 				055E72711594F34600C8DCC4 /* Security.framework */,
 				05CEF7DB153C647F006A3E5F /* CFNetwork.framework */,
@@ -923,7 +925,6 @@
 		056F5949147EE84D0076010D /* GVCFoundationTests */ = {
 			isa = PBXGroup;
 			children = (
-				057408F217FB86510069576B /* GVCFoundationTestCaseObserver.m */,
 				056F5982147EEDB20076010D /* Additions */,
 				0594FA5D15099D8700614D48 /* formatter */,
 				0594FA5E15099D8700614D48 /* Parsing */,
@@ -1909,7 +1910,6 @@
 				051C88E515613C2C00A4D7F6 /* GVCHeaderSetTest.m in Sources */,
 				054472C11599D70000DF90BA /* NSDateAdditionsTest.m in Sources */,
 				052FB8C416D5C65C00BB849C /* GVCXMLRecursiveParserDelegateTest.m in Sources */,
-				057408F317FB86510069576B /* GVCFoundationTestCaseObserver.m in Sources */,
 				05FCE3EF17B96ED9009F33AF /* GVCCallbackFilterTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1990,6 +1990,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GVCFoundation/GVCFoundation-Prefix.pch";
@@ -2115,6 +2116,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GVCFoundation/GVCFoundation-Prefix.pch";
@@ -2135,6 +2137,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GVCFoundation/GVCFoundation-Prefix.pch";

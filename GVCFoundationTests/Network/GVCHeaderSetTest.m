@@ -241,7 +241,7 @@ static NSDictionary *rawHeaders = nil;
     NSData *data = [NSData dataWithContentsOfFile:responseFile];
     
     NSError *respError = nil;
-    XCTAssertTrue([responseData openData:[data length] error:&respError], @"Open Data failed %@", respError );
+    XCTAssertTrue([responseData openData:-1 error:&respError], @"Open Data failed %@", respError );
     
     NSUInteger batchSize = [data length] / 10;
     NSRange position = NSMakeRange(0, batchSize);

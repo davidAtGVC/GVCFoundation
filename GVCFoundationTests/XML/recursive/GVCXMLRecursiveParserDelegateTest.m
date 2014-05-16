@@ -41,7 +41,7 @@
 	[parser setXmlDocumentClassName:NSStringFromClass([GVCSOAPDocument class])];
 
 	GVCXMLParserDelegate_Status stat = [parser parse];
-	XCTAssertTrue(stat == GVCXMLParserDelegate_Status_SUCCESS, @"Parse status = %d", stat);
+	XCTAssertTrue(stat == GVCXMLParserDelegate_Status_SUCCESS, @"Parse status = %@", @(stat));
 	
 	XCTAssertTrue([[parser document] isKindOfClass:[GVCSOAPDocument class]], @"Document is wrong class %@", GVC_CLASSNAME([parser document]));
 	GVCSOAPDocument *doc = (GVCSOAPDocument *)[parser document];
@@ -55,7 +55,7 @@
 	GVCSOAPBody *body = [envelope body];
 
 	XCTAssertNotNil([body contentArray], @"Body has no content");
-	XCTAssertTrue([[body contentArray] count] == 1, @"Body should have 1 content record not %d", [[body contentArray] count]);
+	XCTAssertTrue([[body contentArray] count] == 1, @"Body should have 1 content record not %@", @([[body contentArray] count]));
 	XCTAssertTrue([[[body contentArray] lastObject] isKindOfClass:[GVCSOAPFault class]], @"Fault is wrong class %@", GVC_CLASSNAME([[body contentArray] lastObject]));
 	GVCSOAPFault *fault = [[body contentArray] lastObject];
 
@@ -72,7 +72,7 @@
 	XCTAssertTrue([[faultstring text] isEqualToString:@"Object reference not set to an instance of an object."], @"faultstring text is wrong %@", [faultstring text]);
 
 	XCTAssertNotNil([fault contentArray], @"Fault has no content (details)");
-	XCTAssertTrue([[fault contentArray] count] == 1, @"Fault should have 1 content record (detail) not %d", [[fault contentArray] count]);
+	XCTAssertTrue([[fault contentArray] count] == 1, @"Fault should have 1 content record (detail) not %@", @([[fault contentArray] count]));
 	XCTAssertTrue([[[fault contentArray] lastObject] isKindOfClass:[GVCSOAPFaultDetail class]], @"Fault is wrong class %@", GVC_CLASSNAME([[fault contentArray] lastObject]));
 //	GVCSOAPFaultDetail *detail = [[fault contentArray] lastObject];
 

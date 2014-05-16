@@ -49,14 +49,14 @@ const NSString *ITUNES_URL = @"http://ax.phobos.apple.com.edgesuite.net/WebObjec
         GVCRSSDigester *parseDelegate = (GVCRSSDigester *)[xmlParseOp xmlParser];
         
 		XCTAssertNotNil(parseDelegate, @"Operation success with parseDelegate %@", parseDelegate);
-		XCTAssertTrue( [parseDelegate status] == GVCXMLParserDelegate_Status_SUCCESS , @"Operation should be success %d", [parseDelegate status]);
+		XCTAssertTrue( [parseDelegate status] == GVCXMLParserDelegate_Status_SUCCESS , @"Operation should be success %@", @([parseDelegate status]));
 
         NSArray *digest = [parseDelegate digestKeys];
 		XCTAssertNotNil(digest, @"Parse digest %@", digest);
 
         GVCRSSFeed *feed = (GVCRSSFeed *)[parseDelegate digestValueForPath:@"feed"];
 		XCTAssertNotNil(feed, @"Parse feed %@", feed);
-        XCTAssertTrue([[feed feedEntries] count] == 47, @"Feed entries count %d", [[feed feedEntries] count]);
+        XCTAssertTrue([[feed feedEntries] count] == 47, @"Feed entries count %@", @([[feed feedEntries] count]));
         
 		hasCalledBack = YES;
 	}];
@@ -114,14 +114,14 @@ const NSString *ITUNES_URL = @"http://ax.phobos.apple.com.edgesuite.net/WebObjec
             GVCRSSDigester *parseDelegate = (GVCRSSDigester *)[xmlParseOp xmlParser];
             
             XCTAssertNotNil(parseDelegate, @"Operation success with parseDelegate %@", parseDelegate);
-            XCTAssertTrue( [parseDelegate status] == GVCXMLParserDelegate_Status_SUCCESS , @"Operation should be success %d", [parseDelegate status]);
+            XCTAssertTrue( [parseDelegate status] == GVCXMLParserDelegate_Status_SUCCESS , @"Operation should be success %@", @([parseDelegate status]));
             
             NSArray *digest = [parseDelegate digestKeys];
             XCTAssertNotNil(digest, @"Parse digest %@", digest);
             
             GVCRSSFeed *feed = (GVCRSSFeed *)[parseDelegate digestValueForPath:@"rss"];
             XCTAssertNotNil(feed, @"Parse feed nil %@", digest);
-            XCTAssertTrue([[feed feedEntries] count] == 100, @"Feed entries count %d", [[feed feedEntries] count]);
+            XCTAssertTrue([[feed feedEntries] count] == 100, @"Feed entries count %@", @([[feed feedEntries] count]));
             
             hasCalledBack = YES;
         }];
@@ -204,7 +204,7 @@ const NSString *ITUNES_URL = @"http://ax.phobos.apple.com.edgesuite.net/WebObjec
         GVCRSSDigester *parseDelegate = (GVCRSSDigester *)[xmlParseOp xmlParser];
         
         XCTAssertNotNil(parseDelegate, @"Operation success with parseDelegate %@", parseDelegate);
-        XCTAssertTrue( [parseDelegate status] == GVCXMLParserDelegate_Status_SUCCESS , @"Operation should be success %d", [parseDelegate status]);
+        XCTAssertTrue( [parseDelegate status] == GVCXMLParserDelegate_Status_SUCCESS , @"Operation should be success %@", @([parseDelegate status]));
         
         NSArray *digest = [parseDelegate digestKeys];
         XCTAssertNotNil(digest, @"Parse digest %@", digest);
@@ -220,7 +220,7 @@ const NSString *ITUNES_URL = @"http://ax.phobos.apple.com.edgesuite.net/WebObjec
         [feed writeRss:outgen];
         
         XCTAssertNotNil(feed, @"Parse feed nil %@", digest);
-        XCTAssertTrue([[feed feedEntries] count] == 100, @"Feed entries count %d", [[feed feedEntries] count]);
+        XCTAssertTrue([[feed feedEntries] count] == 100, @"Feed entries count %@", @([[feed feedEntries] count]));
         
         hasCalledBack = YES;
     }];
