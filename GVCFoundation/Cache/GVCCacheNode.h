@@ -28,6 +28,6 @@
 @protocol GVCCacheDataNode <GVCCacheNode>
 
 - (NSData *)cacheData;
-- (unsigned long long)dataSize;
+- (NSUInteger)dataSize;
 
 @end

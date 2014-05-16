@@ -13,8 +13,8 @@ GVC_DEFINE_STR( GVCNetOperationErrorDomain )
 @interface GVCNetOperation ()
 
 // if the responseData has been set, then these are passed through
-@property (assign, nonatomic) NSUInteger defaultSize;
-@property (assign, nonatomic) NSUInteger maximumSize;
+@property (assign, nonatomic) NSInteger defaultSize;
+@property (assign, nonatomic) NSInteger maximumSize;
 
 // Internal properties
 
@@ -32,20 +32,6 @@ typedef NS_ENUM(NSInteger, GVC_NetOperation_State)
 @end
 
 @implementation GVCNetOperation
-
-@synthesize defaultSize;
-@synthesize maximumSize;
-@synthesize urlConnection;
-@synthesize state;
-@synthesize hasResponseData;
-
-@synthesize request;
-@synthesize lastRequest;
-@synthesize lastResponse;
-@synthesize responseData;
-@synthesize allowSelfSignedCerts;
-@synthesize authEvaluationBlock;
-@synthesize authChallengeBlock;
 
 #pragma mark * Initialise and finalise
 
@@ -94,32 +80,32 @@ typedef NS_ENUM(NSInteger, GVC_NetOperation_State)
 - (void)dealloc
 {
 	// should have been shut down by now
-    GVC_ASSERT(urlConnection == nil, @"Connection should already be closed");
+    GVC_ASSERT([self urlConnection] == nil, @"Connection should already be closed");
 }
 
 
-- (NSUInteger)defaultResponseSize
+- (NSInteger)defaultResponseSize
 {
-	return ([self responseData] == nil ? defaultSize : [[self responseData] defaultResponseSize]);
+	return ([self responseData] == nil ? [self defaultSize] : [[self responseData] defaultResponseSize]);
 }
 
-- (void)setDefaultResponseSize:(NSUInteger)newValue
+- (void)setDefaultResponseSize:(NSInteger)newValue
 {
 	[self willChangeValueForKey:@"defaultResponseSize"];
-    defaultSize = newValue;
+    [self setDefaultSize:newValue];
 	[[self responseData] setDefaultResponseSize:newValue];
 	[self didChangeValueForKey:@"defaultResponseSize"];
 }
 
-- (NSUInteger)maximumResponseSize
+- (NSInteger)maximumResponseSize
 {
-	return ([self responseData] == nil ? maximumSize : [[self responseData] maximumResponseSize]);
+	return ([self responseData] == nil ? [self maximumSize] : [[self responseData] maximumResponseSize]);
 }
 
-- (void)setMaximumResponseSize:(NSUInteger)newValue
+- (void)setMaximumResponseSize:(NSInteger)newValue
 {
 	[self willChangeValueForKey:@"maximumResponseSize"];
-    maximumSize = newValue;
+    [self setMaximumSize:newValue];
 	[[self responseData] setMaximumResponseSize:newValue];
 	[self didChangeValueForKey:@"maximumResponseSize"];
 }
@@ -151,7 +137,7 @@ typedef NS_ENUM(NSInteger, GVC_NetOperation_State)
             [self willChangeValueForKey:@"isFinished"];
         }
         
-		state = newState;
+		_state = newState;
         
         if ((newState == GVC_NetOperation_State_EXECUTING) || (oldState == GVC_NetOperation_State_EXECUTING) ) 
 		{
@@ -296,10 +282,10 @@ typedef NS_ENUM(NSInteger, GVC_NetOperation_State)
         }
         
         
-        if ( defaultSize > 0 )
-            [[self responseData] setMaximumResponseSize:defaultSize];
-        if ( maximumSize > 0 )
-            [[self responseData] setMaximumResponseSize:maximumSize];
+        if ( [self defaultSize] > 0 )
+            [[self responseData] setMaximumResponseSize:[self defaultSize]];
+        if ( [self maximumSize] > 0 )
+            [[self responseData] setMaximumResponseSize:[self maximumSize]];
     }
     	
     if ([[self responseData] hasDataReceived] == NO) 

@@ -8,7 +8,7 @@
 
 #import <GVCFoundation/GVCFoundation.h>
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
 
 #pragma mark - Test Singleton class
@@ -39,14 +39,14 @@ GVC_SINGLETON_CLASS(GVCFoundation)
 
 #pragma mark - Test
 
-@interface GVCFoundationTests : SenTestCase
+@interface GVCFoundationTests : XCTestCase
 {
 }
 @property (strong,nonatomic) NSString *origUUID;
 @end
 
 @implementation GVCFoundationTests
-
+@synthesize origUUID;
 - (void)setUp
 {
     [super setUp];
@@ -67,19 +67,19 @@ GVC_SINGLETON_CLASS(GVCFoundation)
 	GVCFoundation *allocInit = [[GVCFoundation alloc] init];
 	NSString *allocUUID = [allocInit uuid];
 
-	STAssertEquals(shared, allocInit, @"Shared instances should be equal" );
-	STAssertFalse(gvc_IsEmpty([self origUUID]), @"UUID should be initialized in init '%@'", [self origUUID]);
-	STAssertFalse(gvc_IsEmpty(allocUUID), @"UUID should be initialized in init '%@'", allocUUID);
+	XCTAssertEqual(shared, allocInit, @"Shared instances should be equal" );
+	XCTAssertFalse(gvc_IsEmpty(origUUID), @"UUID should be initialized in init '%@'", origUUID);
+	XCTAssertFalse(gvc_IsEmpty(allocUUID), @"UUID should be initialized in init '%@'", allocUUID);
 	
-	STAssertTrue([[self origUUID] isEqual:allocUUID], @"UUID's changed after alloc/init %@ = %@", [self origUUID], allocUUID);
-    STAssertTrue( [[shared uuid] isEqual:[allocInit uuid]], @"%@ = %@", [shared uuid], [allocInit uuid]);
+	XCTAssertTrue([origUUID isEqual:allocUUID], @"UUID's changed after alloc/init %@ = %@", origUUID, allocUUID);
+    XCTAssertTrue( [[shared uuid] isEqual:[allocInit uuid]], @"%@ = %@", [shared uuid], [allocInit uuid]);
 }
 
 - (void)testSingletonScope
 {
 	GVCFoundation *shared = [GVCFoundation sharedGVCFoundation];
-	STAssertFalse(gvc_IsEmpty([shared uuid]), @"UUID should be initialized in init '%@'", [shared uuid]);
-	STAssertTrue([[self origUUID] isEqual:[shared uuid]], @"UUID's changed after scope change %@ = %@", [self origUUID], [shared uuid]);
+	XCTAssertFalse(gvc_IsEmpty([shared uuid]), @"UUID should be initialized in init '%@'", [shared uuid]);
+	XCTAssertTrue([origUUID isEqual:[shared uuid]], @"UUID's changed after scope change %@ = %@", origUUID, [shared uuid]);
 
 }
 

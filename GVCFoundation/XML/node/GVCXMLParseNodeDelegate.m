@@ -24,7 +24,6 @@
 #import "GVCXMLAttribute.h"
 
 @interface GVCXMLParseNodeDelegate ()
-@property (assign, nonatomic, readwrite) GVCXMLParserDelegate_Status status;
 @property (strong, nonatomic) GVCStack *nodeStack;
 @property (strong, nonatomic) NSMutableDictionary *namespaceStack;
 @property (strong, nonatomic) NSMutableArray *declaredNamespaces;

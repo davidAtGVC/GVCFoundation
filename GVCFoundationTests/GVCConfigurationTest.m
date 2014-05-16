@@ -6,7 +6,7 @@
  *
  */
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import <GVCFoundation/GVCFoundation.h>
 #import "GVCResourceTestCase.h"
 
@@ -40,7 +40,7 @@
     [config setOperationQueue:[self queue]];
 
     NSString *path = [self pathForResource:@"LocalConfiguration" extension:@"xml"];
-    STAssertNotNil(path, @"Path should not be nil");
+    XCTAssertNotNil(path, @"Path should not be nil");
     
 //    GVCXMLDigester *dgst = [config digester];
 //    [dgst setFilename:path];

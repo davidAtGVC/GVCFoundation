@@ -6,7 +6,7 @@
  *
  */
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import <GVCFoundation/GVCFoundation.h>
 #import "GVCResourceTestCase.h"
 
@@ -48,20 +48,20 @@ const NSString *ITUNES_URL = @"http://ax.phobos.apple.com.edgesuite.net/WebObjec
         GVCXMLParserOperation *xmlParseOp = (GVCXMLParserOperation *)operation;
         GVCRSSDigester *parseDelegate = (GVCRSSDigester *)[xmlParseOp xmlParser];
         
-		STAssertNotNil(parseDelegate, @"Operation success with parseDelegate %@", parseDelegate);
-		STAssertTrue( [parseDelegate status] == GVCXMLParserDelegate_Status_SUCCESS , @"Operation should be success %d", [parseDelegate status]);
+		XCTAssertNotNil(parseDelegate, @"Operation success with parseDelegate %@", parseDelegate);
+		XCTAssertTrue( [parseDelegate status] == GVCXMLParserDelegate_Status_SUCCESS , @"Operation should be success %d", [parseDelegate status]);
 
         NSArray *digest = [parseDelegate digestKeys];
-		STAssertNotNil(digest, @"Parse digest %@", digest);
+		XCTAssertNotNil(digest, @"Parse digest %@", digest);
 
         GVCRSSFeed *feed = (GVCRSSFeed *)[parseDelegate digestValueForPath:@"feed"];
-		STAssertNotNil(feed, @"Parse feed %@", feed);
-        STAssertTrue([[feed feedEntries] count] == 47, @"Feed entries count %d", [[feed feedEntries] count]);
+		XCTAssertNotNil(feed, @"Parse feed %@", feed);
+        XCTAssertTrue([[feed feedEntries] count] == 47, @"Feed entries count %d", [[feed feedEntries] count]);
         
 		hasCalledBack = YES;
 	}];
 	[xml_op setDidFailWithErrorBlock:^(GVCOperation *operation, NSError *err) {
-		STAssertTrue(NO, @"Operation failed with error %@", err);
+		XCTAssertTrue(NO, @"Operation failed with error %@", err);
 		hasCalledBack = YES;
 	}];
 	[[self queue] addOperation:xml_op];
@@ -113,20 +113,20 @@ const NSString *ITUNES_URL = @"http://ax.phobos.apple.com.edgesuite.net/WebObjec
             GVCXMLParserOperation *xmlParseOp = (GVCXMLParserOperation *)xoperation;
             GVCRSSDigester *parseDelegate = (GVCRSSDigester *)[xmlParseOp xmlParser];
             
-            STAssertNotNil(parseDelegate, @"Operation success with parseDelegate %@", parseDelegate);
-            STAssertTrue( [parseDelegate status] == GVCXMLParserDelegate_Status_SUCCESS , @"Operation should be success %d", [parseDelegate status]);
+            XCTAssertNotNil(parseDelegate, @"Operation success with parseDelegate %@", parseDelegate);
+            XCTAssertTrue( [parseDelegate status] == GVCXMLParserDelegate_Status_SUCCESS , @"Operation should be success %d", [parseDelegate status]);
             
             NSArray *digest = [parseDelegate digestKeys];
-            STAssertNotNil(digest, @"Parse digest %@", digest);
+            XCTAssertNotNil(digest, @"Parse digest %@", digest);
             
             GVCRSSFeed *feed = (GVCRSSFeed *)[parseDelegate digestValueForPath:@"rss"];
-            STAssertNotNil(feed, @"Parse feed nil %@", digest);
-            STAssertTrue([[feed feedEntries] count] == 100, @"Feed entries count %d", [[feed feedEntries] count]);
+            XCTAssertNotNil(feed, @"Parse feed nil %@", digest);
+            XCTAssertTrue([[feed feedEntries] count] == 100, @"Feed entries count %d", [[feed feedEntries] count]);
             
             hasCalledBack = YES;
         }];
         [xml_op setDidFailWithErrorBlock:^(GVCOperation *xoperation, NSError *err) {
-            STAssertTrue(NO, @"Operation failed with error %@", err);
+            XCTAssertTrue(NO, @"Operation failed with error %@", err);
             hasCalledBack = YES;
         }];
 
@@ -165,7 +165,7 @@ const NSString *ITUNES_URL = @"http://ax.phobos.apple.com.edgesuite.net/WebObjec
             GVCLogDebug(@"%d/%d: Operations Ready %d Executing %d Finished %d / Total %d", count%100, count, ready, executing, finished, total);
         }
     }
-    STAssertTrue(hasCalledBack, @"Operation not finished");
+    XCTAssertTrue(hasCalledBack, @"Operation not finished");
     
     if ( hasCalledBack == NO ) 
     {
@@ -203,30 +203,30 @@ const NSString *ITUNES_URL = @"http://ax.phobos.apple.com.edgesuite.net/WebObjec
         GVCXMLParserOperation *xmlParseOp = (GVCXMLParserOperation *)operation;
         GVCRSSDigester *parseDelegate = (GVCRSSDigester *)[xmlParseOp xmlParser];
         
-        STAssertNotNil(parseDelegate, @"Operation success with parseDelegate %@", parseDelegate);
-        STAssertTrue( [parseDelegate status] == GVCXMLParserDelegate_Status_SUCCESS , @"Operation should be success %d", [parseDelegate status]);
+        XCTAssertNotNil(parseDelegate, @"Operation success with parseDelegate %@", parseDelegate);
+        XCTAssertTrue( [parseDelegate status] == GVCXMLParserDelegate_Status_SUCCESS , @"Operation should be success %d", [parseDelegate status]);
         
         NSArray *digest = [parseDelegate digestKeys];
-        STAssertNotNil(digest, @"Parse digest %@", digest);
+        XCTAssertNotNil(digest, @"Parse digest %@", digest);
         
         GVCRSSFeed *feed = (GVCRSSFeed *)[parseDelegate digestValueForPath:@"rss"];
         
 		NSError *tstErr = nil;
 		GVCDirectory *testRoot = [[GVCDirectory TempDirectory] createSubdirectory:GVC_CLASSNAME(self) error:&tstErr];
-		STAssertNil(tstErr, @"Failed to create subdirectory");
+		XCTAssertNil(tstErr, @"Failed to create subdirectory");
 
         GVCFileWriter *writer = [GVCFileWriter writerForFilename:[testRoot fullpathForFile:@"apple300.rss"]];
         GVCXMLGenerator *outgen = [[GVCXMLGenerator alloc] initWithWriter:writer andFormat:GVC_XML_GeneratorFormat_PRETTY];
         [feed writeRss:outgen];
         
-        STAssertNotNil(feed, @"Parse feed nil %@", digest);
-        STAssertTrue([[feed feedEntries] count] == 100, @"Feed entries count %d", [[feed feedEntries] count]);
+        XCTAssertNotNil(feed, @"Parse feed nil %@", digest);
+        XCTAssertTrue([[feed feedEntries] count] == 100, @"Feed entries count %d", [[feed feedEntries] count]);
         
         hasCalledBack = YES;
     }];
     [xml_op setDidFailWithErrorBlock:^(GVCOperation *operation, NSError *err) {
         GVCLogError(@"%f: GVCOperation (%@) did fail with %@", [stopwatch elapsed], operation, err);
-        STAssertTrue(NO, @"Operation failed with error %@", err);
+        XCTAssertTrue(NO, @"Operation failed with error %@", err);
         hasCalledBack = YES;
     }];
 
@@ -261,7 +261,7 @@ const NSString *ITUNES_URL = @"http://ax.phobos.apple.com.edgesuite.net/WebObjec
             GVCLogDebug(@"%d/%d: Operations Ready %d Executing %d Finished %d / Total %d", count%100, count, ready, executing, finished, total);
         }
     }
-    STAssertTrue(hasCalledBack, @"Operation not finished");
+    XCTAssertTrue(hasCalledBack, @"Operation not finished");
     
     if ( hasCalledBack == NO ) 
     {

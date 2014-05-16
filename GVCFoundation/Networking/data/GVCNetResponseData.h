@@ -18,10 +18,10 @@
 @property (readonly, nonatomic) BOOL isClosed;
 
     // (1MB) default response size assumed if no length provided by remote, and no output stream
-@property (assign, nonatomic) NSUInteger defaultResponseSize;
+@property (assign, nonatomic) NSInteger defaultResponseSize;
 
     // (4MB) maximum in-memory response size, causes error if data is greater and no output stream
-@property (assign, nonatomic) NSUInteger maximumResponseSize;    
+@property (assign, nonatomic) NSInteger maximumResponseSize;    
 
 @property (assign, nonatomic) NSUInteger totalBytesRead;
 
@@ -39,7 +39,7 @@
  * @returns a boolean success code
  */
 - (BOOL)appendData:(NSData *)data error:(NSError **)err;
-- (BOOL)openData:(long long)expectedLength error:(NSError **)err;
+- (BOOL)openData:(NSInteger)expectedLength error:(NSError **)err;
 - (BOOL)closeData:(NSError **)err;
 @end
 

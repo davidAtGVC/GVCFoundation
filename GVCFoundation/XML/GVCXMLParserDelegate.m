@@ -26,7 +26,6 @@
 
 
 @interface GVCXMLParserDelegate ()
-@property (assign, nonatomic, readwrite) GVCXMLParserDelegate_Status status;
 @end
 
 

@@ -57,11 +57,11 @@ typedef void (^GVCNetOperationAuthChallengeBlock)(NSURLConnection *connection, N
 @property (copy, nonatomic)  NSURLRequest *lastRequest;
 @property (strong, nonatomic)  NSURLResponse *lastResponse;
 
-- (NSUInteger)defaultResponseSize;
-- (void)setDefaultResponseSize:(NSUInteger)newValue;
+- (NSInteger)defaultResponseSize;
+- (void)setDefaultResponseSize:(NSInteger)newValue;
 
-- (NSUInteger)maximumResponseSize;
-- (void)setMaximumResponseSize:(NSUInteger)newValue;
+- (NSInteger)maximumResponseSize;
+- (void)setMaximumResponseSize:(NSInteger)newValue;
 
 	// secure connection
 @property (assign, nonatomic)  BOOL allowSelfSignedCerts;
