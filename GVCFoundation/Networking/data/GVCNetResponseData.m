@@ -40,7 +40,7 @@
     return self;
 }
 
-- (BOOL)openData:(long long)expectedLength error:(NSError **)err
+- (BOOL)openData:(NSInteger)expectedLength error:(NSError **)err
 {
 	GVC_ASSERT([self isClosed] == YES, @"Response data is already open");
 
@@ -104,7 +104,7 @@
 @synthesize dataBuffer;
 @synthesize responseBody;
 
-- (BOOL)openData:(long long)expectedLength error:(NSError **)err
+- (BOOL)openData:(NSInteger)expectedLength error:(NSError **)err
 {
 	BOOL success = [super openData:expectedLength error:err];
     if ( success == YES )
@@ -114,7 +114,7 @@
             expectedLength = (long long)[self defaultResponseSize];
         }
         
-        if (expectedLength <= (long long) [self maximumResponseSize])
+        if (expectedLength <= [self maximumResponseSize])
         {
             [self setDataBuffer:[NSMutableData dataWithCapacity:(NSUInteger)expectedLength]];
         }
@@ -151,7 +151,7 @@
 	
 	if ([self dataBuffer] != nil)
 	{
-		if ( ([[self dataBuffer] length] + [data length]) <= [self maximumResponseSize] )
+		if ( ([[self dataBuffer] length] + [data length]) <= (NSUInteger)[self maximumResponseSize] )
 		{
 			[[self dataBuffer] appendData:data];
 			[self setTotalBytesRead:[self totalBytesRead] + [data length]];
@@ -209,7 +209,7 @@
 }
 
 
-- (BOOL)openData:(long long)expectedLength error:(NSError **)err
+- (BOOL)openData:(NSInteger)expectedLength error:(NSError **)err
 {
 	BOOL success = [super openData:expectedLength error:err];
     

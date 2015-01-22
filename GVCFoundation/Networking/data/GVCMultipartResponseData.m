@@ -17,7 +17,8 @@
 #import "NSString+GVCFoundation.h"
 #import "NSData+GVCFoundation.h"
 
-typedef enum {
+typedef NS_ENUM(NSInteger, GVCMultipartResponseData_STATE)
+{
     GVCMultipartResponseData_STATE_not_found,
     GVCMultipartResponseData_STATE_initial,
     GVCMultipartResponseData_STATE_boundary,
@@ -25,7 +26,7 @@ typedef enum {
     GVCMultipartResponseData_STATE_in_body,
     GVCMultipartResponseData_STATE_at_end,
     GVCMultipartResponseData_STATE_failed
-} GVCMultipartResponseData_STATE;
+};
 
 @interface GVCMultipartResponseData ()
 @property (assign, nonatomic) GVCMultipartResponseData_STATE multipart_state;
@@ -100,14 +101,14 @@ typedef enum {
         {
             [self setCurrentResponseData:[[GVCMemoryResponseData alloc] init]];
         }
-        success = [[self currentResponseData] openData:NSURLResponseUnknownLength error:err];
+        success = [[self currentResponseData] openData:0 error:err];
         [[self multipart_responses] addObject:[self currentResponseData]];
     }
 
     return success;
 }
 
-- (BOOL)openData:(long long)expectedLength error:(NSError **)err
+- (BOOL)openData:(NSInteger)expectedLength error:(NSError **)err
 {
     BOOL success = [super openData:expectedLength error:err];
     GVC_ASSERT_NOT_NIL([self httpHeaders]);

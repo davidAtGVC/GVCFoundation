@@ -11,14 +11,14 @@
 /*
  * Writer status is used to indicate the various valid states a writer may be in.  Writer subclasses should enforce an error condition if the requested action does not match the current state.
  */
-typedef enum 
+typedef NS_ENUM(NSInteger, GVC_IO_Status)
 {
 	GVC_IO_Status_INITIAL = 0,
 	GVC_IO_Status_OPEN,
 	GVC_IO_Status_CLOSED,
 	GVC_IO_Status_ERROR
 	
-} GVC_IO_Status;
+};
 
 typedef GVC_IO_Status GVCReaderStatus;
 

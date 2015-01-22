@@ -133,7 +133,7 @@ GVC_SINGLETON_CLASS(GVCLogger)
 - (BOOL)isLevelActive:(GVCLoggerLevel)level
 {
 	GVC_DBC_REQUIRE(
-					GVC_DBC_FACT(level > GVCLoggerLevel_OFF && level <= GVCLoggerLevel_INFO);
+					GVC_DBC_FACT(level >= GVCLoggerLevel_OFF && level <= GVCLoggerLevel_INFO);
 					)
     
     // error level logs ALWAYS are active

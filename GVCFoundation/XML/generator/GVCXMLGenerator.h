@@ -9,12 +9,12 @@
 #import "GVCTextGenerator.h"
 #import "GVCXMLParsingModel.h"
 
-typedef enum 
+typedef NS_ENUM(NSInteger, GVC_XML_GeneratorFormat)
 {
 	GVC_XML_GeneratorFormat_PRESERVE,
 	GVC_XML_GeneratorFormat_COMPACT,
 	GVC_XML_GeneratorFormat_PRETTY
-} GVC_XML_GeneratorFormat;
+};
 
 
 

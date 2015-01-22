@@ -19,12 +19,12 @@
  *Ordinal format is YYYY-DDD, where DDD ranges from 1 to 366; for example, 2009-32 is 2009-02-01.
  *Week format is YYYY-Www-D, where ww ranges from 1 to 53 (the 'W' is literal) and D ranges from 1 to 7; for example, 2009-W05-07.
  */
-enum {
+typedef NS_ENUM(NSInteger, GVCISO8601DateFormatter_Type)
+{
     GVCISO8601DateFormatter_Calendar,
     GVCISO8601DateFormatter_Ordinal,
     GVCISO8601DateFormatter_Week,
 };
-typedef NSUInteger GVCISO8601DateFormatter_Type;
 
 //The default separator for time values. Currently, this is ':'.
 extern unichar GVCISO8601DateFormatter_TimeSeparatorCharacter;

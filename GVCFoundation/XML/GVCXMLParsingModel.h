@@ -13,7 +13,7 @@
 @protocol GVCXMLGeneratorProtocol;
 
 
-typedef enum
+typedef NS_ENUM(NSInteger, GVC_XML_ContentType)
 {
 	GVC_XML_ContentType_COMMENT,
 	GVC_XML_ContentType_ATTRIBUTE,
@@ -22,9 +22,10 @@ typedef enum
 	GVC_XML_ContentType_NAMESPACE,
 	GVC_XML_ContentType_SIMPLE,
 	GVC_XML_ContentType_CONTAINER
-} GVC_XML_ContentType;
+};
 
-typedef enum {
+typedef NS_ENUM(NSInteger, GVC_XML_AttributeType)
+{
 	GVC_XML_AttributeType_UNDECLARED = 0,
 	GVC_XML_AttributeType_CDATA = 1,
 	GVC_XML_AttributeType_ID = 2,
@@ -36,7 +37,7 @@ typedef enum {
 	GVC_XML_AttributeType_NMTOKENS = 8,
 	GVC_XML_AttributeType_NOTATION = 9,
 	GVC_XML_AttributeType_ENUMERATED = 10
-} GVC_XML_AttributeType;
+};
 
 
 @protocol GVCXMLContent <NSObject>

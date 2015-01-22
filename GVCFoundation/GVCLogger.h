@@ -13,7 +13,7 @@
 /**
  basic log levels
  */
-typedef enum 
+typedef NS_ENUM(NSInteger, GVCLoggerLevel)
 {
     // turns logging off
 	GVCLoggerLevel_OFF = 0,
@@ -21,7 +21,7 @@ typedef enum
     GVCLoggerLevel_WARNING,
     GVCLoggerLevel_DEBUG,
     GVCLoggerLevel_INFO
-} GVCLoggerLevel;
+};
 
 /* placeholder declaration for the log message data record.  Defined in detail below */
 @class GVCLogMessage;

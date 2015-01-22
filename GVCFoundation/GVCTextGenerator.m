@@ -47,14 +47,14 @@
 
 - (void)open
 {
-	GVC_ASSERT( [writer writerStatus] < GVC_IO_Status_OPEN, @"Writer status is %d", [writer writerStatus] );
+	GVC_ASSERT( [writer writerStatus] < GVC_IO_Status_OPEN, @"Writer status is %@", @([writer writerStatus]) );
 	
 	[writer openWriter];
 }
 
 - (void)close;
 {
-	GVC_ASSERT( [writer writerStatus] < GVC_IO_Status_CLOSED, @"Writer status is %d", [writer writerStatus] );
+	GVC_ASSERT( [writer writerStatus] < GVC_IO_Status_CLOSED, @"Writer status is %@", @([writer writerStatus]) );
 	
 	[writer flush];
 	[writer closeWriter];
@@ -71,7 +71,7 @@
 	if ( [writer writerStatus] < GVC_IO_Status_OPEN )
 		[self open];
     
-	GVC_ASSERT( [writer writerStatus] == GVC_IO_Status_OPEN, @"Writer status should be open is %d", [writer writerStatus] );
+	GVC_ASSERT( [writer writerStatus] == GVC_IO_Status_OPEN, @"Writer status should be open is %@", @([writer writerStatus]) );
 	
     [writer writeString:string];
 }

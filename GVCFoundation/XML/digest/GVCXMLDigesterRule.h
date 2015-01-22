@@ -10,12 +10,12 @@
 @class GVCXMLDigester;
 @class GVCXMLGenerator;
 
-typedef enum _GVC_XML_DigesterRule_Order
+typedef NS_ENUM(NSInteger, GVC_XML_DigesterRule_Order)
 {
 	GVC_XML_DigesterRule_Order_HIGH,
 	GVC_XML_DigesterRule_Order_MED,
 	GVC_XML_DigesterRule_Order_LOW
-} GVC_XML_DigesterRule_Order;
+};
 
 @interface GVCXMLDigesterRule : NSObject 
 

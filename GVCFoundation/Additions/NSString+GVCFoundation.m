@@ -27,11 +27,7 @@
 
 + (NSString *)gvc_StringWithUUID
 {
-	//create a new UUID
-    CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
-    NSString * string = (NSString*)CFBridgingRelease(CFUUIDCreateString(kCFAllocatorDefault, uuid));
-    CFRelease(uuid);
-    return string;
+    return [[NSUUID UUID] UUIDString];
 }
 
 /*  Returns a NSString with randomly selected characters */
