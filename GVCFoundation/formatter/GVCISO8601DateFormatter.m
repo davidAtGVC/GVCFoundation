@@ -651,7 +651,7 @@ static BOOL is_leap_year(NSInteger year);
         case GVCISO8601DateFormatter_Ordinal:
             return [self stringFromDate:date formatString:ISO_ORDINAL_DATE_FORMAT timeZone:timeZone];
         default:
-            [NSException raise:NSInternalInconsistencyException format:@"self.format was %ld, not calendar (%d), week (%d), or ordinal (%d)", (long)self.format, GVCISO8601DateFormatter_Calendar, GVCISO8601DateFormatter_Week, GVCISO8601DateFormatter_Ordinal];
+            [NSException raise:NSInternalInconsistencyException format:@"self.format was %ld, not calendar (%ld), week (%ld), or ordinal (%ld)", (long)self.format, (long)GVCISO8601DateFormatter_Calendar, (long)GVCISO8601DateFormatter_Week, (long)GVCISO8601DateFormatter_Ordinal];
             return nil;
     }
 }

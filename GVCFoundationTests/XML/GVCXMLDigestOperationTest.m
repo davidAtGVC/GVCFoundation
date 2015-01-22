@@ -49,7 +49,7 @@ const NSString *ITUNES_URL = @"http://ax.phobos.apple.com.edgesuite.net/WebObjec
         GVCRSSDigester *parseDelegate = (GVCRSSDigester *)[xmlParseOp xmlParser];
         
 		XCTAssertNotNil(parseDelegate, @"Operation success with parseDelegate %@", parseDelegate);
-		XCTAssertTrue( [parseDelegate status] == GVCXMLParserDelegate_Status_SUCCESS , @"Operation should be success %d", [parseDelegate status]);
+		XCTAssertTrue( [parseDelegate status] == GVCXMLParserDelegate_Status_SUCCESS , @"Operation should be success %ld", [parseDelegate status]);
 
         NSArray *digest = [parseDelegate digestKeys];
 		XCTAssertNotNil(digest, @"Parse digest %@", digest);
@@ -114,7 +114,7 @@ const NSString *ITUNES_URL = @"http://ax.phobos.apple.com.edgesuite.net/WebObjec
             GVCRSSDigester *parseDelegate = (GVCRSSDigester *)[xmlParseOp xmlParser];
             
             XCTAssertNotNil(parseDelegate, @"Operation success with parseDelegate %@", parseDelegate);
-            XCTAssertTrue( [parseDelegate status] == GVCXMLParserDelegate_Status_SUCCESS , @"Operation should be success %d", [parseDelegate status]);
+            XCTAssertTrue( [parseDelegate status] == GVCXMLParserDelegate_Status_SUCCESS , @"Operation should be success %ld", [parseDelegate status]);
             
             NSArray *digest = [parseDelegate digestKeys];
             XCTAssertNotNil(digest, @"Parse digest %@", digest);
@@ -204,7 +204,7 @@ const NSString *ITUNES_URL = @"http://ax.phobos.apple.com.edgesuite.net/WebObjec
         GVCRSSDigester *parseDelegate = (GVCRSSDigester *)[xmlParseOp xmlParser];
         
         XCTAssertNotNil(parseDelegate, @"Operation success with parseDelegate %@", parseDelegate);
-        XCTAssertTrue( [parseDelegate status] == GVCXMLParserDelegate_Status_SUCCESS , @"Operation should be success %d", [parseDelegate status]);
+        XCTAssertTrue( [parseDelegate status] == GVCXMLParserDelegate_Status_SUCCESS , @"Operation should be success %ld", [parseDelegate status]);
         
         NSArray *digest = [parseDelegate digestKeys];
         XCTAssertNotNil(digest, @"Parse digest %@", digest);

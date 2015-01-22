@@ -41,7 +41,7 @@
 	GVCRSSDigester *parser = [[GVCRSSDigester alloc] init];
 	[parser setXmlFilename:[self pathForResource:file extension:@"xml"]];
 	GVCXMLParserDelegate_Status stat = [parser parse];
-	XCTAssertTrue(stat == GVCXMLParserDelegate_Status_SUCCESS, @"%@ Parse status = %d", file, stat);
+	XCTAssertTrue(stat == GVCXMLParserDelegate_Status_SUCCESS, @"%@ Parse status = %ld", file, stat);
 	
 	GVCRSSFeed *feed = [parser digestValueForPath:root];
 	GVCFileWriter *writer = [GVCFileWriter writerForFilename:[testRoot fullpathForFile:file]];

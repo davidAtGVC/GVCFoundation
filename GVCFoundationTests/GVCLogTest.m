@@ -70,19 +70,19 @@
     GVCLogger *logger = [GVCLogger sharedGVCLogger];
     [logger setWriter:[[LogStringWriter alloc] init]];
     
-    XCTAssertTrue([logger loggerLevel] == GVCLoggerLevel_DEBUG, @"Default logger level should be %d not %d", GVCLoggerLevel_DEBUG, [logger loggerLevel]);
+    XCTAssertTrue([logger loggerLevel] == GVCLoggerLevel_DEBUG, @"Default logger level should be %ld not %ld", (long)GVCLoggerLevel_DEBUG, (long)[logger loggerLevel]);
 	XCTAssertTrue([[logger writer] isKindOfClass:[LogStringWriter class]], @"nil string should be detected as IsEmpty = true");
 
     LogStringWriter *writer = (LogStringWriter *)[logger writer];
 
     // turn logging off, nothing should log
     [logger setLoggerLevel:GVCLoggerLevel_OFF];
-    XCTAssertTrue([logger loggerLevel] == GVCLoggerLevel_OFF, @"Logger level should be %d not %d", GVCLoggerLevel_OFF, [logger loggerLevel]);
+    XCTAssertTrue([logger loggerLevel] == GVCLoggerLevel_OFF, @"Logger level should be %ld not %ld", (long)GVCLoggerLevel_OFF, (long)[logger loggerLevel]);
 
-    XCTAssertTrue([logger isLevelActive:GVCLoggerLevel_ERROR], @"Logger level ERROR should always be active %d not %d", GVCLoggerLevel_ERROR, [logger loggerLevel]);
-    XCTAssertFalse([logger isLevelActive:GVCLoggerLevel_WARNING], @"Logger level WARNING should not be active %d not %d", GVCLoggerLevel_WARNING, [logger loggerLevel]);
-    XCTAssertFalse([logger isLevelActive:GVCLoggerLevel_DEBUG], @"Logger level DEBUG should not be active %d not %d", GVCLoggerLevel_DEBUG, [logger loggerLevel]);
-    XCTAssertFalse([logger isLevelActive:GVCLoggerLevel_INFO], @"Logger level INFO should not be active %d not %d", GVCLoggerLevel_INFO, [logger loggerLevel]);
+    XCTAssertTrue([logger isLevelActive:GVCLoggerLevel_ERROR], @"Logger level ERROR should always be active %ld not %ld", (long)GVCLoggerLevel_ERROR, (long)[logger loggerLevel]);
+    XCTAssertFalse([logger isLevelActive:GVCLoggerLevel_WARNING], @"Logger level WARNING should not be active %ld not %ld", (long)GVCLoggerLevel_WARNING, (long)[logger loggerLevel]);
+    XCTAssertFalse([logger isLevelActive:GVCLoggerLevel_DEBUG], @"Logger level DEBUG should not be active %ld not %ld", (long)GVCLoggerLevel_DEBUG, (long)[logger loggerLevel]);
+    XCTAssertFalse([logger isLevelActive:GVCLoggerLevel_INFO], @"Logger level INFO should not be active %ld not %ld", (long)GVCLoggerLevel_INFO, (long)[logger loggerLevel]);
 
     GVCLogInfo(@"%@", self);
     XCTAssertTrue(gvc_IsEmpty([writer string]), @"Log is OFF, GVCLogInfo should not generate '%@'", [writer string]);

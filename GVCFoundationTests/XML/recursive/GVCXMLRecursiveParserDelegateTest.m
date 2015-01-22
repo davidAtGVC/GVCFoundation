@@ -41,7 +41,7 @@
 	[parser setXmlDocumentClassName:NSStringFromClass([GVCSOAPDocument class])];
 
 	GVCXMLParserDelegate_Status stat = [parser parse];
-	XCTAssertTrue(stat == GVCXMLParserDelegate_Status_SUCCESS, @"Parse status = %d", stat);
+	XCTAssertTrue(stat == GVCXMLParserDelegate_Status_SUCCESS, @"Parse status = %ld", stat);
 	
 	XCTAssertTrue([[parser document] isKindOfClass:[GVCSOAPDocument class]], @"Document is wrong class %@", GVC_CLASSNAME([parser document]));
 	GVCSOAPDocument *doc = (GVCSOAPDocument *)[parser document];
