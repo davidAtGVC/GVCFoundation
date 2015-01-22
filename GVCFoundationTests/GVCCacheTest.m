@@ -6,11 +6,11 @@
  *
  */
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import <GVCFoundation/GVCFoundation.h>
 
 #pragma mark - Interface declaration
-@interface GVCCacheTest : SenTestCase
+@interface GVCCacheTest : XCTestCase
 
 @end
 

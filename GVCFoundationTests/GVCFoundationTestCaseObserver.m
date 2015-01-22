@@ -6,10 +6,10 @@
  *
  */
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
 #pragma mark - Interface declaration
-@interface GVCFoundationTestCaseObserver : SenTestLog
+@interface GVCFoundationTestCaseObserver : XCTestCase
 
 @end
 
@@ -21,16 +21,16 @@ extern void __gcov_flush(void);
 
 + (void)initialize
 {
-    [[NSUserDefaults standardUserDefaults] setValue:@"GVCFoundationTestCaseObserver" forKey:SenTestObserverClassKey];
+    [[NSUserDefaults standardUserDefaults] setValue:@"GVCFoundationTestCaseObserver" forKey:XCTestErrorDomain];
     [super initialize];
 }
 
 	// setup for all the following tests
 + (void)testSuiteDidStart:(NSNotification*)notification
 {
-    [super testSuiteDidStart:notification];
+//    [super testSuiteDidStart:notification];
     
-    SenTestSuiteRun* suite = notification.object;
+    XCTestSuiteRun* suite = notification.object;
     
     if (mainSuite == nil)
     {
@@ -40,7 +40,7 @@ extern void __gcov_flush(void);
 
 + (void)testSuiteDidStop:(NSNotification*)notification
 {
-    [super testSuiteDidStop:notification];
+//    [super testSuiteDidStop:notification];
 
 #ifdef TEST_GCOVR
     SenTestSuiteRun* suite = notification.object;

@@ -24,15 +24,6 @@
 
 @implementation GVCNetResponseData
 
-@synthesize httpHeaders;
-@synthesize hasDataReceived;
-@synthesize isClosed;
-
-@synthesize defaultResponseSize;
-@synthesize maximumResponseSize;
-@synthesize totalBytesRead;
-@synthesize responseEncoding;
-
 - (id)init
 {
 	self = [super init];
@@ -120,7 +111,7 @@
     {
         if (expectedLength == NSURLResponseUnknownLength) 
         {
-            expectedLength = [self defaultResponseSize];
+            expectedLength = (long long)[self defaultResponseSize];
         }
         
         if (expectedLength <= (long long) [self maximumResponseSize])

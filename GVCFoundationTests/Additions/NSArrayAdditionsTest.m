@@ -6,11 +6,11 @@
  *
  */
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import <GVCFoundation/GVCFoundation.h>
 
 #pragma mark - Interface declaration
-@interface NSArrayAdditionsTest : SenTestCase
+@interface NSArrayAdditionsTest : XCTestCase
 
 @property (strong, nonatomic) NSArray *alphaArray;
 @property (strong, nonatomic) NSArray *numberArray;
@@ -50,8 +50,8 @@
 	
 		// sort the array using the string length selector
 	NSArray *sorted = [NSArray gvc_ArrayByOrderingSet:set byKey:@"length" ascending:YES];
-	STAssertFalse(gcv_IsEqualCollection( unsorted, sorted), @"'%@' != sorted '%@'", unsorted, sorted );
-	STAssertTrue(gcv_IsEqualCollection( expectedByLength, sorted), @"'%@' != sorted '%@'", expectedByLength, sorted );
+	XCTAssertFalse(gcv_IsEqualCollection( unsorted, sorted), @"'%@' != sorted '%@'", unsorted, sorted );
+	XCTAssertTrue(gcv_IsEqualCollection( expectedByLength, sorted), @"'%@' != sorted '%@'", expectedByLength, sorted );
 
 }
 
@@ -62,7 +62,7 @@
         total += [(NSString *)item length];
     };
     [[self alphaArray] gvc_performOnEach:each];
-	STAssertTrue(total == 15, @"Total length expected was 15, result was %d", total );
+	XCTAssertTrue(total == 15, @"Total length expected was 15, result was %ld", (long)total );
 }
 
 
@@ -75,7 +75,7 @@
     NSArray *filtered = [[self alphaArray] gvc_filterArrayForAccept:each];
     NSArray *expected = [NSArray arrayWithObjects:@"a", @"aaa", @"eae", nil];
 
-	STAssertTrue(gcv_IsEqualCollection( expected, filtered), @"'%@' != filterd '%@'", expected, filtered );
+	XCTAssertTrue(gcv_IsEqualCollection( expected, filtered), @"'%@' != filterd '%@'", expected, filtered );
 }
 
 - (void)testgvc_filterArrayForRejects
@@ -87,7 +87,7 @@
     NSArray *filtered = [[self alphaArray] gvc_filterArrayForReject:each];
     NSArray *expected = [NSArray arrayWithObjects:@"bbb", @"cc", @"ddd", nil];
     
-	STAssertTrue(gcv_IsEqualCollection( expected, filtered), @"'%@' != filterd '%@'", expected, filtered );
+	XCTAssertTrue(gcv_IsEqualCollection( expected, filtered), @"'%@' != filterd '%@'", expected, filtered );
 }
 
 - (void)testgvc_filterArrayFor
@@ -104,7 +104,7 @@
                          [NSNumber numberWithInteger:55], 
                          [NSNumber numberWithInteger:66], nil];
     
-	STAssertTrue(gcv_IsEqualCollection( expected, filtered), @"'%@' != filterd '%@'", expected, filtered );
+	XCTAssertTrue(gcv_IsEqualCollection( expected, filtered), @"'%@' != filterd '%@'", expected, filtered );
 }
 
 @end

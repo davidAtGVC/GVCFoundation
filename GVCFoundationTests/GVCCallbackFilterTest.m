@@ -6,7 +6,7 @@
  *
  */
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import <GVCFoundation/GVCFoundation.h>
 #import "GVCResourceTestCase.h"
 
@@ -50,7 +50,7 @@ GVC_DEFINE_STRVALUE(CAR_FIELD_PRICE, Price);
 	NSArray *fieldNames = @[CAR_FIELD_YEAR, CAR_FIELD_MAKE, CAR_FIELD_MODEL, CAR_FIELD_DESC, CAR_FIELD_PRICE];
 	CarModelParserDelegate *carsDelegate = [[CarModelParserDelegate alloc] init];
 	GVCCSVParser *parser = [[GVCCSVParser alloc] initWithDelegate:carsDelegate separator:@"," fieldNames:fieldNames firstLineHeaders:YES];
-	STAssertTrue([parser parseFilename:file error:&error], @"Failed to parse cars file %@", error);
+	XCTAssertTrue([parser parseFilename:file error:&error], @"Failed to parse cars file %@", error);
     [self setCarsDb:[carsDelegate cars]];
 
 }

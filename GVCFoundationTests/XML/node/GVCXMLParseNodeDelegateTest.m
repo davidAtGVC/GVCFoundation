@@ -6,7 +6,7 @@
  *
  */
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import <GVCFoundation/GVCFoundation.h>
 #import "GVCResourceTestCase.h"
 
@@ -39,7 +39,7 @@
 	GVCXMLParseNodeDelegate *parser = [[GVCXMLParseNodeDelegate alloc] init];
 	[parser setXmlFilename:[self pathForResource:XML_Agent_OIDs extension:@"xml"]];
 	GVCXMLParserDelegate_Status stat = [parser parse];
-	STAssertTrue(stat == GVCXMLParserDelegate_Status_SUCCESS, @"Parse status = %d", stat);
+	XCTAssertTrue(stat == GVCXMLParserDelegate_Status_SUCCESS, @"Parse status = %d", stat);
 	
 	GVCXMLDocument *doc = [parser document];
 	GVCLogError(@"Document %@", doc);

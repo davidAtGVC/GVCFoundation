@@ -6,7 +6,7 @@
  *
  */
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import <GVCFoundation/GVCFoundation.h>
 #import "GVCResourceTestCase.h"
 
@@ -138,7 +138,7 @@ static NSDictionary *rawHeaders = nil;
                   @"Identity;", @"Transfer-Encoding",
                   nil];
 
-    STAssertTrue([allHeaderKeys count] == [allHeaderValues count], @"Header keys and values different count");
+    XCTAssertTrue([allHeaderKeys count] == [allHeaderValues count], @"Header keys and values different count");
 }
 
 	// tear down the test setup
@@ -153,11 +153,11 @@ static NSDictionary *rawHeaders = nil;
     {
         NSString *val = [allHeaderValues objectAtIndex:[allHeaderKeys indexOfObject:key]];
         GVCHTTPHeader *aHeader = [set headerForKey:key];
-        STAssertNotNil(aHeader, @"Did not find header for key %@", key);
-        STAssertTrue( [[aHeader headerName] isEqualToString:key], @"Name does not match %@ != %@", [aHeader headerName], key);
+        XCTAssertNotNil(aHeader, @"Did not find header for key %@", key);
+        XCTAssertTrue( [[aHeader headerName] isEqualToString:key], @"Name does not match %@ != %@", [aHeader headerName], key);
         
-        STAssertNotNil([aHeader headerValue], @"Did not find header value for %@", key);
-        STAssertTrue( [[aHeader headerValue] isEqualToString:val], @"Value %@ does not match %@ != %@", key, [aHeader headerValue], val);
+        XCTAssertNotNil([aHeader headerValue], @"Did not find header value for %@", key);
+        XCTAssertTrue( [[aHeader headerValue] isEqualToString:val], @"Value %@ does not match %@ != %@", key, [aHeader headerValue], val);
         
         NSDictionary *params = [allParamDicts valueForKey:key];
         if (gvc_IsEmpty(params) == NO)
@@ -167,8 +167,8 @@ static NSDictionary *rawHeaders = nil;
                 NSString *pval = [params valueForKey:pkey];
                 NSString *paramVal = [aHeader parameterForKey:pkey];
                 
-                STAssertNotNil(paramVal, @"Did not find parameter for %@ -> %@", key, pkey);
-                STAssertTrue( [paramVal isEqualToString:pval], @"Value for %@ -> %@ does not match %@ != %@", key, pkey, pval, paramVal);
+                XCTAssertNotNil(paramVal, @"Did not find parameter for %@ -> %@", key, pkey);
+                XCTAssertTrue( [paramVal isEqualToString:pval], @"Value for %@ -> %@ does not match %@ != %@", key, pkey, pval, paramVal);
             }
         }
     }
@@ -232,7 +232,7 @@ static NSDictionary *rawHeaders = nil;
     
 	NSError *tstErr = nil;
 	GVCDirectory *testRoot = [[GVCDirectory TempDirectory] createSubdirectory:GVC_CLASSNAME(self) error:&tstErr];
-	STAssertNil(tstErr, @"Failed to create subdirectory");
+	XCTAssertNil(tstErr, @"Failed to create subdirectory");
 
     GVCMultipartResponseData *responseData = [[GVCMultipartResponseData alloc] initForFilename:[testRoot uniqueFilename]];
     [responseData parseResponseHeaders:rawHeaders];
@@ -241,16 +241,16 @@ static NSDictionary *rawHeaders = nil;
     NSData *data = [NSData dataWithContentsOfFile:responseFile];
     
     NSError *respError = nil;
-    STAssertTrue([responseData openData:[data length] error:&respError], @"Open Data failed %@", respError );
+    XCTAssertTrue([responseData openData:(long long)[data length] error:&respError], @"Open Data failed %@", respError );
     
     NSUInteger batchSize = [data length] / 10;
     NSRange position = NSMakeRange(0, batchSize);
     while ( NSMaxRange(position) < [data length] )
     {
-        STAssertTrue([responseData appendData:[data subdataWithRange:position] error:&respError], @"Append Data failed %@", respError);
+        XCTAssertTrue([responseData appendData:[data subdataWithRange:position] error:&respError], @"Append Data failed %@", respError);
         position = NSMakeRange(NSMaxRange(position), batchSize);
     }
-    STAssertTrue([responseData closeData:&respError], @"Close Data failed %@", respError );
+    XCTAssertTrue([responseData closeData:&respError], @"Close Data failed %@", respError );
     
     
 }

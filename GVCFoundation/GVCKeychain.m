@@ -39,7 +39,8 @@ GVC_SINGLETON_CLASS(GVCKeychain)
 
     BOOL success = NO;
     NSString *errMessage = nil;
-    NSData * data = [NSPropertyListSerialization dataFromPropertyList:object format:NSPropertyListBinaryFormat_v1_0 errorDescription:&errMessage];
+    NSError *anError = nil;
+    NSData * data = [NSPropertyListSerialization dataWithPropertyList:object format:NSPropertyListBinaryFormat_v1_0 options:nil error:&anError];
     if (data != nil) 
     {
 #if TARGET_OS_IPHONE
@@ -85,7 +86,6 @@ GVC_SINGLETON_CLASS(GVCKeychain)
 	GVC_DBC_REQUIRE(GVC_DBC_FACT_NOT_EMPTY(aKey);)
     
 #if TARGET_OS_IPHONE
-    NSString *errMessage = nil;
 	NSMutableDictionary *queryDictionary = [NSMutableDictionary dictionary];
 
 	[queryDictionary setObject:(__bridge id)kSecClassGenericPassword forKey:(__bridge id)kSecClass];
@@ -98,7 +98,8 @@ GVC_SINGLETON_CLASS(GVCKeychain)
 
     if (status == noErr) 
     {
-        object = [NSPropertyListSerialization propertyListFromData:(__bridge NSData *)data mutabilityOption:NSPropertyListImmutable format:NULL errorDescription:&errMessage];
+        NSError *anError = nil;
+        object = [NSPropertyListSerialization propertyListWithData:(__bridge NSData *)data options:NSPropertyListImmutable format:nil error:&anError];
     }
 #else
     UInt32 length = 0;

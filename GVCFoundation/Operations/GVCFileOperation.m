@@ -289,7 +289,7 @@ GVC_DEFINE_STR( GVCFileOperationErrorDomain )
 			}
 			else if (sourcePath != nil)
 			{
-				NSData *srcd = [NSData dataWithContentsOfMappedFile:sourcePath];
+				NSData *srcd = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:sourcePath]];
 				[fd writeData:srcd];
 				[fd closeFile];
 				[self operationWillFinish];

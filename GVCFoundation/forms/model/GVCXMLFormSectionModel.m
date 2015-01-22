@@ -141,6 +141,9 @@
  */
 - (NSArray *)entryArray
 {
+    GVC_DBC_REQUIRE(
+                    GVC_DBC_FACT(_entryArray == nil || _entryArray != nil );
+                    )
 	return [self questionArray];
 }
 

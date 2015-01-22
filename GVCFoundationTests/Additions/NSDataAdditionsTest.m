@@ -6,7 +6,7 @@
  *
  */
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import <GVCFoundation/GVCFoundation.h>
 #import "GVCResourceTestCase.h"
 
@@ -38,7 +38,7 @@ void printfBytes(const char *name, const unsigned char *bytes, NSUInteger length
         {
             printf("%c", ((isspace(name[i]) == YES) ? '_' : name[i] ));
         }
-        printf("[%d] = {\n\t", length);
+        printf("[%lu] = {\n\t", (unsigned long)length);
         for (NSUInteger i = 0; i < length; i++)
         {
             printf("0x%02X", (unsigned char)bytes[i]);
@@ -73,7 +73,7 @@ void printfBytes(const char *name, const unsigned char *bytes, NSUInteger length
 	for (NSUInteger x = 1 ; x < 1024 ; ++x)
 	{
 		NSMutableData *data = [[NSMutableData alloc] initWithCapacity:x];
-		STAssertNotNil(data, @"failed to alloc data block");
+		XCTAssertNotNil(data, @"failed to alloc data block");
 
 		//		void *buf = [data mutableBytes];
 
@@ -85,12 +85,12 @@ void printfBytes(const char *name, const unsigned char *bytes, NSUInteger length
 		}
 				
 		NSString *encoded = [data gvc_base64Encoded];
-		STAssertNotNil(encoded, @"Failed to encode base 64");
-		STAssertEquals(([encoded length] % 4), (NSUInteger)0, @"encoded size should be a multiple of 4");
+		XCTAssertNotNil(encoded, @"Failed to encode base 64");
+		XCTAssertEqual(([encoded length] % 4), (NSUInteger)0, @"encoded size should be a multiple of 4");
 		
 		NSData *decoded = [NSData gvc_Base64Decoded:encoded];
-		STAssertNotNil(decoded, @"Failed to decode base 64");
-		STAssertEqualObjects(data, decoded, @"Decode failed");
+		XCTAssertNotNil(decoded, @"Failed to decode base 64");
+		XCTAssertEqualObjects(data, decoded, @"Decode failed");
 	}
 }
 
@@ -104,53 +104,53 @@ void printfBytes(const char *name, const unsigned char *bytes, NSUInteger length
 	// empty data
 	NSData *emptyData = [NSData data];
 	encoded = [emptyData gvc_base64Encoded];
-	STAssertEquals(([encoded length] % 4), (NSUInteger)0, @"encoded size should be a multiple of 4");
-	STAssertEquals([encoded length], (NSUInteger)0, @"encoded size of empty data should be 0");
+	XCTAssertEqual(([encoded length] % 4), (NSUInteger)0, @"encoded size should be a multiple of 4");
+	XCTAssertEqual([encoded length], (NSUInteger)0, @"encoded size of empty data should be 0");
 
 	// one input char
 	correctRaw = @"A";
 	correctEncoding = @"QQ==";
 	NSData *oneCharData = [correctRaw dataUsingEncoding:NSUTF8StringEncoding];
 	encoded = [oneCharData gvc_base64Encoded];
-	STAssertEquals(([encoded length] % 4), (NSUInteger)0, @"encoded size should be a multiple of 4");
-	STAssertEqualObjects(encoded, correctEncoding, @"encoded '%@' should equal '%@'", encoded, correctEncoding);
+	XCTAssertEqual(([encoded length] % 4), (NSUInteger)0, @"encoded size should be a multiple of 4");
+	XCTAssertEqualObjects(encoded, correctEncoding, @"encoded '%@' should equal '%@'", encoded, correctEncoding);
 
 	decoded = [NSData gvc_Base64Decoded:encoded];
-	STAssertNotNil(decoded, @"Faild to decode");
-	STAssertEqualObjects(oneCharData, decoded, @"Decode failed for '%@'", correctRaw);
+	XCTAssertNotNil(decoded, @"Faild to decode");
+	XCTAssertEqualObjects(oneCharData, decoded, @"Decode failed for '%@'", correctRaw);
 
 	// two input char
 	correctRaw = @"AB";
 	correctEncoding = @"QUI=";
 	NSData *twoCharData = [correctRaw dataUsingEncoding:NSUTF8StringEncoding];
 	encoded = [twoCharData gvc_base64Encoded];
-	STAssertEquals(([encoded length] % 4), (NSUInteger)0, @"encoded size should be a multiple of 4");
-	STAssertEqualObjects(encoded, correctEncoding, @"encoded '%@' should equal '%@'", encoded, correctEncoding);
+	XCTAssertEqual(([encoded length] % 4), (NSUInteger)0, @"encoded size should be a multiple of 4");
+	XCTAssertEqualObjects(encoded, correctEncoding, @"encoded '%@' should equal '%@'", encoded, correctEncoding);
 	
 	decoded = [NSData gvc_Base64Decoded:encoded];
-	STAssertEqualObjects(twoCharData, decoded, @"Decode failed for '%@'", correctRaw);
+	XCTAssertEqualObjects(twoCharData, decoded, @"Decode failed for '%@'", correctRaw);
 
 	// three input char
 	correctRaw = @"ABC";
 	correctEncoding = @"QUJD";
 	NSData *threeCharData = [correctRaw dataUsingEncoding:NSUTF8StringEncoding];
 	encoded = [threeCharData gvc_base64Encoded];
-	STAssertEquals(([encoded length] % 4), (NSUInteger)0, @"encoded size should be a multiple of 4");
-	STAssertEqualObjects(encoded, correctEncoding, @"encoded '%@' should equal '%@'", encoded, correctEncoding);
+	XCTAssertEqual(([encoded length] % 4), (NSUInteger)0, @"encoded size should be a multiple of 4");
+	XCTAssertEqualObjects(encoded, correctEncoding, @"encoded '%@' should equal '%@'", encoded, correctEncoding);
 	
 	decoded = [NSData gvc_Base64Decoded:encoded];
-	STAssertEqualObjects(threeCharData, decoded, @"Decode failed for '%@'", correctRaw);
+	XCTAssertEqualObjects(threeCharData, decoded, @"Decode failed for '%@'", correctRaw);
 
 	// four input char
 	correctRaw = @"ABCD";
 	correctEncoding = @"QUJDRA==";
 	NSData *fourCharData = [correctRaw dataUsingEncoding:NSUTF8StringEncoding];
 	encoded = [fourCharData gvc_base64Encoded];
-	STAssertEquals(([encoded length] % 4), (NSUInteger)0, @"encoded size should be a multiple of 4");
-	STAssertEqualObjects(encoded, correctEncoding, @"encoded '%@' should equal '%@'", encoded, correctEncoding);
+	XCTAssertEqual(([encoded length] % 4), (NSUInteger)0, @"encoded size should be a multiple of 4");
+	XCTAssertEqualObjects(encoded, correctEncoding, @"encoded '%@' should equal '%@'", encoded, correctEncoding);
 	
 	decoded = [NSData gvc_Base64Decoded:encoded];
-	STAssertEqualObjects(fourCharData, decoded, @"Decode failed for '%@'", correctRaw);
+	XCTAssertEqualObjects(fourCharData, decoded, @"Decode failed for '%@'", correctRaw);
 
 	// all char from 0 to ff.
 	/*
@@ -173,7 +173,7 @@ void printfBytes(const char *name, const unsigned char *bytes, NSUInteger length
 	 F0 F1 F2 F3 F4 F5 F6 F7 F8 F9 FA FB FC FD FE FF | ................
 	 */
 	NSMutableData *rawData = [[NSMutableData alloc] initWithCapacity:256];
-	STAssertNotNil(rawData, @"failed to alloc data block");
+	XCTAssertNotNil(rawData, @"failed to alloc data block");
 	Byte buf[1];
 	for (NSUInteger idx = 0 ; idx < 256 ; idx++)
 	{
@@ -183,40 +183,40 @@ void printfBytes(const char *name, const unsigned char *bytes, NSUInteger length
 	correctEncoding = @"AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8gISIjJCUmJygpKissLS4vMDEyMzQ1Njc4OTo7PD0+P0BBQkNERUZHSElKS0xNTk9QUVJTVFVWV1hZWltcXV5fYGFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6e3x9fn+AgYKDhIWGh4iJiouMjY6PkJGSk5SVlpeYmZqbnJ2en6ChoqOkpaanqKmqq6ytrq+wsbKztLW2t7i5uru8vb6/wMHCw8TFxsfIycrLzM3Oz9DR0tPU1dbX2Nna29zd3t/g4eLj5OXm5+jp6uvs7e7v8PHy8/T19vf4+fr7/P3+/w==";
 
 	encoded = [rawData gvc_base64Encoded];
-	STAssertEquals(([encoded length] % 4), (NSUInteger)0, @"encoded size should be a multiple of 4");
-	STAssertEqualObjects(encoded, correctEncoding, @"encoded should equal correct encoding");
+	XCTAssertEqual(([encoded length] % 4), (NSUInteger)0, @"encoded size should be a multiple of 4");
+	XCTAssertEqualObjects(encoded, correctEncoding, @"encoded should equal correct encoding");
 	
 	decoded = [NSData gvc_Base64Decoded:encoded];
-	STAssertEqualObjects(rawData, decoded, @"Decode failed all char 256");
+	XCTAssertEqualObjects(rawData, decoded, @"Decode failed all char 256");
 }
 
 - (void)testMD5
 {
     NSData *data = [NSData dataWithContentsOfFile:[self pathForResource:CSV_Cars extension:@"csv"]];
-    STAssertNotNil(data, @"No Data");
+    XCTAssertNotNil(data, @"No Data");
     
     unsigned char charsmd5_cars[16] = {0x5E,0x06,0x9C,0xD0,0xEA,0x1F,0xBF,0xC2,0xFD,0x71,0x75,0xE4,0xA9,0x5E,0x02,0x0A};
     NSData *correctMD5_cars = [NSData dataWithBytesNoCopy:charsmd5_cars length:16];
     NSData *carsMd5 = [data gvc_md5Digest];
-	STAssertNotNil(carsMd5, @"Faild to decode");
-	STAssertEqualObjects(correctMD5_cars, carsMd5, @"MD5 failed");
-	STAssertEqualObjects(@"5e069cd0ea1fbfc2fd7175e4a95e020a", [carsMd5 gvc_hexString], @"MD5 hex string failed");
+	XCTAssertNotNil(carsMd5, @"Faild to decode");
+	XCTAssertEqualObjects(correctMD5_cars, carsMd5, @"MD5 failed");
+	XCTAssertEqualObjects(@"5e069cd0ea1fbfc2fd7175e4a95e020a", [carsMd5 gvc_hexString], @"MD5 hex string failed");
 
     data = [NSData dataWithContentsOfFile:[self pathForResource:CSV_VocabularySummary extension:@"csv"]];
-    STAssertNotNil(data, @"No Data");
+    XCTAssertNotNil(data, @"No Data");
     
     unsigned char charsmd5_vocab[16] = {0xDC,0x5B,0xDE,0xAD,0x69,0xB9,0x30,0x5D,0xAD,0x8A,0x38,0x37,0x8D,0xA3,0x51,0x0F};
     NSData *correctMD5_vocab = [NSData dataWithBytesNoCopy:charsmd5_vocab length:16];
     NSData *vocabMd5 = [data gvc_md5Digest];
-	STAssertNotNil(vocabMd5, @"Faild to decode");
-	STAssertEqualObjects(correctMD5_vocab, vocabMd5, @"MD5 failed");
-	STAssertEqualObjects(@"dc5bdead69b9305dad8a38378da3510f", [vocabMd5 gvc_hexString], @"MD5 hex string failed");
+	XCTAssertNotNil(vocabMd5, @"Faild to decode");
+	XCTAssertEqualObjects(correctMD5_vocab, vocabMd5, @"MD5 failed");
+	XCTAssertEqualObjects(@"dc5bdead69b9305dad8a38378da3510f", [vocabMd5 gvc_hexString], @"MD5 hex string failed");
 }
 
 - (void)testSHA1
 {
     NSData *data = [NSData dataWithContentsOfFile:[self pathForResource:CSV_Cars extension:@"csv"]];
-    STAssertNotNil(data, @"No Data");
+    XCTAssertNotNil(data, @"No Data");
     
     unsigned char charsSHA1_cars[20] = {
         0xF6, 0x58, 0x8F, 0x84, 0xD9, 0xD1, 0x59, 0x19, 0x29, 0x30, 0x40, 0xCD, 0x2B, 0xFF, 0xA5, 0x34,
@@ -224,12 +224,12 @@ void printfBytes(const char *name, const unsigned char *bytes, NSUInteger length
     };
     NSData *correctSHA1_cars = [NSData dataWithBytesNoCopy:charsSHA1_cars length:20];
     NSData *carsSHA1 = [data gvc_sha1Digest];
-	STAssertNotNil(carsSHA1, @"Faild to decode");
-	STAssertEqualObjects(correctSHA1_cars, carsSHA1, @"SHA1 failed");
-	STAssertEqualObjects(@"f6588f84d9d15919293040cd2bffa5340e49936b", [carsSHA1 gvc_hexString], @"SHA1 hex string failed");
+	XCTAssertNotNil(carsSHA1, @"Faild to decode");
+	XCTAssertEqualObjects(correctSHA1_cars, carsSHA1, @"SHA1 failed");
+	XCTAssertEqualObjects(@"f6588f84d9d15919293040cd2bffa5340e49936b", [carsSHA1 gvc_hexString], @"SHA1 hex string failed");
     
     data = [NSData dataWithContentsOfFile:[self pathForResource:CSV_VocabularySummary extension:@"csv"]];
-    STAssertNotNil(data, @"No Data");
+    XCTAssertNotNil(data, @"No Data");
     
     unsigned char charsSHA1_vocab[20] = {
         0x84, 0x71, 0x54, 0xBD, 0xA5, 0xFD, 0x54, 0x9C, 0xCF, 0xD6, 0x6D, 0xC8, 0xFF, 0x93, 0x70, 0x07,
@@ -237,9 +237,9 @@ void printfBytes(const char *name, const unsigned char *bytes, NSUInteger length
     };
     NSData *correctSHA1_vocab = [NSData dataWithBytesNoCopy:charsSHA1_vocab length:20];
     NSData *vocabSHA1 = [data gvc_sha1Digest];
-	STAssertNotNil(vocabSHA1, @"Faild to decode");
-	STAssertEqualObjects(correctSHA1_vocab, vocabSHA1, @"SHA1 failed");
-	STAssertEqualObjects(@"847154bda5fd549ccfd66dc8ff937007dcc6e2c3", [vocabSHA1 gvc_hexString], @"SHA1 hex string failed");
+	XCTAssertNotNil(vocabSHA1, @"Faild to decode");
+	XCTAssertEqualObjects(correctSHA1_vocab, vocabSHA1, @"SHA1 failed");
+	XCTAssertEqualObjects(@"847154bda5fd549ccfd66dc8ff937007dcc6e2c3", [vocabSHA1 gvc_hexString], @"SHA1 hex string failed");
 }
 
 @end

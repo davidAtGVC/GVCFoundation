@@ -6,11 +6,11 @@
  *
  */
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import <GVCFoundation/GVCFoundation.h>
 
 #pragma mark - Interface declaration
-@interface GVCDirectoryTest : SenTestCase
+@interface GVCDirectoryTest : XCTestCase
 
 @end
 
@@ -36,10 +36,10 @@
     GVCDirectory *temp1 = [GVCDirectory TempDirectory];
     GVCDirectory *temp2 = [GVCDirectory TempDirectory];
     
-    STAssertNotNil(temp1, @"Temporary directory first call is nil" );
-    STAssertNotNil(temp2, @"Temporary directory second call is nil" );
-    STAssertEqualObjects(temp1, temp2, @"Should act like a singleton %@ != %@", temp1, temp2);
-    STAssertEqualObjects([temp1 rootDirectory], [temp2 rootDirectory], @"Should be same path %@ != %@", [temp1 rootDirectory], [temp2 rootDirectory]);
+    XCTAssertNotNil(temp1, @"Temporary directory first call is nil" );
+    XCTAssertNotNil(temp2, @"Temporary directory second call is nil" );
+    XCTAssertEqualObjects(temp1, temp2, @"Should act like a singleton %@ != %@", temp1, temp2);
+    XCTAssertEqualObjects([temp1 rootDirectory], [temp2 rootDirectory], @"Should be same path %@ != %@", [temp1 rootDirectory], [temp2 rootDirectory]);
     
     GVCLogError(@"Temp: %@", [temp1 rootDirectory]);
 }
@@ -50,10 +50,10 @@
     GVCDirectory *cache1 = [GVCDirectory CacheDirectory];
     GVCDirectory *cache2 = [GVCDirectory CacheDirectory];
     
-    STAssertNotNil(cache1, @"Cache directory first call is nil" );
-    STAssertNotNil(cache2, @"Cache directory second call is nil" );
-    STAssertEqualObjects(cache1, cache2, @"Should act like a singleton %@ != %@", cache1, cache2);
-    STAssertEqualObjects([cache1 rootDirectory], [cache2 rootDirectory], @"Should be same path %@ != %@", [cache1 rootDirectory], [cache2 rootDirectory]);
+    XCTAssertNotNil(cache1, @"Cache directory first call is nil" );
+    XCTAssertNotNil(cache2, @"Cache directory second call is nil" );
+    XCTAssertEqualObjects(cache1, cache2, @"Should act like a singleton %@ != %@", cache1, cache2);
+    XCTAssertEqualObjects([cache1 rootDirectory], [cache2 rootDirectory], @"Should be same path %@ != %@", [cache1 rootDirectory], [cache2 rootDirectory]);
     
     GVCLogError(@"cache: %@", [cache1 rootDirectory]);
 }

@@ -6,7 +6,7 @@
  *
  */
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 #import <Foundation/Foundation.h>
 #import <GVCFoundation/GVCFoundation.h>
 #import "GVCResourceTestCase.h"
@@ -52,7 +52,7 @@
 	NSArray *fieldNames = [[NSArray alloc] initWithObjects:@"Year",@"Make",@"Model",@"Description",@"Price", nil];
 	CarsParserDelegate *carsDelegate = [[CarsParserDelegate alloc] init];
 	GVCCSVParser *parser = [[GVCCSVParser alloc] initWithDelegate:carsDelegate separator:@"," fieldNames:fieldNames firstLineHeaders:NO];
-	STAssertTrue([parser parseFilename:file error:&error], @"Failed to parse cars file %@", error);
+	XCTAssertTrue([parser parseFilename:file error:&error], @"Failed to parse cars file %@", error);
 }
 
 @end

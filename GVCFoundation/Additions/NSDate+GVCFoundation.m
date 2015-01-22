@@ -79,7 +79,7 @@
 	[comps setDay:d];
 	[comps setMonth:m];
 	[comps setYear:y];
-	NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+	NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
 	NSDate *date = [gregorian dateFromComponents:comps];
 	
 	return date;
@@ -94,7 +94,7 @@
 	[comps setDay:d];
 	[comps setMonth:m];
 	[comps setYear:y];
-	NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+	NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
 	NSDate *date = [gregorian dateFromComponents:comps];
 	
 	return date;
@@ -104,42 +104,42 @@
 
 - (NSDateComponents *)gvc_componentsForHourMinuteSecond
 {
-	return [[NSCalendar currentCalendar] components:NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit fromDate:self];
+	return [[NSCalendar currentCalendar] components:NSCalendarUnitMonth|NSCalendarUnitMinute|NSCalendarUnitSecond fromDate:self];
 }
 
 - (NSDateComponents *)gvc_componentsForYearMonthDay
 {
-	return [[NSCalendar currentCalendar] components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:self];
+	return [[NSCalendar currentCalendar] components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:self];
 }
 
 - (NSUInteger)gvc_weekday
 {
-	return [[NSCalendar currentCalendar] ordinalityOfUnit:NSDayCalendarUnit inUnit:NSWeekCalendarUnit forDate:self];
+	return [[NSCalendar currentCalendar] ordinalityOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitWeekday forDate:self];
 }
 
 - (NSUInteger)gvc_numberOfDaysInMonth
 {
-	return [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:self].length;
+	return [[NSCalendar currentCalendar] rangeOfUnit:NSCalendarUnitDay inUnit:NSCalendarUnitMonth forDate:self].length;
 }
 
 - (NSInteger)gvc_year
 {
-	NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-	NSDateComponents *comp = [gregorian components:NSYearCalendarUnit fromDate:self];
+	NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+	NSDateComponents *comp = [gregorian components:NSCalendarUnitYear fromDate:self];
 	return [comp year];
 }
 
 - (NSInteger)gvc_monthOfYear
 {
-	NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-	NSDateComponents *comp = [gregorian components:NSMonthCalendarUnit fromDate:self];
+	NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+	NSDateComponents *comp = [gregorian components:NSCalendarUnitMonth fromDate:self];
 	return [comp month];
 }
 
 - (NSInteger)gvc_dayOfMonth
 {
-	NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-	NSDateComponents *comp = [gregorian components:NSDayCalendarUnit fromDate:self];
+	NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+	NSDateComponents *comp = [gregorian components:NSCalendarUnitDay fromDate:self];
 	return [comp day];
 }
 
@@ -151,7 +151,7 @@
 					)
 	
 	NSDate *adjusted = nil;
-	BOOL success = [[NSCalendar currentCalendar] rangeOfUnit:NSMonthCalendarUnit startDate:&adjusted interval:NULL forDate:self];
+	BOOL success = [[NSCalendar currentCalendar] rangeOfUnit:NSCalendarUnitMonth startDate:&adjusted interval:NULL forDate:self];
 	
 	GVC_DBC_ENSURE(
 				   GVC_DBC_FACT(success);
@@ -184,7 +184,7 @@
 					GVC_DBC_FACT((second >= 0) && (second < 60));
 					)
 	
-	unsigned int flags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+	unsigned int flags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitMinute | NSCalendarUnitSecond;
 	NSDateComponents* components = [[NSCalendar currentCalendar] components:flags fromDate:self];
 	[components setHour:hour];
 	[components setMinute:minute];
@@ -289,7 +289,7 @@
 	BOOL isEqual = NO;
 	if ( aDate != nil )
 	{
-		NSUInteger compUnits = (NSYearCalendarUnit| NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekCalendarUnit |  NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSWeekdayCalendarUnit | NSWeekdayOrdinalCalendarUnit);
+		NSUInteger compUnits = (NSCalendarUnitYear| NSCalendarUnitMonth | NSCalendarUnitDay);
 		
 		NSDateComponents *components1 = [[NSCalendar currentCalendar] components:compUnits fromDate:self];
 		NSDateComponents *components2 = [[NSCalendar currentCalendar] components:compUnits fromDate:aDate];
@@ -306,7 +306,7 @@
 					GVC_DBC_FACT_NOT_NIL(aDate);
 					)
 	
-	NSUInteger compUnits = (NSYearCalendarUnit);
+	NSUInteger compUnits = (NSCalendarUnitYear);
 	
 	NSDateComponents *myComponents = [[NSCalendar currentCalendar] components:compUnits fromDate:self];
 	NSDateComponents *otherComponents = [[NSCalendar currentCalendar] components:compUnits fromDate:aDate];
@@ -419,8 +419,8 @@
 
 - (NSString *)gvc_iso8601DurationFromDate:(NSDate *)date
 {
-	NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-	NSDateComponents *components = [gregorianCalendar components: (NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSDayCalendarUnit | NSMonthCalendarUnit | NSYearCalendarUnit ) fromDate:self toDate:date options:0];
+	NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+	NSDateComponents *components = [gregorianCalendar components: (NSCalendarUnitMonth | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear ) fromDate:self toDate:date options:0];
 	
 	NSMutableString *buffer = [NSMutableString stringWithString:@"P"];
 	if ( [components year] > 0 )
